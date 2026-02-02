@@ -1,7 +1,7 @@
 import fnmatch
 import json
 import os
-
+import time
 
 from paraview.simple import (
     FindSource,
@@ -112,18 +112,28 @@ class EAMVisSource:
         if not self.valid:
             return
 
-    def UpdatePipeline(self, time=0.0):
+    def UpdatePipeline(self, time_value=0.0):
         if not self.valid:
             return
 
+        print(f"\n[Pipeline.UpdatePipeline] Starting (time={time_value})...")
+        pipeline_start = time.perf_counter()
+
         atmos_proj = FindSource("AtmosProj")
         if atmos_proj:
-            atmos_proj.UpdatePipeline(time)
+            t0 = time.perf_counter()
+            atmos_proj.UpdatePipeline(time_value)
+            print(f"  [AtmosProj.UpdatePipeline] {time.perf_counter() - t0:.2f}s")
+        
+        t0 = time.perf_counter()
         self.moveextents = atmos_proj.GetDataInformation().GetBounds()
+        print(f"  [GetDataInformation.GetBounds] {time.perf_counter() - t0:.2f}s")
 
         cont_proj = FindSource("ContProj")
         if cont_proj:
-            cont_proj.UpdatePipeline(time)
+            t0 = time.perf_counter()
+            cont_proj.UpdatePipeline(time_value)
+            print(f"  [ContProj.UpdatePipeline] {time.perf_counter() - t0:.2f}s")
 
         atmos_extract = FindSource("AtmosExtract")
         bounds = atmos_extract.GetDataInformation().GetBounds()
@@ -134,11 +144,15 @@ class EAMVisSource:
             grid_gen.LatitudeRange = [bounds[2], bounds[3]]
         grid_proj = FindSource("GridProj")
         if grid_proj:
-            grid_proj.UpdatePipeline(time)
+            t0 = time.perf_counter()
+            grid_proj.UpdatePipeline(time_value)
+            print(f"  [GridProj.UpdatePipeline] {time.perf_counter() - t0:.2f}s")
 
         self.views["atmosphere_data"] = OutputPort(atmos_proj, 0)
         self.views["continents"] = OutputPort(cont_proj, 0)
         self.views["grid_lines"] = OutputPort(grid_proj, 0)
+        
+        print(f"[Pipeline.UpdatePipeline] Total: {time.perf_counter() - pipeline_start:.2f}s")
 
     def UpdateSlicing(self, dimension, slice):
         if self.slicing.get(dimension) == slice:

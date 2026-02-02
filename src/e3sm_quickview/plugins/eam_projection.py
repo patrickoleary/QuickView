@@ -1,3 +1,5 @@
+import time as time_module
+
 from paraview.simple import *
 from paraview.util.vtkAlgorithm import *
 from vtkmodules.numpy_interface import dataset_adapter as dsa
@@ -262,8 +264,11 @@ class EAMProject(VTKPythonAlgorithmBase):
             self.Modified()
 
     def RequestData(self, request, inInfo, outInfo):
+        t_start = time_module.perf_counter()
         inData = self.GetInputData(inInfo, 0, 0)
         outData = self.GetOutputData(outInfo, 0)
+        
+        t0 = time_module.perf_counter()
         if inData.IsA("vtkPolyData"):
             afilter = vtkAppendFilter()
             afilter.AddInputData(inData)
@@ -271,14 +276,17 @@ class EAMProject(VTKPythonAlgorithmBase):
             outData.DeepCopy(afilter.GetOutput())
         else:
             outData.DeepCopy(inData)
+        print(f"    [EAMProject] DeepCopy: {time_module.perf_counter() - t0:.2f}s")
 
         if self.project == 0:
+            print(f"    [EAMProject] Total (no proj): {time_module.perf_counter() - t_start:.2f}s")
             return 1
 
         inWrap = dsa.WrapDataObject(inData)
         outWrap = dsa.WrapDataObject(outData)
         inPoints = np.array(inWrap.Points)
 
+        t0 = time_module.perf_counter()
         flat = inPoints.flatten()
         x = flat[0::3] - 180.0 if self.translate else flat[0::3]
         y = flat[1::3]
@@ -300,6 +308,9 @@ class EAMProject(VTKPythonAlgorithmBase):
             print(f"Projection error: {e}")
             # If projection fails, return without modifying coordinates
             return 1
+        print(f"    [EAMProject] Transform: {time_module.perf_counter() - t0:.2f}s")
+        
+        t0 = time_module.perf_counter()
         flat[0::3] = np.array(res[0])
         flat[1::3] = np.array(res[1])
 
@@ -310,8 +321,18 @@ class EAMProject(VTKPythonAlgorithmBase):
         vtk_coords = vtkPoints()
         vtk_coords.SetData(_coords)
         outWrap.SetPoints(vtk_coords)
+        print(f"    [EAMProject] SetPoints: {time_module.perf_counter() - t0:.2f}s")
+        print(f"    [EAMProject] Total: {time_module.perf_counter() - t_start:.2f}s")
 
         return 1
+
+
+# =============================================================================
+# OPTIMIZATION: INITIAL_CLIP_ON controls whether lat/lon clipping is enabled.
+# Set to False to completely disable crop feature (always skip clipping).
+# Set to True to enable clipping when user crops (full range still skips).
+# =============================================================================
+INITIAL_CLIP_ON = True
 
 
 @smproxy.filter()
@@ -352,10 +373,47 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
             self.latrange = [min, max]
             self.Modified()
 
+    # =========================================================================
+    # OPTIMIZATION: Helper to check if clipping should be skipped
+    # =========================================================================
+    def _should_skip_clipping(self):
+        """Returns True if clipping should be skipped (pass-through mode).
+        
+        Logic (Option 2):
+        - Full range → always skip (fast, no clipping needed)
+        - Cropped range + INITIAL_CLIP_ON=True → perform clipping
+        - Cropped range + INITIAL_CLIP_ON=False → skip (disables crop feature)
+        """
+        # Always skip if using full range (no clipping needed)
+        if (self.longrange == [-180.0, 180.0] and 
+            self.latrange == [-90.0, 90.0]):
+            return True
+        # Only skip non-full-range if clipping is globally disabled
+        if not INITIAL_CLIP_ON:
+            return True
+        return False
+
     def RequestData(self, request, inInfo, outInfo):
+        t_start = time_module.perf_counter()
         inData = self.GetInputData(inInfo, 0, 0)
         outData = self.GetOutputData(outInfo, 0)
+        ncells = inData.GetNumberOfCells()
+        print(f"    [EAMTransformAndExtract] Input cells: {ncells:,}")
 
+        # =====================================================================
+        # OPTIMIZATION: Skip all clipping if disabled or using full range
+        # This saves ~6 seconds per pipeline update on large datasets
+        # =====================================================================
+        if self._should_skip_clipping():
+            outData.ShallowCopy(inData)
+            print(f"    [EAMTransformAndExtract] SKIPPED (clip disabled or full range)")
+            print(f"    [EAMTransformAndExtract] Total: {time_module.perf_counter() - t_start:.2f}s (output cells: {outData.GetNumberOfCells():,})")
+            return 1
+
+        # =====================================================================
+        # CLIPPING ENABLED: Perform meridian wrap handling and lat/lon extract
+        # =====================================================================
+        t0 = time_module.perf_counter()
         planeL = vtkPlane()
         planeL.SetOrigin([180.0, 0.0, 0.0])
         planeL.SetNormal([-1, 0, 0])
@@ -363,7 +421,9 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
         clipL.SetClipFunction(planeL)
         clipL.SetInputData(inData)
         clipL.Update()
+        print(f"    [EAMTransformAndExtract] clipL: {time_module.perf_counter() - t0:.2f}s")
 
+        t0 = time_module.perf_counter()
         planeR = vtkPlane()
         planeR.SetOrigin([180.0, 0.0, 0.0])
         planeR.SetNormal([1, 0, 0])
@@ -371,19 +431,25 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
         clipR.SetClipFunction(planeR)
         clipR.SetInputData(inData)
         clipR.Update()
+        print(f"    [EAMTransformAndExtract] clipR: {time_module.perf_counter() - t0:.2f}s")
 
+        t0 = time_module.perf_counter()
         transFunc = vtkTransform()
         transFunc.Translate(-360, 0, 0)
         transform = vtkTransformFilter()
         transform.SetInputData(clipR.GetOutput())
         transform.SetTransform(transFunc)
         transform.Update()
+        print(f"    [EAMTransformAndExtract] transform: {time_module.perf_counter() - t0:.2f}s")
 
+        t0 = time_module.perf_counter()
         append = vtkAppendFilter()
         append.AddInputData(clipL.GetOutput())
         append.AddInputData(transform.GetOutput())
         append.Update()
+        print(f"    [EAMTransformAndExtract] append: {time_module.perf_counter() - t0:.2f}s")
 
+        t0 = time_module.perf_counter()
         box = vtkPVBox()
         box.SetReferenceBounds(
             self.longrange[0],
@@ -400,8 +466,10 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
         extract.ExactBoxClipOn()
         extract.SetInputData(append.GetOutput())
         extract.Update()
+        print(f"    [EAMTransformAndExtract] extract: {time_module.perf_counter() - t0:.2f}s")
 
         outData.ShallowCopy(extract.GetOutput())
+        print(f"    [EAMTransformAndExtract] Total: {time_module.perf_counter() - t_start:.2f}s (output cells: {outData.GetNumberOfCells():,})")
         return 1
 
 

@@ -6,6 +6,47 @@ from vtkmodules.vtkCommonDataModel import vtkUnstructuredGrid, vtkCellArray
 from vtkmodules.util import vtkConstants, numpy_support
 from paraview import print_error, print_warning
 
+import time
+import tracemalloc
+from contextlib import contextmanager
+
+@contextmanager
+def profile(label, show_progress=False, total=None):
+    """Context manager for profiling time and memory with optional progress updates.
+    
+    Args:
+        label: Description of the operation being profiled
+        show_progress: If True, prints progress updates (use with yield)
+        total: Total number of steps for progress tracking
+    """
+    tracemalloc.start()
+    start = time.perf_counter()
+    
+    class ProgressTracker:
+        def __init__(self, total):
+            self.current = 0
+            self.total = total
+            
+        def update(self, step=1, msg=""):
+            self.current += step
+            if self.total:
+                pct = (self.current / self.total) * 100
+                print(f"\r[{label}] {pct:.1f}% ({self.current}/{self.total}) {msg}", end="", flush=True)
+            else:
+                print(f"\r[{label}] Step {self.current} {msg}", end="", flush=True)
+    
+    tracker = ProgressTracker(total) if show_progress else None
+    try:
+        yield tracker
+    finally:
+        elapsed = time.perf_counter() - start
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        if show_progress:
+            print()  # newline after progress
+        print(f"[{label}] {elapsed:.2f}s | Mem: {current/1e6:.1f}MB (peak: {peak/1e6:.1f}MB)")
+
+
 try:
     import netCDF4
     import numpy as np
@@ -303,7 +344,8 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
                     self._mesh_dataset.close()
                 except Exception:
                     pass
-            self._mesh_dataset = netCDF4.Dataset(self._ConnFileName, "r")
+            with profile("Load connectivity file"):
+                self._mesh_dataset = netCDF4.Dataset(self._ConnFileName, "r")
             self._cached_mesh_filename = self._ConnFileName
         return self._mesh_dataset
 
@@ -315,7 +357,8 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
                     self._var_dataset.close()
                 except Exception:
                     pass
-            self._var_dataset = netCDF4.Dataset(self._DataFileName, "r")
+            with profile("Load data file"):
+                self._var_dataset = netCDF4.Dataset(self._DataFileName, "r")
             self._cached_var_filename = self._DataFileName
         return self._var_dataset
 
@@ -407,8 +450,14 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
                     slice_tuple.append(self._slices.get(dim, 0))
 
             # Get data with proper slicing
-            data = vardata[varmeta.name][tuple(slice_tuple)].data.flatten()
+            t0 = time.perf_counter()
+            raw_data = vardata[varmeta.name][tuple(slice_tuple)]
+            t1 = time.perf_counter()
+            data = raw_data.data.flatten()
+            t2 = time.perf_counter()
             data = np.where(data == varmeta.fillval, np.nan, data)
+            t3 = time.perf_counter()
+            print(f"  [{varmeta.name}] nc_read={t1-t0:.3f}s flatten={t2-t1:.3f}s fillval={t3-t2:.3f}s slice={slice_tuple}")
             return data
         except Exception as e:
             print_error(f"Error loading variable {varmeta.name}: {e}")
@@ -429,56 +478,61 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
             # Geometry already cached
             return
 
-        dims = meshdata.dimensions
-        mvars = np.array(list(meshdata.variables.keys()))
+        with profile("Build geometry", show_progress=True, total=4) as tracker:
+            dims = meshdata.dimensions
+            mvars = np.array(list(meshdata.variables.keys()))
 
-        # Use the identified horizontal dimension
-        if not self._horizontal_dim:
-            print_error("Horizontal dimension not identified in connectivity file")
-            return
+            # Use the identified horizontal dimension
+            if not self._horizontal_dim:
+                print_error("Horizontal dimension not identified in connectivity file")
+                return
 
-        ncells2D = dims[self._horizontal_dim].size
-        self._cached_ncells2D = ncells2D
+            ncells2D = dims[self._horizontal_dim].size
+            self._cached_ncells2D = ncells2D
 
-        # Find lat/lon dimensions
-        latdim = mvars[np.where(np.char.find(mvars, "corner_lat") > -1)][0]
-        londim = mvars[np.where(np.char.find(mvars, "corner_lon") > -1)][0]
+            # Find lat/lon dimensions
+            latdim = mvars[np.where(np.char.find(mvars, "corner_lat") > -1)][0]
+            londim = mvars[np.where(np.char.find(mvars, "corner_lon") > -1)][0]
 
-        # Build coordinates
-        lat = meshdata[latdim][:].data.flatten()
-        lon = meshdata[londim][:].data.flatten()
+            # Build coordinates
+            tracker.update(msg="loading lat/lon")
+            lat = meshdata[latdim][:].data.flatten()
+            lon = meshdata[londim][:].data.flatten()
 
-        coords = np.empty((len(lat), 3), dtype=np.float64)
-        coords[:, 0] = lon
-        coords[:, 1] = lat
-        coords[:, 2] = 0.0
+            coords = np.empty((len(lat), 3), dtype=np.float64)
+            coords[:, 0] = lon
+            coords[:, 1] = lat
+            coords[:, 2] = 0.0
 
-        # Create VTK points
-        _coords = dsa.numpyTovtkDataArray(coords)
-        vtk_coords = vtkPoints()
-        vtk_coords.SetData(_coords)
-        self._cached_points = vtk_coords
+            # Create VTK points
+            tracker.update(msg="creating VTK points")
+            _coords = dsa.numpyTovtkDataArray(coords)
+            vtk_coords = vtkPoints()
+            vtk_coords.SetData(_coords)
+            self._cached_points = vtk_coords
 
-        # Build cell arrays
-        cellTypes = np.empty(ncells2D, dtype=np.uint8)
-        cellTypes.fill(vtkConstants.VTK_QUAD)
-        self._cached_cell_types = numpy_support.numpy_to_vtk(
-            num_array=cellTypes.ravel(),
-            deep=True,
-            array_type=vtkConstants.VTK_UNSIGNED_CHAR,
-        )
+            # Build cell arrays
+            tracker.update(msg="building cell types")
+            cellTypes = np.empty(ncells2D, dtype=np.uint8)
+            cellTypes.fill(vtkConstants.VTK_QUAD)
+            self._cached_cell_types = numpy_support.numpy_to_vtk(
+                num_array=cellTypes.ravel(),
+                deep=True,
+                array_type=vtkConstants.VTK_UNSIGNED_CHAR,
+            )
 
-        offsets = np.arange(0, (4 * ncells2D) + 1, 4, dtype=np.int64)
-        self._cached_offsets = numpy_support.numpy_to_vtk(
-            num_array=offsets.ravel(),
-            deep=True,
-            array_type=vtkConstants.VTK_ID_TYPE,
-        )
+            offsets = np.arange(0, (4 * ncells2D) + 1, 4, dtype=np.int64)
+            self._cached_offsets = numpy_support.numpy_to_vtk(
+                num_array=offsets.ravel(),
+                deep=True,
+                array_type=vtkConstants.VTK_ID_TYPE,
+            )
 
-        cells = np.arange(ncells2D * 4, dtype=np.int64)
-        self._cached_cells = numpy_support.numpy_to_vtk(
-            num_array=cells.ravel(), deep=True, array_type=vtkConstants.VTK_ID_TYPE
-        )
+            tracker.update(msg="building cell connectivity")
+            cells = np.arange(ncells2D * 4, dtype=np.int64)
+            self._cached_cells = numpy_support.numpy_to_vtk(
+                num_array=cells.ravel(), deep=True, array_type=vtkConstants.VTK_ID_TYPE
+            )
 
     def _populate_variable_metadata(self):
         if self._DataFileName is None or self._ConnFileName is None:
@@ -499,17 +553,20 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
 
         # First pass: collect dimensions used by valid variables
         all_dimensions = set()
-        for name, info in vardata.variables.items():
-            dims = set(info.dimensions)
-            if self._data_horizontal_dim not in dims:
-                continue
-            varmeta = VarMeta(name, info, self._data_horizontal_dim)
-            if len(dims) == 1 and "area" in name.lower():
-                self._areavar = varmeta
-            if len(dims) > 1:
-                all_dimensions.update(dims)
-            self._variables[name] = varmeta
-            self._variable_selection.AddArray(name)
+        total_vars = len(vardata.variables)
+        with profile("Scan variables", show_progress=True, total=total_vars) as tracker:
+            for name, info in vardata.variables.items():
+                tracker.update(msg=name)
+                dims = set(info.dimensions)
+                if self._data_horizontal_dim not in dims:
+                    continue
+                varmeta = VarMeta(name, info, self._data_horizontal_dim)
+                if len(dims) == 1 and "area" in name.lower():
+                    self._areavar = varmeta
+                if len(dims) > 1:
+                    all_dimensions.update(dims)
+                self._variables[name] = varmeta
+                self._variable_selection.AddArray(name)
 
         # Remove the horizontal dimension from sliceable dimensions
         all_dimensions.discard(self._data_horizontal_dim)
@@ -681,6 +738,9 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
         return timeInd
 
     def RequestData(self, request, inInfo, outInfo):
+        request_start = time.perf_counter()
+        print("\n[RequestData] Starting...")
+        
         if (
             self._ConnFileName is None
             or self._ConnFileName == "None"
@@ -716,16 +776,17 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
         output_mesh = dsa.WrapDataObject(self._output)
 
         if self._dirty:
-            self._output = vtkUnstructuredGrid()
-            output_mesh = dsa.WrapDataObject(self._output)
+            with profile("Create VTK mesh"):
+                self._output = vtkUnstructuredGrid()
+                output_mesh = dsa.WrapDataObject(self._output)
 
-            # Use cached geometry
-            output_mesh.SetPoints(self._cached_points)
+                # Use cached geometry
+                output_mesh.SetPoints(self._cached_points)
 
-            # Create cell array from cached data
-            cellArray = vtkCellArray()
-            cellArray.SetData(self._cached_offsets, self._cached_cells)
-            output_mesh.VTKObject.SetCells(self._cached_cell_types, cellArray)
+                # Create cell array from cached data
+                cellArray = vtkCellArray()
+                cellArray.SetData(self._cached_offsets, self._cached_cells)
+                output_mesh.VTKObject.SetCells(self._cached_cell_types, cellArray)
 
             self._dirty = False
 
@@ -735,12 +796,21 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
         for i in range(last_num_arrays):
             to_remove.add(output_mesh.CellData.GetArrayName(i))
 
-        for name, varmeta in self._variables.items():
-            if self._variable_selection.ArrayIsEnabled(name):
-                if output_mesh.CellData.HasArray(name):
-                    to_remove.remove(name)
-                data = self._load_variable(vardata, varmeta)
-                output_mesh.CellData.append(data, name)
+        # Count enabled variables for progress tracking
+        enabled_vars = [
+            (name, varmeta)
+            for name, varmeta in self._variables.items()
+            if self._variable_selection.ArrayIsEnabled(name)
+        ]
+
+        if enabled_vars:
+            with profile("Load variables", show_progress=True, total=len(enabled_vars)) as tracker:
+                for name, varmeta in enabled_vars:
+                    tracker.update(msg=name)
+                    if output_mesh.CellData.HasArray(name):
+                        to_remove.discard(name)
+                    data = self._load_variable(vardata, varmeta)
+                    output_mesh.CellData.append(data, name)
 
         area_var_name = "area"
         if self._areavar and not output_mesh.CellData.HasArray(area_var_name):
@@ -753,7 +823,10 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
         for var_name in to_remove:
             output_mesh.CellData.RemoveArray(var_name)
 
-        output = vtkUnstructuredGrid.GetData(outInfo, 0)
-        output.ShallowCopy(self._output)
+        with profile("Copy to output"):
+            output = vtkUnstructuredGrid.GetData(outInfo, 0)
+            output.ShallowCopy(self._output)
 
+        total_time = time.perf_counter() - request_start
+        print(f"[RequestData] Total: {total_time:.2f}s")
         return 1
