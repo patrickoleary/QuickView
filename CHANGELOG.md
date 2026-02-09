@@ -2,6 +2,57 @@
 
 <!-- version list -->
 
+## v1.3.0 (2026-02-09)
+
+### Bug Fixes
+
+- Adding graceful tauri launch for linux
+  ([`0a1a05c`](https://github.com/Kitware/QuickView/commit/0a1a05cc400ab6f3080e6dae785ce2860e801c1c))
+
+- **#10**: Make the group button deselect group
+  ([`360f68f`](https://github.com/Kitware/QuickView/commit/360f68faa662f5be3da5dfc5be08af1367ab07ab))
+
+- **animation**: Update icon
+  ([`a160557`](https://github.com/Kitware/QuickView/commit/a1605579e114596aa10756920fe66145d3066b5d))
+
+- **crop**: Update icon for lat/lon cropping
+  ([`f4ca4c1`](https://github.com/Kitware/QuickView/commit/f4ca4c104235d8bb4b7c71769ad1f3ede80ac0f2))
+
+- **file loading**: Update icon
+  ([`612f533`](https://github.com/Kitware/QuickView/commit/612f533348bc8e00cf6058483f2cd7445e71d9f4))
+
+- **keybinding**: Set lat/lon crop to 'l'
+  ([`8ecaffc`](https://github.com/Kitware/QuickView/commit/8ecaffcbb00934471c97378d5174642898d2b62f))
+
+- **keybinding**: Use 'crm' for projections
+  ([`ef57571`](https://github.com/Kitware/QuickView/commit/ef575715fc4b76985c054054a4f8c670b3f09c8e))
+
+- **layout**: Renamed to 'Viewport layout' with 'p' shortcut
+  ([`d108b78`](https://github.com/Kitware/QuickView/commit/d108b783f1a9ac3b3497dc7dd555a2b2280bc04e))
+
+- **resetCamera**: 'Auto zoom' with 'z' shortcut
+  ([`637eef1`](https://github.com/Kitware/QuickView/commit/637eef1e3e3e0290258053e08758f9f56cd8b5db))
+
+- **tools**: Update order
+  ([`a5d1f20`](https://github.com/Kitware/QuickView/commit/a5d1f20d22ca3dfebcf630704f48df3aa9964db1))
+
+- **var type**: Make types easier to read
+  ([`bea4536`](https://github.com/Kitware/QuickView/commit/bea453685372c334b8a9a05daa0790b72665a8ed))
+
+- **Variable selection**: Replace Field by Variable
+  ([`339caef`](https://github.com/Kitware/QuickView/commit/339caef8dc68b756944efcbe1698654c2664b347))
+
+### Documentation
+
+- **dev**: Update command line
+  ([`016fe42`](https://github.com/Kitware/QuickView/commit/016fe4289226cc3b80ae3a60b7f0a0e3dbaa84ce))
+
+### Features
+
+- Adding jupyter extension to run as app
+  ([`788ba23`](https://github.com/Kitware/QuickView/commit/788ba23aa01b2c8493e5d840ff61594f4a250d4a))
+
+
 ## v1.2.1 (2025-12-11)
 
 ### Bug Fixes
