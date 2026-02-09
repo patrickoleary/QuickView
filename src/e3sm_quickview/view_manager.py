@@ -227,13 +227,14 @@ class VariableView(TrameComponent):
             ):
                 with v3.VRow(
                     dense=True,
-                    classes="ma-0 pa-0 bg-black opacity-90 d-flex align-center",
+                    classes="ma-0 pa-0 bg-black opacity-90 d-flex align-center flex-nowrap",
                 ):
                     tview.create_size_menu(self.name, self.config)
                     with html.Div(
                         self.variable_name,
-                        classes="text-subtitle-2 pr-2",
+                        classes="text-subtitle-2 pr-2 text-truncate",
                         style="user-select: none;",
+                        title=self.variable_name,
                     ):
                         with v3.VMenu(activator="parent"):
                             with v3.VList(density="compact", style="max-height: 40vh;"):
@@ -258,19 +259,19 @@ class VariableView(TrameComponent):
                     v3.VSpacer()
                     html.Div(
                         "t = {{ time_idx }}",
-                        classes="text-caption px-1",
+                        classes="text-caption px-1 text-no-wrap",
                         v_if="timestamps.length > 1",
                     )
                     if self.variable_type == "m":
                         html.Div(
                             "[k = {{ midpoint_idx }}]",
-                            classes="text-caption px-1",
+                            classes="text-caption px-1 text-no-wrap",
                             v_if="midpoints.length > 1",
                         )
                     if self.variable_type == "i":
                         html.Div(
                             "[k = {{ interface_idx }}]",
-                            classes="text-caption px-1",
+                            classes="text-caption px-1 text-no-wrap",
                             v_if="interfaces.length > 1",
                         )
                     v3.VSpacer()
@@ -278,7 +279,7 @@ class VariableView(TrameComponent):
                         "avg = {{"
                         f"fields_avgs['{self.variable_name}']?.toExponential(2) || 'N/A'"
                         "}}",
-                        classes="text-caption px-1",
+                        classes="text-caption px-1 text-no-wrap",
                     )
 
                 with html.Div(
