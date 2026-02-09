@@ -1,17 +1,17 @@
 import math
 
+from paraview import simple
 from trame.app import TrameComponent
-from trame.ui.html import DivLayout
-from trame.widgets import paraview as pvw, vuetify3 as v3, client, html
 from trame.decorators import controller
-
+from trame.ui.html import DivLayout
+from trame.widgets import client, html
+from trame.widgets import paraview as pvw
+from trame.widgets import vuetify3 as v3
 from trame_dataclass.core import StateDataModel
 
-from paraview import simple
-
 from e3sm_quickview.components import view as tview
-from e3sm_quickview.utils.color import get_cached_colorbar_image, COLORBAR_CACHE
 from e3sm_quickview.presets import COLOR_BLIND_SAFE
+from e3sm_quickview.utils.color import COLORBAR_CACHE, get_cached_colorbar_image
 
 
 def auto_size_to_col(size):
@@ -429,7 +429,7 @@ class ViewManager(TrameComponent):
                             continue
 
                         # Look up color from variable_types to match chip colors
-                        border_color = type_to_color.get(str(var_type), "primary")
+                        border_color = type_to_color.get(", ".join(var_type), "primary")
                         with v3.VAlert(
                             border="start",
                             classes="pr-1 py-1 pl-3 mb-1",

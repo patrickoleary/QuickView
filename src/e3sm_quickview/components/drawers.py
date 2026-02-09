@@ -1,5 +1,5 @@
 from trame.decorators import change
-from trame.widgets import html
+from trame.widgets import client, html
 from trame.widgets import vuetify3 as v3
 
 from e3sm_quickview import __version__ as quickview_version
@@ -72,7 +72,10 @@ class FieldSelection(v3.VNavigationDrawer):
         )
 
         with self:
-            with html.Div(style="position:fixed;top:0;width: 500px;"):
+            with html.Div(
+                style="position:fixed;top:0;width: 500px;height:100vh;",
+                classes="d-flex flex-column",
+            ):
                 with v3.VCardActions(classes="pb-0", style="min-height: 0;"):
                     v3.VBtn(
                         classes="text-none",
@@ -90,11 +93,11 @@ class FieldSelection(v3.VNavigationDrawer):
                     )
                 with v3.VCardActions(
                     key="variables_selected.length",
-                    classes="flex-wrap py-1",
-                    style="overflow-y: auto; max-height: 100px; min-height: 42px;",
+                    classes="flex-wrap py-1 flex-0-0 ga-1",
+                    style="overflow-y: auto; max-height: 40vh; min-height: 0;",
                 ):
-                    v3.VChip(
-                        "{{ variables_selected.filter(id => variables_listing.find(v => v.id === id)?.type === vtype.name).length }} {{ vtype.name }}",
+                    with v3.VChip(
+                        "{{ vtype.name }}",
                         v_for="(vtype, idx) in variable_types",
                         key="idx",
                         color=("vtype.color",),
@@ -106,8 +109,15 @@ class FieldSelection(v3.VNavigationDrawer):
                         click_close=(
                             "variables_selected = variables_selected.filter(id => variables_listing.find(v => v.id === id)?.type !== vtype.name)"
                         ),
-                        classes="ma-1",
-                    )
+                        classes="mx-1",
+                    ):
+                        with v3.Template(v_slot_prepend=True):
+                            v3.VAvatar(
+                                "{{ variables_selected.filter(id => variables_listing.find(v => v.id === id)?.type === vtype.name).length }}",
+                                border=True,
+                                classes="mr-1 ml-n1",
+                                variant="plain",
+                            )
 
                 v3.VTextField(
                     v_model=("variables_filter", ""),
@@ -116,29 +126,42 @@ class FieldSelection(v3.VNavigationDrawer):
                     placeholder="Filter",
                     density="compact",
                     variant="outlined",
-                    classes="mx-2",
+                    classes="mx-2 flex-0-0",
                     prepend_inner_icon="mdi-magnify",
                     clearable=True,
                 )
-                with html.Div(style="margin:1px;"):
-                    v3.VDataTable(
-                        v_model=("variables_selected", []),
-                        show_select=True,
-                        item_value="id",
-                        density="compact",
-                        fixed_header=True,
-                        headers=(
-                            "variables_headers",
-                            constants.VAR_HEADERS,
-                        ),
-                        items=("variables_listing", []),
-                        height="calc(100vh - 6rem)",
-                        style="user-select: none; cursor: pointer;",
-                        hover=True,
-                        search=("variables_filter", ""),
-                        items_per_page=-1,
-                        hide_default_footer=True,
-                    )
+                with html.Div(style="margin:1px;padding:1px;", classes="flex-fill"):
+                    with client.SizeObserver("var_selection_size"):
+                        with v3.VDataTable(
+                            v_model=("variables_selected", []),
+                            show_select=True,
+                            item_value="id",
+                            density="compact",
+                            fixed_header=True,
+                            headers=(
+                                "variables_headers",
+                                constants.VAR_HEADERS,
+                            ),
+                            items=("variables_listing", []),
+                            height=["var_selection_size?.size.height || '30vh'"],
+                            style="user-select: none; cursor: pointer;top:0;left:0;",
+                            classes="position-absolute",
+                            hover=True,
+                            search=("variables_filter", ""),
+                            items_per_page=-1,
+                            hide_default_footer=True,
+                        ):
+                            with v3.Template(raw_attrs=['#item.name="{ value }"']):
+                                html.Div(
+                                    "{{ value.split('_').join(' ') }}",
+                                    classes="text-break text-capitalize",
+                                    title=["`${value}`"],
+                                )
+                            with v3.Template(raw_attrs=['#item.type="{ value }"']):
+                                html.Div(
+                                    "{{ value }}",
+                                    classes="text-break text-caption",
+                                )
 
     @change("variables_selected")
     def _on_dirty_variable_selection(self, **_):
