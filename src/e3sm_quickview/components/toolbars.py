@@ -2,8 +2,8 @@ import asyncio
 
 from trame.app import asynchronous
 from trame.decorators import change
-from trame.widgets import html, vuetify3 as v3, client
-
+from trame.widgets import client, html
+from trame.widgets import vuetify3 as v3
 
 from e3sm_quickview.utils import js
 
@@ -295,7 +295,7 @@ class Animation(v3.VToolbar):
 
         with self:
             v3.VIcon(
-                "mdi-movie-open-cog-outline",
+                "mdi-video",
                 classes="px-6 opacity-50",
             )
             with v3.VRow(classes="ma-0 px-2 align-center"):

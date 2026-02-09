@@ -183,7 +183,7 @@ class Animation(ToggleButton):
         super().__init__(
             compact="compact_drawer",
             title="Animation controls",
-            icon="mdi-movie-open-cog-outline",
+            icon="mdi-video",
             value="animation-controls",
             keybinding="a",
         )

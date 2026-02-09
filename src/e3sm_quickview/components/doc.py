@@ -116,7 +116,7 @@ class ToolDataSelection(Tool):
 class ToolAnimation(Tool):
     def __init__(self):
         super().__init__(
-            icon="mdi-movie-open-cog-outline",
+            icon="mdi-video",
             title="Animation controls",
             description="Toggle animation toolbar.",
         )
