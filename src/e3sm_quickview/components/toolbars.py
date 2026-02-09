@@ -191,7 +191,7 @@ class Cropping(v3.VToolbar):
         super().__init__(**to_kwargs("adjust-databounds"))
 
         with self:
-            v3.VIcon("mdi-crop", classes="pl-6 opacity-50")
+            v3.VIcon("mdi-web", classes="pl-6 opacity-50")
             with v3.VRow(classes="ma-0 px-2 align-center"):
                 with v3.VCol(cols=6):
                     with v3.VRow(classes="mx-2 my-0"):

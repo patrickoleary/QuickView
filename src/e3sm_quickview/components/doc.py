@@ -94,7 +94,7 @@ class ToolLayoutManagement(Tool):
 class ToolCropping(Tool):
     def __init__(self):
         super().__init__(
-            icon="mdi-crop",
+            icon="mdi-web",
             title="Lat/Long cropping",
             description="Toggle cropping toolbar for adjusting spacial bounds.",
         )

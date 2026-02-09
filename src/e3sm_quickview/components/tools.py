@@ -161,7 +161,7 @@ class Cropping(ToggleButton):
         super().__init__(
             compact="compact_drawer",
             title="Lat/Long cropping",
-            icon="mdi-crop",
+            icon="mdi-web",
             value="adjust-databounds",
             keybinding="c",
         )
