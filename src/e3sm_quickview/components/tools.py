@@ -139,7 +139,7 @@ class OpenFile(ToggleButton):
         super().__init__(
             compact="compact_drawer",
             title="File loading",
-            icon="mdi-file-document-outline",
+            icon="mdi-file-upload-outline",
             value="load-data",
         )
 

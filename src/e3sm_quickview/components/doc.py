@@ -23,7 +23,7 @@ class Tool(v3.VListItem):
 class ToolFileLoading(Tool):
     def __init__(self):
         super().__init__(
-            icon="mdi-file-document-outline",
+            icon="mdi-file-upload-outline",
             title="File loading",
             description="Load files to explore. Those could be simulation and connectivity files or even a state file pointing to those files.",
         )
