@@ -2,6 +2,23 @@
 
 <!-- version list -->
 
+## v1.3.1 (2026-02-09)
+
+### Bug Fixes
+
+- **crop**: Allow text input
+  ([`9c8143a`](https://github.com/Kitware/QuickView/commit/9c8143a0089f96ae74d0c25253edc54e2d87ed65))
+
+- **presets**: Enable all ParaView presets
+  ([`ba85976`](https://github.com/Kitware/QuickView/commit/ba85976a944c9c76a2d0a66cd23d307f40f1216a))
+
+- **variables**: Better layout for variable selection
+  ([`ef1f16b`](https://github.com/Kitware/QuickView/commit/ef1f16b657bbb0662eb3108cb3e4464900c2f3a4))
+
+- **view**: Use ellipsis on title
+  ([`427768e`](https://github.com/Kitware/QuickView/commit/427768ecfa57f33af8761c4cddd2c09de36c2219))
+
+
 ## v1.3.0 (2026-02-09)
 
 ### Bug Fixes
