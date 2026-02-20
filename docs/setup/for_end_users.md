@@ -1,4 +1,4 @@
-# Install and Launch for End Users
+## Install and Launch for End Users
 
 At version 1.0, QuickView is expected to be installed and used from a personal
 computer with the data files also being local. Future versions will support the
@@ -9,7 +9,7 @@ the near [future](../future.md).
 
 ---
 
-# Install
+## Install
 
 For end users, pre-built binaries are available and can be installed with just a
 few steps, as described below.
@@ -45,7 +45,7 @@ few steps, as described below.
 
 ---
 
-# Launch
+## Launch
 
 To launch the EAM QuickView GUI, simply double-click the app icon in the
 Applications folder.
@@ -58,7 +58,7 @@ Applications folder.
 
 ---
 
-# Within a conda environment
+## Within a conda environment
 
 You can install `e3sm-quickview` directly in your conda environment via this
 simple command `conda install -c conda-forge e3sm-quickview`. But you can also
@@ -84,3 +84,21 @@ Common options are as follow:
   also use `0` as a way to let the system pick an available port automatically.
 - `--host 0.0.0.0` to allow external connection on Linux.
 - `--help` to list all the options.
+
+## At NERSC
+
+- First [login to NERSC jupyter](https://jupyter.nersc.gov/hub/login)
+- Start a sessing inside JupyterHub
+- Open a terminal and run the following commands
+
+```
+# Go to the directory that you want to browse
+cd /path/to/your/data
+
+# Run the application
+/global/common/software/m4359/quickview
+```
+
+The application will start and will print the URL for you to connect. You can
+simply click on the URL in the terminal to open a new browser tab with the
+application in full screen.
