@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.3.3 (2026-02-20)
+
+### Bug Fixes
+
+- **NERSC**: Improve jupyter/nersc usage
+  ([`aa7086b`](https://github.com/Kitware/QuickView/commit/aa7086bedd2264b1f9602c968dd8f505bc34047a))
+
+### Documentation
+
+- **NERSC**: Add information for jupyter setup at NERSC
+  ([`3037841`](https://github.com/Kitware/QuickView/commit/303784165f17b6f0ad1fcf237909f734ab5cf85f))
+
+
 ## v1.3.2 (2026-02-18)
 
 ### Bug Fixes
