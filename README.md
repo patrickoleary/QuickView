@@ -1,7 +1,10 @@
 # QuickView
 
-[![Test](https://github.com/ayenpure/QuickView/actions/workflows/test.yml/badge.svg)](https://github.com/ayenpure/QuickView/actions/workflows/test.yml)
-[![Package and Release](https://github.com/ayenpure/QuickView/actions/workflows/package-and-release.yml/badge.svg)](https://github.com/ayenpure/QuickView/actions/workflows/package-and-release.yml)
+[![Test](https://github.com/Kitware/QuickView/actions/workflows/test.yml/badge.svg)](https://github.com/Kitware/QuickView/actions/workflows/test.yml)
+[![Release](https://github.com/Kitware/QuickView/actions/workflows/release.yml/badge.svg)](https://github.com/Kitware/QuickView/actions/workflows/release.yml)
+[![Package](https://github.com/Kitware/QuickView/actions/workflows/package.yml/badge.svg)](https://github.com/Kitware/QuickView/actions/workflows/package.yml)
+![PyPI](https://img.shields.io/pypi/v/e3sm-quickview?label=pypi%20package)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview)
 
 **EAM QuickView** is an open-source, interactive visualization tool
 designed for scientists working with the atmospheric component of the 
