@@ -1,7 +1,10 @@
 from paraview.simple import *
 from paraview.util.vtkAlgorithm import *
 from vtkmodules.numpy_interface import dataset_adapter as dsa
-from vtkmodules.vtkCommonCore import vtkPoints
+from vtkmodules.vtkCommonCore import (
+    vtkPoints,
+    vtkIdList,
+)
 from vtkmodules.vtkCommonDataModel import (
     vtkPolyData,
     vtkCellArray,
@@ -51,7 +54,6 @@ def ProcessPoint(point, radius):
     y = rho * math.sin(math.radians(phi)) * math.sin(math.radians(theta))
     z = rho * math.cos(math.radians(phi))
     return [x, y, z]
-
 
 @smproxy.filter()
 @smproperty.input(name="Input")
@@ -408,16 +410,7 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
 @smproxy.filter()
 @smproperty.input(name="Input")
 @smdomain.datatype(
-    dataTypes=["vtkPolyData", "vtkUnstructuredGrid"], composite_data_supported=False
-)
-@smproperty.xml(
-    """
-                <IntVectorProperty name="Center Meridian"
-                      command="SetCentralMeridian"
-                      number_of_elements="1"
-                      default_values="0">
-                 </IntVectorProperty>
-                """
+    dataTypes=["vtkPolyData"], composite_data_supported=False
 )
 @smproperty.xml(
     """
@@ -456,7 +449,6 @@ class EAMExtract(VTKPythonAlgorithmBase):
         outData = self.GetOutputData(outInfo, 0)
         if self.longrange == [-180.0, 180] and self.latrange == [-90, 90]:
             outData.ShallowCopy(inData)
-            timeLog.End()
             return 1
 
         box = vtkPVBox()
@@ -477,68 +469,90 @@ class EAMExtract(VTKPythonAlgorithmBase):
         extract.Update()
 
         outData.ShallowCopy(extract.GetOutput())
-        timeLog.End()
         return 1
 
 
 
+@smproxy.filter()
+@smproperty.input(name="Input")
+@smproperty.xml(
+                """
+                <IntVectorProperty name="Meridian"
+                    command="SetMeridian"
+                    number_of_elements="1"
+                    default_values="0">
+                <IntRangeDomain min="-180" max="180" name="range" />
+                <Documentation>
+    Sets the central meridian.
+    Commonly used central meridians (longitudes) (- represents West, + represents East,
+     0 is Greenwitch prime meridian):
+    - 0 (Prime Meridian): Standard "Western" view.
+    - -90/-100: Centered on North America.
+    - 100/110: Centered on Asia.
+    - -150/-160: Centered on the Pacific Ocean.
+    - 20: Often used to center Europe and Africa.
+                </Documentation>
+                </IntVectorProperty>
+                """
+)
+@smdomain.datatype(
+    dataTypes=["vtkPolyData", "vtkUnstructuredGrid"], composite_data_supported=False
+)
 class EAMCenterMeridian(VTKPythonAlgorithmBase):
+    '''Cuts an unstructured grid and re-arranges the pieces such that
+    the specified meridian is in the middle.  Note that the mesh is
+    specified with bounds [0, 360], but the meridian is specified in the more
+    common bounds [-180, 180].
+    '''
     def __init__(self):
         super().__init__(
             nInputPorts=1, nOutputPorts=1, outputType="vtkUnstructuredGrid"
         )
-        self.project = 0
-        self.cmeridian = 0.0
+        # common values:
+        self._center_meridian = 0
 
-    def SetCentralMeridian(self, meridian):
-        if self.cmeridian != meridian:
-            self.cmeridian = meridian
-            self.Modified()
+    def SetMeridian(self, meridian_):
+        '''
+        Specifies the central meridian (longitude in the middle of the map)
+        '''
+        if meridian_ < -180 or meridian_ > 180:
+            print_error("SetMeridian called with parameter outside [-180, 180]: {}".format(meridian_))
+            return
+        self._center_meridian = meridian_
+        self.Modified()
 
     def RequestData(self, request, inInfo, outInfo):
         inData = self.GetInputData(inInfo, 0, 0)
         outData = self.GetOutputData(outInfo, 0)
 
-        if self.cmeridian == 0:
-            outData.ShallowCopy(inData)
-            return 1
+        cut_meridian = self._center_meridian + 180
 
-        split = (self.cmeridian - 180) if self.cmeridian > 0 else (self.cmeridian + 180)
-
-        planeL = vtkPlane()
-        planeL.SetOrigin([split, 0.0, 0.0])
-        planeL.SetNormal([-1, 0, 0])
+        plane = vtkPlane()
+        plane.SetOrigin([cut_meridian, 0.0, 0.0])
+        plane.SetNormal([-1, 0, 0])
+        # vtkClipPolyData hangs
         clipL = vtkTableBasedClipDataSet()
-        clipL.SetClipFunction(planeL)
+        clipL.SetClipFunction(plane)
         clipL.SetInputData(inData)
         clipL.Update()
 
-        planeR = vtkPlane()
-        planeR.SetOrigin([split, 0.0, 0.0])
-        planeR.SetNormal([1, 0, 0])
+        plane.SetNormal([1, 0, 0])
         clipR = vtkTableBasedClipDataSet()
-        clipR.SetClipFunction(planeR)
+        clipR.SetClipFunction(plane)
         clipR.SetInputData(inData)
         clipR.Update()
 
         transFunc = vtkTransform()
-        transFunc.Translate(360, 0, 0)
+        transFunc.Translate(-360, 0, 0)
         transform = vtkTransformFilter()
-        transform.SetInputData(clipL.GetOutput())
+        transform.SetInputData(clipR.GetOutput())
         transform.SetTransform(transFunc)
         transform.Update()
 
         append = vtkAppendFilter()
-        append.AddInputData(clipR.GetOutput())
+        append.AddInputData(clipL.GetOutput())
         append.AddInputData(transform.GetOutput())
         append.Update()
+        outData.ShallowCopy(append.GetOutput())
 
-        transFunc = vtkTransform()
-        transFunc.Translate(-(180 + split), 0, 0)
-        transform = vtkTransformFilter()
-        transform.SetInputData(append.GetOutput())
-        transform.SetTransform(transFunc)
-        transform.Update()
-
-        outData.ShallowCopy(transform.GetOutput())
         return 1
