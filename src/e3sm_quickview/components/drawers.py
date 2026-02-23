@@ -145,7 +145,7 @@ class FieldSelection(v3.VNavigationDrawer):
                             items=("variables_listing", []),
                             height=["var_selection_size?.size.height || '30vh'"],
                             style="user-select: none; cursor: pointer;top:0;left:0;",
-                            classes="position-absolute",
+                            classes="position-absolute show-scrollbar",
                             hover=True,
                             search=("variables_filter", ""),
                             items_per_page=-1,

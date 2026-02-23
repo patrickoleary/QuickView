@@ -1,0 +1,16 @@
+.show-scrollbar ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px; /* or height for horizontal */
+}
+
+/* Styles the draggable part of the scrollbar */
+.show-scrollbar ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Styles the track (the area the thumb moves within) */
+.show-scrollbar ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
