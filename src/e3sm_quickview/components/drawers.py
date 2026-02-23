@@ -153,8 +153,8 @@ class FieldSelection(v3.VNavigationDrawer):
                         ):
                             with v3.Template(raw_attrs=['#item.name="{ value }"']):
                                 html.Div(
-                                    "{{ value.split('_').join(' ') }}",
-                                    classes="text-break text-capitalize",
+                                    "{{ value }}",
+                                    classes="text-break",
                                     title=["`${value}`"],
                                 )
                             with v3.Template(raw_attrs=['#item.type="{ value }"']):
