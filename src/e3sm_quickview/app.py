@@ -1,7 +1,9 @@
 import asyncio
 import datetime
 import json
+import math
 import os
+from functools import partial
 from pathlib import Path
 
 from trame.app import TrameApp, asynchronous, file_upload
@@ -420,22 +422,18 @@ class EAMApp(TrameApp):
                         if values is not None
                         else []
                     )
+
                     if values is not None and len(values) > 1:
                         n_cols += 1
-                        available_tracks.append({"title": name, "value": name})
+                        available_tracks.append(name)
                 self.state.toolbar_slider_cols = 12 / n_cols if n_cols else 12
                 self.state.animation_tracks = available_tracks
                 self.state.animation_track = (
-                    self.state.animation_tracks[0]["value"]
-                    if available_tracks
-                    else None
+                    self.state.animation_tracks[0] if available_tracks else None
                 )
 
-                from functools import partial
-
                 # Initialize dynamic index variables for each dimension
-                for track in available_tracks:
-                    dim_name = track["value"]
+                for dim_name in available_tracks:
                     index_var = f"{dim_name}_idx"
                     if "time" in index_var:
                         self.state[index_var] = 50
@@ -460,6 +458,19 @@ class EAMApp(TrameApp):
 
         # Flatten the list of lists
         flattened_vars = [var for var_list in vars_to_show.values() for var in var_list]
+
+        # Compute used dimensions
+        used_dims = set()
+        for dims in self.selected_variables.keys():
+            used_dims.update(dims)
+        self.state.available_animation_tracks = [
+            n for n in self.state.animation_tracks if n in used_dims
+        ]
+        self.state.animation_track = (
+            self.state.available_animation_tracks[0]
+            if self.state.available_animation_tracks
+            else None
+        )
 
         self.source.LoadVariables(flattened_vars)
 
@@ -498,13 +509,21 @@ class EAMApp(TrameApp):
                 await asyncio.sleep(0.1)
                 self.view_manager.reset_camera()
 
-    @change("active_tools", "animation_tracks")
+    @change("active_tools", "available_animation_tracks")
     def _on_toolbar_change(self, active_tools, **_):
         top_padding = 0
         for name in active_tools:
             if name == "select-slice-time":
-                track_count = len(self.state.animation_tracks or [])
-                rows_needed = max(1, (track_count + 2) // 3)  # 3 sliders per row
+                track_count = len(self.state.available_animation_tracks or [])
+                rows_needed = 1
+                if track_count > 3:
+                    if track_count % 3 == 0 or (track_count + 1) % 3 == 0:
+                        rows_needed = math.ceil(track_count / 3)
+                    elif track_count % 2 == 0:
+                        rows_needed = track_count / 2
+                    else:
+                        rows_needed = math.ceil(track_count / 3)
+
                 top_padding += 70 * rows_needed
             else:
                 top_padding += toolbars.SIZES.get(name, 0)

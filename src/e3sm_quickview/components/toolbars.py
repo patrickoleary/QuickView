@@ -322,21 +322,24 @@ class DataSelection(html.Div):
 
             with v3.VRow(classes="ma-0 pr-2 flex-wrap flex-grow-1", dense=True):
                 # Debug: Show animation_tracks array
-                # html.Div("Animation Tracks: {{ JSON.stringify(animation_tracks) }}", classes="col-12")
+                # html.Div(
+                #     "Animation Tracks: {{ JSON.stringify(available_animation_tracks) }}",
+                #     classes="col-12",
+                # )
                 # Each track gets a column (3 per row)
                 with v3.VCol(
-                    cols=4,
-                    v_for="(track, idx) in animation_tracks",
+                    cols=("utils.quickview.cols(available_animation_tracks.length)",),
+                    v_for="(track, idx) in available_animation_tracks",
                     key="idx",
                     classes="pa-2",
                 ):
-                    with client.Getter(name=("track.value",), value_name="t_values"):
+                    with client.Getter(name=("track",), value_name="t_values"):
                         with client.Getter(
-                            name=("track.value + '_idx'",), value_name="t_idx"
+                            name=("track + '_idx'",), value_name="t_idx"
                         ):
                             with v3.VRow(classes="ma-0 align-center", dense=True):
                                 v3.VLabel(
-                                    "{{track.title}}",
+                                    "{{track}}",
                                     classes="text-subtitle-2",
                                 )
                                 v3.VSpacer()
@@ -348,7 +351,7 @@ class DataSelection(html.Div):
                                 model_value=("t_idx",),
                                 update_modelValue=(
                                     self.on_update_slider,
-                                    "[track.value, $event]",
+                                    "[track, $event]",
                                 ),
                                 min=0,
                                 # max=100,#("get(track.value).length - 1",),
@@ -375,7 +378,7 @@ class Animation(v3.VToolbar):
             with v3.VRow(classes="ma-0 px-2 align-center"):
                 v3.VSelect(
                     v_model=("animation_track", "timestamps"),
-                    items=("animation_tracks", []),
+                    items=("available_animation_tracks", []),
                     flat=True,
                     variant="plain",
                     hide_details=True,
