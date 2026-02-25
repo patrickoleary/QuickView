@@ -419,6 +419,69 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
                  </IntVectorProperty>
                 """
 )
+@smproperty.xml(
+    """
+                <DoubleVectorProperty name="Longitude Range"
+                      command="SetLongitudeRange"
+                      number_of_elements="2"
+                      default_values="-180 180">
+                 </DoubleVectorProperty>
+                <DoubleVectorProperty name="Latitude Range"
+                      command="SetLatitudeRange"
+                      number_of_elements="2"
+                      default_values="-90 90">
+                 </DoubleVectorProperty>
+                """
+)
+class EAMExtract(VTKPythonAlgorithmBase):
+    def __init__(self):
+        super().__init__(
+            nInputPorts=1, nOutputPorts=1, outputType="vtkUnstructuredGrid"
+        )
+        self.longrange = [-180.0, 180.0]
+        self.latrange = [-90.0, 90.0]
+
+    def SetLongitudeRange(self, min, max):
+        if self.longrange[0] != min or self.longrange[1] != max:
+            self.longrange = [min, max]
+            self.Modified()
+
+    def SetLatitudeRange(self, min, max):
+        if self.latrange[0] != min or self.latrange[1] != max:
+            self.latrange = [min, max]
+            self.Modified()
+
+    def RequestData(self, request, inInfo, outInfo):
+        inData = self.GetInputData(inInfo, 0, 0)
+        outData = self.GetOutputData(outInfo, 0)
+        if self.longrange == [-180.0, 180] and self.latrange == [-90, 90]:
+            outData.ShallowCopy(inData)
+            timeLog.End()
+            return 1
+
+        box = vtkPVBox()
+        box.SetReferenceBounds(
+            self.longrange[0],
+            self.longrange[1],
+            self.latrange[0],
+            self.latrange[1],
+            -1.0,
+            1.0,
+        )
+        box.SetUseReferenceBounds(True)
+        extract = vtkPVClipDataSet()
+        extract.SetClipFunction(box)
+        extract.InsideOutOn()
+        extract.ExactBoxClipOn()
+        extract.SetInputData(inData)
+        extract.Update()
+
+        outData.ShallowCopy(extract.GetOutput())
+        timeLog.End()
+        return 1
+
+
+
 class EAMCenterMeridian(VTKPythonAlgorithmBase):
     def __init__(self):
         super().__init__(
