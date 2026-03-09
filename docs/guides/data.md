@@ -12,17 +12,23 @@ data format that QuickView expects in order to properly read and visualize the
 simulation data.
 
 ::: tip Tip: Consistency Between Simulation File and Connecitivity File One of
+
 the repeatedly encountered causes of error when loading files in QuickView is
 that the grid described by the connecitivity file does not match the grid in the
-simulation data file. :::
+simulation data file.
+
+:::
 
 ::: warning Caution: Newer EAMxx Output Files The EAMxx output file that
+
 QuickView has been tested for was generated in late 2024. As EAMxx further
 evolves and its output format changes, QuickView might need to be updated
 accordingly. If the user encounters such a case, we recommend reaching out to
 our developers or using the
 [Issue tab on GitHub](https://github.com/Kitware/QuickView/issues) to start a
-discussion. :::
+discussion.
+
+:::
 
 ## Overview
 
