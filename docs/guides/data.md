@@ -91,9 +91,12 @@ the visualization.
 # Connectivity files
 
 ::: tip Tip: Connecitivity File Download A collection of connectivity files can
+
 be found on [Zenodo](https://doi.org/10.5281/zenodo.16908566). The archive is
 continually updated as more users inform us about the grids their data files
-use. :::
+use.
+
+:::
 
 The horizontal grids used by EAM are cubed spheres. Since these are unstructed
 grids, QuickView needs to know how to map data to the globe. Therefore, for each
