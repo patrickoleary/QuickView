@@ -1,4 +1,0 @@
-git-lfs
-mkdocs
-mkdocs-material
-mkdocstrings[python]

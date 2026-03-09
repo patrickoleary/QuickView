@@ -1,0 +1,4 @@
+.vp-doc table {
+  display: inline-table !important;
+  width: 100% !important;
+}

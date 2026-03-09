@@ -10,8 +10,8 @@ example:
 - Data file: `EAMv2_ne30pg2_F2010.eam.h0.nc`
 - Connectivity file: `connectivity_ne30pg2_TEMPEST.scrip.nc`
 
-See the [Data Requirements](../data-requirements.md) documentation for detailed
-information about file formats and available datasets.
+See the Data Requirements documentation for detailed information about file
+formats and available datasets.
 
 ## Usage
 
@@ -54,18 +54,18 @@ The following table provides additional information about the parameters and
 
 ## Components of QuickView
 
-![eam-quickview-full-enum](../images/eam-quickview-full-enum.png)
+<!--![eam-quickview-full-enum](../../images/eam-quickview-full-enum.png)-->
 
 The QuickView app has three main components, they are highlighted in the above
 screen shot.
 
-1. [Toolbar](toolbar.md) -- highlighted in green, let's the users control some
+1. [Toolbar](toolbar) -- highlighted in green, let's the users control some
    global properties of the application and displays helpful information.
 
-2. [Control Panel](control_panel.md) -- highlighted in red, let's the user
-   control the data to represent, e.g. slicing or dicing the data to focus on
-   certain regions/aspects of the data
+2. [Control Panel](control_panel) -- highlighted in red, let's the user control
+   the data to represent, e.g. slicing or dicing the data to focus on certain
+   regions/aspects of the data
 
-3. [View Port(s)](view_port.md) -- highlighted in yellow, displays the data for
-   the user, and control some properties for coloring and scalar mapping of the
+3. [View Port(s)](viewport) -- highlighted in yellow, displays the data for the
+   user, and control some properties for coloring and scalar mapping of the
    data.

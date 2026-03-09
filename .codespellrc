@@ -1,0 +1,4 @@
+[codespell]
+skip = package-lock.json,CHANGELOG.md,**/*.js
+ignore-words-list = hist,scrip,SCRIP
+ignore-regex = name="ba"
