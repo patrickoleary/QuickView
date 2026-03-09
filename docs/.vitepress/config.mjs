@@ -15,7 +15,7 @@ export default defineConfig({
     logo: "/icon-full.png",
     nav: [
       { text: "Home", link: "/" },
-      { text: "NERSC", link: "/nersc/" },
+      { text: "NERSC", link: "/nersc/login" },
       { text: "Guides", link: "/guides/data" },
     ],
 
@@ -23,12 +23,14 @@ export default defineConfig({
       "/nersc/": [
         {
           text: "Connecting to NERSC",
-          items: [{ text: "Login", link: "/nersc/login" }],
+          items: [
+            { text: "Login", link: "/nersc/login" },
+            { text: "Installation", link: "/nersc/installation" },
+          ],
         },
         {
           text: "Perlmutter",
           items: [
-            { text: "Introduction", link: "/nersc/perlmutter" },
             { text: "Quick View", link: "/nersc/perlmutter-run-quickview" },
             {
               text: "Quick Compare",
@@ -60,18 +62,9 @@ export default defineConfig({
           ],
         },
         {
-          text: "Installations",
-          items: [
-            { text: "Desktop bundle", link: "/guides/installation/desktop" },
-            { text: "Conda package", link: "/guides/installation/conda" },
-          ],
-        },
-        {
           text: "Development",
           items: [
-            { text: "Introduction", link: "/guides/dev" },
             { text: "Setup", link: "/guides/dev/setup" },
-            { text: "Publish to NERSC", link: "/guides/dev/nersc" },
             { text: "Continuous Integration", link: "/guides/dev/ci" },
           ],
         },
