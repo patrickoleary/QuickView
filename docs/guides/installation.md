@@ -26,7 +26,8 @@ xattr -d com.apple.quarantine <your_filename>.dmg
 ```
 
 Then the **first execution will take a while** as macOS check and validate the
-full application file tree. :::
+full application file tree.
+:::
 
 ## Conda installation
 
@@ -41,4 +42,5 @@ conda install e3sm-quickview # replace with application name
 
 :::warning macOS specificity On macOS, the first execution will also take a
 while as the system validate each python file for security. But any following
-execution should be very quick. :::
+execution should be very quick.
+:::
