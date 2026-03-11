@@ -4,10 +4,10 @@ The application that belong to the **Quick View** suite are available as
 **conda** package and standalone desktop application across OS like Mac, Windows
 and Linux.
 
-| Applications | conda package    | Releases                                                         | Versions                                                                                                                            |
-| ------------ | ---------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| QuickView    | e3sm-quickview   | [Download](https://github.com/Kitware/QuickView/releases)        | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview) |
-| QuickCompare | e3sm-compareview | [Download](https://github.com/Kitware/E3SMQuickCompare/releases) | ![PyPI](https://img.shields.io/pypi/v/e3sm-compareview?label=pypi%20package)                                                        |
+| Applications | conda package    | Releases                                                         | Conda                                                                                                                                   | PyPI                                                                                                                        |
+| ------------ | ---------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| QuickView    | e3sm-quickview   | [Download](https://github.com/Kitware/QuickView/releases)        | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview)     | [![PyPI](https://img.shields.io/pypi/v/e3sm-quickview?label=pypi%20package)](https://pypi.org/project/e3sm-quickview/)      |
+| QuickCompare | e3sm_compareview | [Download](https://github.com/Kitware/E3SMQuickCompare/releases) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm_compareview.svg)](https://anaconda.org/conda-forge/e3sm_compareview) | [![PyPI](https://img.shields.io/pypi/v/e3sm-compareview?label=pypi%20package)](https://pypi.org/project/e3sm-compareview/)  |
 
 ## Desktop bundle
 
