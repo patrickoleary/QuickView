@@ -221,6 +221,20 @@ def createModifiedCallback(anobject):
                 </StringVectorProperty>
                 """
 )
+@smproperty.xml(
+    """
+<IntVectorProperty command="SetForceFloatPoints"
+                         name="ForceFloatPoints"
+                         default_values="1"
+                         number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation>
+           If True, the points of the dataset will be float, otherwise they will be float or double depending
+           on the type of corner_lat and corner_lon variables in the connectivity file.
+        </Documentation>
+      </IntVectorProperty>
+                """
+)
 class EAMSliceSource(VTKPythonAlgorithmBase):
     def __init__(self):
         VTKPythonAlgorithmBase.__init__(
@@ -230,6 +244,7 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
 
         self._DataFileName = None
         self._ConnFileName = None
+        self._ForceFloatPoints = True
         self._dirty = False
 
         # Variables for dimension sliders
@@ -448,7 +463,12 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
         lat = meshdata[latdim][:].data.flatten()
         lon = meshdata[londim][:].data.flatten()
 
-        coords = np.empty((len(lat), 3), dtype=np.float64)
+
+        if self._ForceFloatPoints:
+            points_type = np.float32
+        else:
+            points_type = np.float64 if lat.dtype == np.float64 else np.float32
+        coords = np.empty((len(lat), 3), dtype=points_type)
         coords[:, 0] = lon
         coords[:, 1] = lat
         coords[:, 2] = 0.0
@@ -577,6 +597,11 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
             # Re-populate metadata if data file is already set
             if self._DataFileName:
                 self._populate_variable_metadata()
+            self.Modified()
+
+    def SetForceFloatPoints(self, forceFloatPoints):
+        if self._ForceFloatPoints != forceFloatPoints:
+            self._ForceFloatPoints = forceFloatPoints
             self.Modified()
 
     def SetSlicing(self, slice_str):
