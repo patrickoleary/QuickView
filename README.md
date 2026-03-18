@@ -65,3 +65,9 @@ programs via [SciDAC](https://www.scidac.gov/).
 ## License
 
 Apache Software License - see [LICENSE](LICENSE) file for details.
+
+## Commit message convention
+
+Semantic release rely on
+[conventional commits](https://www.conventionalcommits.org/) to generate new
+releases and changelog.
