@@ -11,7 +11,10 @@ from vtkmodules.vtkCommonDataModel import (
     vtkPlane,
 )
 from vtkmodules.vtkCommonTransforms import vtkTransform
-from vtkmodules.vtkFiltersCore import vtkAppendFilter
+from vtkmodules.vtkFiltersCore import (
+    vtkAppendFilter,
+    vtkGenerateIds,
+)
 from vtkmodules.vtkFiltersGeneral import (
     vtkTransformFilter,
     vtkTableBasedClipDataSet,
@@ -510,6 +513,7 @@ class EAMCenterMeridian(VTKPythonAlgorithmBase):
         )
         # common values:
         self._center_meridian = 0
+        self._cached_output = None
 
     def SetMeridian(self, meridian_):
         '''
@@ -521,38 +525,80 @@ class EAMCenterMeridian(VTKPythonAlgorithmBase):
         self._center_meridian = meridian_
         self.Modified()
 
+    def GetMeridian(self):
+        '''
+        Returns the central meridian
+        '''
+        return self._center_meridian
+
     def RequestData(self, request, inInfo, outInfo):
         inData = self.GetInputData(inInfo, 0, 0)
+        inPoints = inData.GetPoints()
+        inCellArray = inData.GetCells()
+
         outData = self.GetOutputData(outInfo, 0)
+        if self._cached_output and self._cached_output.GetMTime() > inPoints.GetMTime() and \
+           self._cached_output.GetMTime() > inCellArray.GetMTime():
+            # only scalars have been added or removed
+            cached_cell_data = self._cached_output.GetCellData()
 
-        cut_meridian = self._center_meridian + 180
+            in_cell_data = inData.GetCellData()
 
-        plane = vtkPlane()
-        plane.SetOrigin([cut_meridian, 0.0, 0.0])
-        plane.SetNormal([-1, 0, 0])
-        # vtkClipPolyData hangs
-        clipL = vtkTableBasedClipDataSet()
-        clipL.SetClipFunction(plane)
-        clipL.SetInputData(inData)
-        clipL.Update()
+            outData.ShallowCopy(self._cached_output)
+            out_cell_data = outData.GetCellData()
 
-        plane.SetNormal([1, 0, 0])
-        clipR = vtkTableBasedClipDataSet()
-        clipR.SetClipFunction(plane)
-        clipR.SetInputData(inData)
-        clipR.Update()
+            out_cell_data.Initialize()
+            for i in range(in_cell_data.GetNumberOfArrays()):
+                in_array = in_cell_data.GetArray(i)
+                cached_array = cached_cell_data.GetArray(in_array.GetName())
+                if cached_array and cached_array.GetMTime() >= in_array.GetMTime():
+                    # this scalar has been seen before
+                    # simply add a reference in the outData
+                    out_cell_data.AddArray(in_array)
+                else:
+                    # this scalar is new
+                    # we have to fill in the additional cells resulted from the clip
+                    out_array = in_array.NewInstance()
+                    array0 = cached_cell_data.GetArray(0)
+                    out_array.SetNumberOfComponents(array0.GetNumberOfComponents())
+                    out_array.SetNumberOfTuples(array0.GetNumberOfTuples())
+                    out_array.SetName(in_array.GetName())
+                    out_cell_data.AddArray(out_array)
+                    outData.cell_data[out_array.GetName()] = inData.cell_data[i][self._cached_output.cell_data['PedigreeIds']]
+        else:
+            generate_ids = vtkGenerateIds()
+            generate_ids.SetInputData(inData)
+            generate_ids.PointIdsOff()
+            generate_ids.SetCellIdsArrayName("PedigreeIds")
 
-        transFunc = vtkTransform()
-        transFunc.Translate(-360, 0, 0)
-        transform = vtkTransformFilter()
-        transform.SetInputData(clipR.GetOutput())
-        transform.SetTransform(transFunc)
-        transform.Update()
+            cut_meridian = self._center_meridian + 180
+            plane = vtkPlane()
+            plane.SetOrigin([cut_meridian, 0.0, 0.0])
+            plane.SetNormal([-1, 0, 0])
+            # vtkClipPolyData hangs
+            clipL = vtkTableBasedClipDataSet()
+            clipL.SetClipFunction(plane)
+            clipL.SetInputConnection(generate_ids.GetOutputPort())
+            clipL.Update()
 
-        append = vtkAppendFilter()
-        append.AddInputData(clipL.GetOutput())
-        append.AddInputData(transform.GetOutput())
-        append.Update()
-        outData.ShallowCopy(append.GetOutput())
+            plane.SetNormal([1, 0, 0])
+            clipR = vtkTableBasedClipDataSet()
+            clipR.SetClipFunction(plane)
+            clipR.SetInputConnection(generate_ids.GetOutputPort())
+            clipR.Update()
 
+            transFunc = vtkTransform()
+            transFunc.Translate(-360, 0, 0)
+            transform = vtkTransformFilter()
+            transform.SetInputData(clipR.GetOutput())
+            transform.SetTransform(transFunc)
+            transform.Update()
+
+            append = vtkAppendFilter()
+            append.AddInputData(clipL.GetOutput())
+            append.AddInputData(transform.GetOutput())
+            append.Update()
+            outData.ShallowCopy(append.GetOutput())
+            self._cached_output = outData.NewInstance()
+            self._cached_output.ShallowCopy(outData)
         return 1
