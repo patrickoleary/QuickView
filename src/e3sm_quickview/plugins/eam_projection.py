@@ -1,14 +1,20 @@
 from paraview.simple import *
 from paraview.util.vtkAlgorithm import *
 from vtkmodules.numpy_interface import dataset_adapter as dsa
-from vtkmodules.vtkCommonCore import vtkPoints
+from vtkmodules.vtkCommonCore import (
+    vtkPoints,
+    vtkIdList,
+)
 from vtkmodules.vtkCommonDataModel import (
     vtkPolyData,
     vtkCellArray,
     vtkPlane,
 )
 from vtkmodules.vtkCommonTransforms import vtkTransform
-from vtkmodules.vtkFiltersCore import vtkAppendFilter
+from vtkmodules.vtkFiltersCore import (
+    vtkAppendFilter,
+    vtkGenerateIds,
+)
 from vtkmodules.vtkFiltersGeneral import (
     vtkTransformFilter,
     vtkTableBasedClipDataSet,
@@ -51,7 +57,6 @@ def ProcessPoint(point, radius):
     y = rho * math.sin(math.radians(phi)) * math.sin(math.radians(theta))
     z = rho * math.cos(math.radians(phi))
     return [x, y, z]
-
 
 @smproxy.filter()
 @smproperty.input(name="Input")
@@ -408,74 +413,192 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
 @smproxy.filter()
 @smproperty.input(name="Input")
 @smdomain.datatype(
-    dataTypes=["vtkPolyData", "vtkUnstructuredGrid"], composite_data_supported=False
+    dataTypes=["vtkPolyData"], composite_data_supported=False
 )
 @smproperty.xml(
     """
-                <IntVectorProperty name="Center Meridian"
-                      command="SetCentralMeridian"
-                      number_of_elements="1"
-                      default_values="0">
-                 </IntVectorProperty>
+                <DoubleVectorProperty name="Longitude Range"
+                      command="SetLongitudeRange"
+                      number_of_elements="2"
+                      default_values="-180 180">
+                 </DoubleVectorProperty>
+                <DoubleVectorProperty name="Latitude Range"
+                      command="SetLatitudeRange"
+                      number_of_elements="2"
+                      default_values="-90 90">
+                 </DoubleVectorProperty>
                 """
 )
-class EAMCenterMeridian(VTKPythonAlgorithmBase):
+class EAMExtract(VTKPythonAlgorithmBase):
     def __init__(self):
         super().__init__(
             nInputPorts=1, nOutputPorts=1, outputType="vtkUnstructuredGrid"
         )
-        self.project = 0
-        self.cmeridian = 0.0
+        self.longrange = [-180.0, 180.0]
+        self.latrange = [-90.0, 90.0]
 
-    def SetCentralMeridian(self, meridian):
-        if self.cmeridian != meridian:
-            self.cmeridian = meridian
+    def SetLongitudeRange(self, min, max):
+        if self.longrange[0] != min or self.longrange[1] != max:
+            self.longrange = [min, max]
+            self.Modified()
+
+    def SetLatitudeRange(self, min, max):
+        if self.latrange[0] != min or self.latrange[1] != max:
+            self.latrange = [min, max]
             self.Modified()
 
     def RequestData(self, request, inInfo, outInfo):
         inData = self.GetInputData(inInfo, 0, 0)
         outData = self.GetOutputData(outInfo, 0)
-
-        if self.cmeridian == 0:
+        if self.longrange == [-180.0, 180] and self.latrange == [-90, 90]:
             outData.ShallowCopy(inData)
             return 1
 
-        split = (self.cmeridian - 180) if self.cmeridian > 0 else (self.cmeridian + 180)
+        box = vtkPVBox()
+        box.SetReferenceBounds(
+            self.longrange[0],
+            self.longrange[1],
+            self.latrange[0],
+            self.latrange[1],
+            -1.0,
+            1.0,
+        )
+        box.SetUseReferenceBounds(True)
+        extract = vtkPVClipDataSet()
+        extract.SetClipFunction(box)
+        extract.InsideOutOn()
+        extract.ExactBoxClipOn()
+        extract.SetInputData(inData)
+        extract.Update()
 
-        planeL = vtkPlane()
-        planeL.SetOrigin([split, 0.0, 0.0])
-        planeL.SetNormal([-1, 0, 0])
-        clipL = vtkTableBasedClipDataSet()
-        clipL.SetClipFunction(planeL)
-        clipL.SetInputData(inData)
-        clipL.Update()
+        outData.ShallowCopy(extract.GetOutput())
+        return 1
 
-        planeR = vtkPlane()
-        planeR.SetOrigin([split, 0.0, 0.0])
-        planeR.SetNormal([1, 0, 0])
-        clipR = vtkTableBasedClipDataSet()
-        clipR.SetClipFunction(planeR)
-        clipR.SetInputData(inData)
-        clipR.Update()
 
-        transFunc = vtkTransform()
-        transFunc.Translate(360, 0, 0)
-        transform = vtkTransformFilter()
-        transform.SetInputData(clipL.GetOutput())
-        transform.SetTransform(transFunc)
-        transform.Update()
 
-        append = vtkAppendFilter()
-        append.AddInputData(clipR.GetOutput())
-        append.AddInputData(transform.GetOutput())
-        append.Update()
+@smproxy.filter()
+@smproperty.input(name="Input")
+@smproperty.xml(
+                """
+                <IntVectorProperty name="Meridian"
+                    command="SetMeridian"
+                    number_of_elements="1"
+                    default_values="0">
+                <IntRangeDomain min="-180" max="180" name="range" />
+                <Documentation>
+    Sets the central meridian.
+    Commonly used central meridians (longitudes) (- represents West, + represents East,
+     0 is Greenwitch prime meridian):
+    - 0 (Prime Meridian): Standard "Western" view.
+    - -90/-100: Centered on North America.
+    - 100/110: Centered on Asia.
+    - -150/-160: Centered on the Pacific Ocean.
+    - 20: Often used to center Europe and Africa.
+                </Documentation>
+                </IntVectorProperty>
+                """
+)
+@smdomain.datatype(
+    dataTypes=["vtkPolyData", "vtkUnstructuredGrid"], composite_data_supported=False
+)
+class EAMCenterMeridian(VTKPythonAlgorithmBase):
+    '''Cuts an unstructured grid and re-arranges the pieces such that
+    the specified meridian is in the middle.  Note that the mesh is
+    specified with bounds [0, 360], but the meridian is specified in the more
+    common bounds [-180, 180].
+    '''
+    def __init__(self):
+        super().__init__(
+            nInputPorts=1, nOutputPorts=1, outputType="vtkUnstructuredGrid"
+        )
+        # common values:
+        self._center_meridian = 0
+        self._cached_output = None
 
-        transFunc = vtkTransform()
-        transFunc.Translate(-(180 + split), 0, 0)
-        transform = vtkTransformFilter()
-        transform.SetInputData(append.GetOutput())
-        transform.SetTransform(transFunc)
-        transform.Update()
+    def SetMeridian(self, meridian_):
+        '''
+        Specifies the central meridian (longitude in the middle of the map)
+        '''
+        if meridian_ < -180 or meridian_ > 180:
+            print_error("SetMeridian called with parameter outside [-180, 180]: {}".format(meridian_))
+            return
+        self._center_meridian = meridian_
+        self.Modified()
 
-        outData.ShallowCopy(transform.GetOutput())
+    def GetMeridian(self):
+        '''
+        Returns the central meridian
+        '''
+        return self._center_meridian
+
+    def RequestData(self, request, inInfo, outInfo):
+        inData = self.GetInputData(inInfo, 0, 0)
+        inPoints = inData.GetPoints()
+        inCellArray = inData.GetCells()
+
+        outData = self.GetOutputData(outInfo, 0)
+        if self._cached_output and self._cached_output.GetMTime() > inPoints.GetMTime() and \
+           self._cached_output.GetMTime() > inCellArray.GetMTime():
+            # only scalars have been added or removed
+            cached_cell_data = self._cached_output.GetCellData()
+
+            in_cell_data = inData.GetCellData()
+
+            outData.ShallowCopy(self._cached_output)
+            out_cell_data = outData.GetCellData()
+
+            out_cell_data.Initialize()
+            for i in range(in_cell_data.GetNumberOfArrays()):
+                in_array = in_cell_data.GetArray(i)
+                cached_array = cached_cell_data.GetArray(in_array.GetName())
+                if cached_array and cached_array.GetMTime() >= in_array.GetMTime():
+                    # this scalar has been seen before
+                    # simply add a reference in the outData
+                    out_cell_data.AddArray(in_array)
+                else:
+                    # this scalar is new
+                    # we have to fill in the additional cells resulted from the clip
+                    out_array = in_array.NewInstance()
+                    array0 = cached_cell_data.GetArray(0)
+                    out_array.SetNumberOfComponents(array0.GetNumberOfComponents())
+                    out_array.SetNumberOfTuples(array0.GetNumberOfTuples())
+                    out_array.SetName(in_array.GetName())
+                    out_cell_data.AddArray(out_array)
+                    outData.cell_data[out_array.GetName()] = inData.cell_data[i][self._cached_output.cell_data['PedigreeIds']]
+        else:
+            generate_ids = vtkGenerateIds()
+            generate_ids.SetInputData(inData)
+            generate_ids.PointIdsOff()
+            generate_ids.SetCellIdsArrayName("PedigreeIds")
+
+            cut_meridian = self._center_meridian + 180
+            plane = vtkPlane()
+            plane.SetOrigin([cut_meridian, 0.0, 0.0])
+            plane.SetNormal([-1, 0, 0])
+            # vtkClipPolyData hangs
+            clipL = vtkTableBasedClipDataSet()
+            clipL.SetClipFunction(plane)
+            clipL.SetInputConnection(generate_ids.GetOutputPort())
+            clipL.Update()
+
+            plane.SetNormal([1, 0, 0])
+            clipR = vtkTableBasedClipDataSet()
+            clipR.SetClipFunction(plane)
+            clipR.SetInputConnection(generate_ids.GetOutputPort())
+            clipR.Update()
+
+            transFunc = vtkTransform()
+            transFunc.Translate(-360, 0, 0)
+            transform = vtkTransformFilter()
+            transform.SetInputData(clipR.GetOutput())
+            transform.SetTransform(transFunc)
+            transform.Update()
+
+            append = vtkAppendFilter()
+            append.AddInputData(clipL.GetOutput())
+            append.AddInputData(transform.GetOutput())
+            append.Update()
+            outData.ShallowCopy(append.GetOutput())
+            self._cached_output = outData.NewInstance()
+            self._cached_output.ShallowCopy(outData)
         return 1

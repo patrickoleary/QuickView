@@ -209,8 +209,11 @@ class EAMVisSource:
                 )
 
             # Step 1: Extract and transform atmospheric data
-            atmos_extract = EAMTransformAndExtract(  # noqa: F821
-                registrationName="AtmosExtract", Input=self.data
+            atmos_center = EAMCenterMeridian(
+                registrationName="AtmosCenter", Input=self.data
+            )
+            atmos_extract = EAMExtract(  # noqa: F821
+                registrationName="AtmosExtract", Input=atmos_center
             )
             atmos_extract.LongitudeRange = [-180.0, 180.0]
             atmos_extract.LatitudeRange = [-90.0, 90.0]
@@ -224,7 +227,11 @@ class EAMVisSource:
             atmos_proj.Projection = self.projection
             atmos_proj.Translate = 0
             atmos_proj.UpdatePipeline()
-            self.moveextents = atmos_proj.GetDataInformation().GetBounds()
+
+            atmos_polydata = ExtractSurface(
+                registrationName="AtmosPolyData", Input=atmos_proj
+            )
+            self.moveextents = atmos_polydata.GetDataInformation().GetBounds()
 
             # Step 3: Load and process continent outlines
             if self.globe is None:
@@ -270,7 +277,7 @@ class EAMVisSource:
             grid_proj.UpdatePipeline()
 
             # Step 8: Cache all projected views for rendering
-            self.views["atmosphere_data"] = OutputPort(atmos_proj, 0)
+            self.views["atmosphere_data"] = OutputPort(atmos_polydata, 0)
             self.views["continents"] = OutputPort(cont_proj, 0)
             self.views["grid_lines"] = OutputPort(grid_proj, 0)
 
