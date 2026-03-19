@@ -2,6 +2,59 @@
 
 <!-- version list -->
 
+## v2.0.0 (2026-03-19)
+
+### Bug Fixes
+
+- Constrain trame-dataclass version
+  ([`49930a1`](https://github.com/Kitware/QuickView/commit/49930a134f582fe88c96b26eb8e26a2382436093))
+
+- EAMCenterMeridian can center on specified meridian.
+  ([`9cc2c1b`](https://github.com/Kitware/QuickView/commit/9cc2c1bb3269af2e2941b0de38e5af79f58218cc))
+
+- Split EAMTransformAndExtract: EAMCenterMeridian, EAMExtract
+  ([`d7b8335`](https://github.com/Kitware/QuickView/commit/d7b8335bbc9b223d647e912dfdc0dc2aaa7b0162))
+
+### Chores
+
+- **docs**: Update installation guide with conda/pypi links
+  ([`8a6f3db`](https://github.com/Kitware/QuickView/commit/8a6f3db3bb49904ff5a977c8ad1a654768adf7fb))
+
+### Documentation
+
+- Update README.md
+  ([`f00423c`](https://github.com/Kitware/QuickView/commit/f00423c0c8ef7a15876a66bb71f7b4c678a08d36))
+
+- **website**: Add nersc section
+  ([`ee160e5`](https://github.com/Kitware/QuickView/commit/ee160e5ab972eca7e22e56cf3e51bdbee9cfc3a1))
+
+- **website**: Fix prettier formatting
+  ([`e0ee1bd`](https://github.com/Kitware/QuickView/commit/e0ee1bdda8c06a3a643792fe16614be4ea959576))
+
+- **website**: Setup website
+  ([`d9ba41c`](https://github.com/Kitware/QuickView/commit/d9ba41cca5d0a1af66046cd2ac9a9e928b8df814))
+
+- **website**: Update tips structure
+  ([`54c3d3a`](https://github.com/Kitware/QuickView/commit/54c3d3a5e63ece65d4d6ca278ee9aa7a7ef9ca4a))
+
+- **website**: Update tips structure
+  ([`1fa8124`](https://github.com/Kitware/QuickView/commit/1fa81241abdca8e8015276b3125763680d48c037))
+
+- **website**: Update tips structure
+  ([`dc912e1`](https://github.com/Kitware/QuickView/commit/dc912e1b3272cd069775b41ed2f2d13a259f9603))
+
+### Features
+
+- Add EAMExtract
+  ([`4f0fca2`](https://github.com/Kitware/QuickView/commit/4f0fca2d6df3eaeae9e9eacb095826d1c9cdd84e))
+
+- Add ForceFloatPoints to EAMSliceSource
+  ([`aaa3682`](https://github.com/Kitware/QuickView/commit/aaa3682dfd7519c76c2b8e7533273be1423dd9bb))
+
+- Cache output of CenterMeridian, reuse mesh and existing arrays
+  ([`88a4c49`](https://github.com/Kitware/QuickView/commit/88a4c494a514b49e59e51878e996d40586796ae8))
+
+
 ## v1.3.5 (2026-03-03)
 
 ### Bug Fixes
