@@ -22,7 +22,10 @@ class Tools(v3.VNavigationDrawer):
                     density="compact",
                     nav=True,
                     select_strategy="independent",
-                    v_model_selected=("active_tools", ["load-data"]),
+                    v_model_selected=(
+                        "active_tools",
+                        ["load-data", "select-slice-time", "animation-controls"],
+                    ),
                 ):
                     tools.AppLogo()
                     tools.ResetCamera(click=reset_camera)
