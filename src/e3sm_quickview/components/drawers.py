@@ -94,7 +94,7 @@ class FieldSelection(v3.VNavigationDrawer):
                 with v3.VCardActions(
                     key="variables_selected.length",
                     classes="flex-wrap py-1 flex-0-0 ga-1",
-                    style="overflow-y: auto; max-height: 40vh; min-height: 0;",
+                    style="overflow-y: auto; max-height: 40vh; min-height: 64px;",
                 ):
                     with v3.VChip(
                         "{{ vtype.name }}",
