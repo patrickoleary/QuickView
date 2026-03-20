@@ -227,9 +227,9 @@ class EAMApp(TrameApp):
         from collections import defaultdict
 
         vars_per_type = defaultdict(list)
-        for var in self.state.variables_selected:
-            type = self.source.varmeta[var].dimensions
-            vars_per_type[type].append(var)
+        for name in self.state.variables_selected:
+            type = self.source.variables[name].dimensions
+            vars_per_type[type].append(name)
 
         return dict(vars_per_type)
 
@@ -391,7 +391,7 @@ class EAMApp(TrameApp):
                             "type": ", ".join(var.dimensions),
                             "id": f"{var.name}",
                         }
-                        for _, var in self.source.varmeta.items()
+                        for _, var in self.source.variables.items()
                     ),
                 ]
 
@@ -401,7 +401,7 @@ class EAMApp(TrameApp):
                 dim_types = sorted(
                     set(
                         ", ".join(var.dimensions)
-                        for var in self.source.varmeta.values()
+                        for var in self.source.variables.values()
                     )
                 )
                 self.state.variable_types = [
@@ -412,7 +412,7 @@ class EAMApp(TrameApp):
                 # Update Layer/Time values and ui layout
                 n_cols = 0
                 available_tracks = []
-                for name, dim in self.source.dimmeta.items():
+                for name, dim in self.source.dimensions.items():
                     values = dim.data
                     # Convert to list for JSON serialization
                     self.state[name] = (
