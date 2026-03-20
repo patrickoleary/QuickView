@@ -259,7 +259,7 @@ class VariableView(TrameComponent):
                     v3.VIcon(
                         "mdi-lock-outline",
                         size="x-small",
-                        v_show=("lock_views", False),
+                        v_show=("lock_views", True),
                         style="transform: scale(0.75);",
                     )
 
