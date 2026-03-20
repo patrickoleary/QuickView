@@ -214,7 +214,7 @@ class MapProjection(v3.VTooltip):
                             mandatory=True,
                             v_model_selected=(
                                 "projection",
-                                ["Cyl. Equidistant"],
+                                ["Mollweide"],
                             ),
                             density="compact",
                             # items=("projections", self.options),
