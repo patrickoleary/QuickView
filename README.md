@@ -7,12 +7,12 @@
 [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview)
 
 **EAM QuickView** is an open-source, interactive visualization tool
-designed for scientists working with the atmospheric component of the 
-[Energy Exascale Earth System Model (E3SM)](https://e3sm.org/), 
-known as the E3SM Atmosphere Model (EAM). 
-Its Python- and [Trame](https://www.kitware.com/trame/)-based 
+designed for scientists working with the atmospheric component of the
+[Energy Exascale Earth System Model (E3SM)](https://e3sm.org/),
+known as the E3SM Atmosphere Model (EAM).
+Its Python- and [Trame](https://www.kitware.com/trame/)-based
 Graphical User Interface (GUI) provides
-intuitive access to [ParaView](https://www.paraview.org/)'s 
+intuitive access to [ParaView](https://www.paraview.org/)'s
 powerful analysis and visualization capabilities, without the steep learning curve.
 
 ![Application](https://raw.githubusercontent.com/Kitware/QuickView/master/QuickView-app.png)

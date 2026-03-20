@@ -40,7 +40,13 @@ tauri = [
 jupyter = [
     "jupyter-server-proxy>=4.0.0",
 ]
-
+dev = [
+    "pre-commit",
+    "ruff",
+    "pytest >=6",
+    "pytest-asyncio",
+    "pytest-cov >=3",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -69,8 +75,8 @@ quickview = "e3sm_quickview.jupyter:setup_quickview"
 
 [tool.ruff.lint.per-file-ignores]
 # Ignore star import issues in ParaView plugins
-"e3sm_quickview/plugins/*.py" = ["F403", "F405"]
-"e3sm_quickview/pipeline.py" = ["F821"]  # Plugin classes loaded dynamically
+"src/e3sm_quickview/plugins/*.py" = ["F403", "F405"]
+"src/e3sm_quickview/pipeline.py" = ["F821"]  # Plugin classes loaded dynamically
 
 [tool.semantic_release]
 version_toml = [
