@@ -101,23 +101,9 @@ class VariableView(TrameComponent):
 
         # Add annotation to the view
         # - continents
-        globe = source.views["continents"]
-        repG = simple.Show(globe, self.view)
-        simple.ColorBy(repG, None)
-        repG.SetRepresentationType("Wireframe")
-        repG.RenderLinesAsTubes = 1
-        repG.LineWidth = 1.0
-        repG.AmbientColor = [0.67, 0.67, 0.67]
-        repG.DiffuseColor = [0.67, 0.67, 0.67]
-        self.rep_globe = repG
+        self.view.GetRenderer().AddActor(source.continent.actor)
         # - gridlines
-        annot = source.views["grid_lines"]
-        repAn = simple.Show(annot, self.view)
-        repAn.SetRepresentationType("Wireframe")
-        repAn.AmbientColor = [0.67, 0.67, 0.67]
-        repAn.DiffuseColor = [0.67, 0.67, 0.67]
-        repAn.Opacity = 0.4
-        self.rep_grid = repAn
+        self.view.GetRenderer().AddActor(source.grid_lines.actor)
 
         # Reactive behavior
         self.config.watch(

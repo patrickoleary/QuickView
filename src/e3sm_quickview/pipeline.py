@@ -4,6 +4,7 @@ from pathlib import Path
 
 from paraview import simple
 from vtkmodules.vtkCommonCore import vtkLogger
+from vtkmodules.vtkRenderingCore import vtkActor, vtkPolyDataMapper
 
 
 def load_plugins():
@@ -19,7 +20,6 @@ def load_plugins():
         print("Error loading plugin :", e)
 
 
-# Define a VTK error observer
 class ErrorObserver:
     def __init__(self):
         self.error_occurred = False
@@ -53,6 +53,18 @@ class Continent:
             Projection=projection,
             Translate=0,
         )
+        # Representation
+        self.geometry = simple.ExtractSurface(Input=self.proj)
+        self.mapper = vtkPolyDataMapper(
+            input_connection=self.geometry.GetClientSideObject().output_port,
+            scalar_visibility=0,
+        )
+        self.actor = vtkActor(mapper=self.mapper)
+        self.actor.property.SetRepresentationToWireframe()
+        self.actor.property.render_lines_as_tubes = 1
+        self.actor.property.line_width = 1.0
+        self.actor.property.ambient_color = (0.67, 0.67, 0.67)
+        self.actor.property.diffuse_color = (0.67, 0.67, 0.67)
 
     def crop(self, longitude_min_max, latitude_min_max):
         self._crop.LongitudeRange = longitude_min_max
@@ -77,6 +89,16 @@ class GridLines:
             Projection=projection,
             Translate=0,
         )
+        self.geometry = simple.ExtractSurface(Input=self.proj)
+        # representation
+        self.mapper = vtkPolyDataMapper(
+            input_connection=self.geometry.GetClientSideObject().output_port,
+        )
+        self.actor = vtkActor(mapper=self.mapper)
+        self.actor.property.SetRepresentationToWireframe()
+        self.actor.property.ambient_color = (0.67, 0.67, 0.67)
+        self.actor.property.diffuse_color = (0.67, 0.67, 0.67)
+        self.actor.property.opacity = 0.4
 
     def crop(self, longitude_min_max, latitude_min_max):
         self.grid_lines.LongitudeRange = longitude_min_max
