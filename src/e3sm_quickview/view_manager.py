@@ -59,7 +59,7 @@ class ViewConfiguration(StateDataModel):
     color_range: list[float] = (0, 1)
     override_range: bool = False
     order: int = 0
-    size: int = 4
+    size: int = 6
     offset: int = 0
     break_row: bool = False
     menu: bool = False
