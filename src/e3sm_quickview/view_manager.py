@@ -48,7 +48,7 @@ def lut_name(element):
 
 class ViewConfiguration(StateDataModel):
     variable: str
-    preset: str = "Inferno (matplotlib)"
+    preset: str = "BuGnYl"
     invert: bool = False
     color_blind: bool = False
     use_log_scale: bool = False
