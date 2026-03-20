@@ -554,7 +554,7 @@ class EAMCenterMeridian(VTKPythonAlgorithmBase):
                 if cached_array and cached_array.GetMTime() >= in_array.GetMTime():
                     # this scalar has been seen before
                     # simply add a reference in the outData
-                    out_cell_data.AddArray(in_array)
+                    out_cell_data.AddArray(cached_array)
                 else:
                     # this scalar is new
                     # we have to fill in the additional cells resulted from the clip
