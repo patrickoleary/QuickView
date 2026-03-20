@@ -3,7 +3,6 @@ from paraview.util.vtkAlgorithm import *
 from vtkmodules.numpy_interface import dataset_adapter as dsa
 from vtkmodules.vtkCommonCore import (
     vtkPoints,
-    vtkIdList,
 )
 from vtkmodules.vtkCommonDataModel import (
     vtkPolyData,
@@ -57,6 +56,7 @@ def ProcessPoint(point, radius):
     y = rho * math.sin(math.radians(phi)) * math.sin(math.radians(theta))
     z = rho * math.cos(math.radians(phi))
     return [x, y, z]
+
 
 @smproxy.filter()
 @smproperty.input(name="Input")
@@ -412,9 +412,7 @@ class EAMTransformAndExtract(VTKPythonAlgorithmBase):
 
 @smproxy.filter()
 @smproperty.input(name="Input")
-@smdomain.datatype(
-    dataTypes=["vtkPolyData"], composite_data_supported=False
-)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
 @smproperty.xml(
     """
                 <DoubleVectorProperty name="Longitude Range"
@@ -475,11 +473,10 @@ class EAMExtract(VTKPythonAlgorithmBase):
         return 1
 
 
-
 @smproxy.filter()
 @smproperty.input(name="Input")
 @smproperty.xml(
-                """
+    """
                 <IntVectorProperty name="Meridian"
                     command="SetMeridian"
                     number_of_elements="1"
@@ -502,11 +499,12 @@ class EAMExtract(VTKPythonAlgorithmBase):
     dataTypes=["vtkPolyData", "vtkUnstructuredGrid"], composite_data_supported=False
 )
 class EAMCenterMeridian(VTKPythonAlgorithmBase):
-    '''Cuts an unstructured grid and re-arranges the pieces such that
+    """Cuts an unstructured grid and re-arranges the pieces such that
     the specified meridian is in the middle.  Note that the mesh is
     specified with bounds [0, 360], but the meridian is specified in the more
     common bounds [-180, 180].
-    '''
+    """
+
     def __init__(self):
         super().__init__(
             nInputPorts=1, nOutputPorts=1, outputType="vtkUnstructuredGrid"
@@ -516,19 +514,23 @@ class EAMCenterMeridian(VTKPythonAlgorithmBase):
         self._cached_output = None
 
     def SetMeridian(self, meridian_):
-        '''
+        """
         Specifies the central meridian (longitude in the middle of the map)
-        '''
+        """
         if meridian_ < -180 or meridian_ > 180:
-            print_error("SetMeridian called with parameter outside [-180, 180]: {}".format(meridian_))
+            print_error(
+                "SetMeridian called with parameter outside [-180, 180]: {}".format(
+                    meridian_
+                )
+            )
             return
         self._center_meridian = meridian_
         self.Modified()
 
     def GetMeridian(self):
-        '''
+        """
         Returns the central meridian
-        '''
+        """
         return self._center_meridian
 
     def RequestData(self, request, inInfo, outInfo):
@@ -537,8 +539,11 @@ class EAMCenterMeridian(VTKPythonAlgorithmBase):
         inCellArray = inData.GetCells()
 
         outData = self.GetOutputData(outInfo, 0)
-        if self._cached_output and self._cached_output.GetMTime() > inPoints.GetMTime() and \
-           self._cached_output.GetMTime() > inCellArray.GetMTime():
+        if (
+            self._cached_output
+            and self._cached_output.GetMTime() > inPoints.GetMTime()
+            and self._cached_output.GetMTime() > inCellArray.GetMTime()
+        ):
             # only scalars have been added or removed
             cached_cell_data = self._cached_output.GetCellData()
 
@@ -564,7 +569,9 @@ class EAMCenterMeridian(VTKPythonAlgorithmBase):
                     out_array.SetNumberOfTuples(array0.GetNumberOfTuples())
                     out_array.SetName(in_array.GetName())
                     out_cell_data.AddArray(out_array)
-                    outData.cell_data[out_array.GetName()] = inData.cell_data[i][self._cached_output.cell_data['PedigreeIds']]
+                    outData.cell_data[out_array.GetName()] = inData.cell_data[i][
+                        self._cached_output.cell_data["PedigreeIds"]
+                    ]
         else:
             generate_ids = vtkGenerateIds()
             generate_ids.SetInputData(inData)

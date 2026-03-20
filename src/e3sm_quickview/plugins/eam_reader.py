@@ -463,7 +463,6 @@ class EAMSliceSource(VTKPythonAlgorithmBase):
         lat = meshdata[latdim][:].data.flatten()
         lon = meshdata[londim][:].data.flatten()
 
-
         if self._ForceFloatPoints:
             points_type = np.float32
         else:
