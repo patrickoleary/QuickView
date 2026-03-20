@@ -1,19 +1,22 @@
-import fnmatch
 import json
-import os
+from collections import defaultdict
+from pathlib import Path
 
-
-from paraview.simple import (
-    FindSource,
-    LoadPlugin,
-    OutputPort,
-    Contour,
-    LegacyVTKReader,
-)
-
+from paraview import simple
 from vtkmodules.vtkCommonCore import vtkLogger
 
-from collections import defaultdict
+
+def load_plugins():
+    try:
+        plugin_dir = Path(__file__).with_name("plugins")
+        for plugin in plugin_dir.glob("*.py"):
+            if plugin.is_file():
+                print("Loading plugin : ", plugin)
+                simple.LoadPlugin(str(plugin.resolve()), ns=globals())
+
+        vtkLogger.SetStderrVerbosity(vtkLogger.VERBOSITY_OFF)
+    except Exception as e:
+        print("Error loading plugin :", e)
 
 
 # Define a VTK error observer
@@ -29,272 +32,247 @@ class ErrorObserver:
         self.error_occurred = False
 
 
-class EAMVisSource:
-    def __init__(self):
-        # flag to check if the pipeline is valid
-        # this is set to true when the pipeline is updated
-        # and the data is available
-        self.valid = False
+class Continent:
+    def __init__(self, projection="Mollweide"):
+        self._projection = projection
+        input_file = Path(__file__).with_name("data") / "globe.vtk"
+        self.reader = simple.LegacyVTKReader(FileNames=[str(input_file.resolve())])
+        self.contour = simple.Contour(
+            Input=self.reader,
+            ContourBy=["POINTS", "cstar"],
+            Isosurfaces=[0.5],
+            PointMergeMethod="Uniform Binning",
+        )
+        self._crop = simple.EAMTransformAndExtract(
+            Input=self.contour,
+            LongitudeRange=[-180.0, 180.0],
+            LatitudeRange=[-90.0, 90.0],
+        )
+        self.proj = simple.EAMProject(
+            Input=self._crop,
+            Projection=projection,
+            Translate=0,
+        )
 
-        self.data_file = None
-        self.conn_file = None
+    def crop(self, longitude_min_max, latitude_min_max):
+        self._crop.LongitudeRange = longitude_min_max
+        self._crop.LatitudeRange = latitude_min_max
 
-        # List of all available variables
-        self.varmeta = None
-        self.dimmeta = None
-        self.slicing = defaultdict(int)
+    @property
+    def projection(self):
+        return self._projection
 
-        self.data = None
-        self.globe = None
-        self.projection = "Cyl. Equidistant"
-        self.timestamps = []
-        self.center = 0.0
+    @projection.setter
+    def projection(self, value):
+        self._projection = value
+        self.proj.Projection = value
 
-        self.extents = [-180.0, 180.0, -90.0, 90.0]
-        self.moveextents = [-180.0, 180.0, -90.0, 90.0]
 
-        self.views = {}
-        self.vars = {"surface": [], "midpoint": [], "interface": []}
+class GridLines:
+    def __init__(self, projection="Mollweide"):
+        self._projection = projection
+        self.grid_lines = simple.EAMGridLines()
+        self.proj = simple.EAMProject(
+            Input=self.grid_lines,
+            Projection=projection,
+            Translate=0,
+        )
 
-        self.observer = ErrorObserver()
-        try:
-            plugin_dir = os.path.join(os.path.dirname(__file__), "plugins")
-            plugins = fnmatch.filter(os.listdir(path=plugin_dir), "*.py")
-            for plugin in plugins:
-                print("Loading plugin : ", plugin)
-                plugpath = os.path.abspath(os.path.join(plugin_dir, plugin))
-                if os.path.isfile(plugpath):
-                    LoadPlugin(plugpath, ns=globals())
+    def crop(self, longitude_min_max, latitude_min_max):
+        self.grid_lines.LongitudeRange = longitude_min_max
+        self.grid_lines.LatitudeRange = latitude_min_max
 
-            vtkLogger.SetStderrVerbosity(vtkLogger.VERBOSITY_OFF)
-        except Exception as e:
-            print("Error loading plugin :", e)
+    @property
+    def projection(self):
+        return self._projection
 
-    def ApplyClipping(self, cliplong, cliplat):
-        if not self.valid:
-            return
+    @projection.setter
+    def projection(self, value):
+        self._projection = value
+        self.proj.Projection = value
 
-        atmos_extract = FindSource("AtmosExtract")
-        atmos_extract.LongitudeRange = cliplong
-        atmos_extract.LatitudeRange = cliplat
 
-        cont_extract = FindSource("ContExtract")
-        cont_extract.LongitudeRange = cliplong
-        cont_extract.LatitudeRange = cliplat
+class DataReader:
+    def __init__(self, projection="Mollweide"):
+        self._file_connection = None
+        self._file_mesh = None
+        self._projection = projection
+        self._observer = ErrorObserver()
+        self._valid = False
+        self._time_values = None
+        self._variables = None
+        self._dimensions = None
+        self._slicing = defaultdict(int)
 
-    def UpdateCenter(self, center):
-        """
-        if self.center != int(center):
-            self.center = int(center)
+        # Pipeline
+        self.reader = simple.EAMSliceDataReader()
+        self.center_meridian = simple.EAMCenterMeridian(
+            Input=self.reader,
+            Meridian=0,
+        )
+        self._crop = simple.EAMExtract(
+            Input=self.center_meridian,
+            LongitudeRange=[-180, 180],
+            LatitudeRange=[-90.0, 90.0],
+        )
+        self.proj = simple.EAMProject(  # noqa: F821
+            Input=self._crop,
+            Projection=projection,
+            Translate=0,
+        )
+        self.geometry = simple.ExtractSurface(Input=self.proj)
 
-            meridian = FindSource("CenterMeridian")
-            meridian.CenterMeridian = self.center
+        # Add observer to
+        vtk_obj = self.reader.GetClientSideObject()
+        vtk_obj.AddObserver("ErrorEvent", self._observer)
+        vtk_obj.GetExecutive().AddObserver("ErrorEvent", self._observer)
 
-            gmeridian = FindSource("GCMeridian")
-            gmeridian.CenterMeridian = self.center
-        """
-        pass
+    @property
+    def valid(self):
+        return self._valid and not self._observer.error_occurred
 
-    def UpdateProjection(self, proj):
-        if not self.valid:
-            return
+    @property
+    def time_values(self):
+        if self._time_values is None and self.valid:
+            timestep_values = self.reader.TimestepValues
+            if timestep_values is None or isinstance(timestep_values, float):
+                self._time_values = [] if timestep_values is None else [timestep_values]
+            else:
+                self._time_values = list(timestep_values)
 
-        atmos_proj = FindSource("AtmosProj")
-        cont_proj = FindSource("ContProj")
-        grid_proj = FindSource("GridProj")
-        if self.projection != proj:
-            self.projection = proj
-            atmos_proj.Projection = proj
-            cont_proj.Projection = proj
-            grid_proj.Projection = proj
+        return self._time_values
 
-    def UpdateTimeStep(self, t_index):
-        if not self.valid:
-            return
-
-    def UpdatePipeline(self, time=0.0):
-        if not self.valid:
-            return
-
-        atmos_proj = FindSource("AtmosProj")
-        if atmos_proj:
-            atmos_proj.UpdatePipeline(time)
-        self.moveextents = atmos_proj.GetDataInformation().GetBounds()
-
-        cont_proj = FindSource("ContProj")
-        if cont_proj:
-            cont_proj.UpdatePipeline(time)
-
-        atmos_extract = FindSource("AtmosExtract")
-        bounds = atmos_extract.GetDataInformation().GetBounds()
-
-        grid_gen = FindSource("GridGen")
-        if grid_gen:
-            grid_gen.LongitudeRange = [bounds[0], bounds[1]]
-            grid_gen.LatitudeRange = [bounds[2], bounds[3]]
-        grid_proj = FindSource("GridProj")
-        if grid_proj:
-            grid_proj.UpdatePipeline(time)
-
-        self.views["atmosphere_data"] = OutputPort(atmos_proj, 0)
-        self.views["continents"] = OutputPort(cont_proj, 0)
-        self.views["grid_lines"] = OutputPort(grid_proj, 0)
-
-    def UpdateSlicing(self, dimension, slice):
-        if self.slicing.get(dimension) == slice:
-            return
-        else:
-            self.slicing[dimension] = slice
-            if self.data is not None:
-                x = json.dumps(self.slicing)
-                self.data.Slicing = x
-
-    def Update(self, data_file, conn_file, force_reload=False):
-        # Check if we need to reload
-        if (
-            not force_reload
-            and self.data_file == data_file
-            and self.conn_file == conn_file
-        ):
+    def load(self, file_mesh, file_connection):
+        if self._file_mesh == file_mesh and self._file_connection == file_connection:
             return self.valid
 
-        self.data_file = data_file
-        self.conn_file = conn_file
+        # Reset internal state
+        self._valid = False
+        self._time_values = None
+        self._observer.clear()
 
-        if self.data is None:
-            data = EAMSliceDataReader(  # noqa: F821
-                registrationName="AtmosReader",
-                ConnectivityFile=conn_file,
-                DataFile=data_file,
-            )
-            self.data = data
-            vtk_obj = data.GetClientSideObject()
-            vtk_obj.AddObserver("ErrorEvent", self.observer)
-            vtk_obj.GetExecutive().AddObserver("ErrorEvent", self.observer)
-            self.varmeta = vtk_obj.GetVariables()
-            self.dimmeta = vtk_obj.GetDimensions()
-
-            for dim in self.dimmeta.keys():
-                self.slicing[dim] = 0
-
-            self.observer.clear()
-        else:
-            self.data.DataFile = data_file
-            self.data.ConnectivityFile = conn_file
-            self.observer.clear()
+        # Update files
+        self.reader.DataFile = self._file_mesh = file_mesh
+        self.reader.ConnectivityFile = self._file_connection = file_connection
 
         try:
-            # Update pipeline and force view refresh
-            self.data.UpdatePipeline(time=0.0)
-            if self.observer.error_occurred:
+            self.reader.UpdatePipeline()
+            if self._observer.error_occurred:
                 raise RuntimeError(
                     "Error occurred in UpdatePipeline. "
                     "Please check if the data and connectivity files exist "
                     "and are compatible"
                 )
 
-            # Ensure TimestepValues is always a list
-            timestep_values = self.data.TimestepValues
-            if isinstance(timestep_values, (list, tuple)):
-                self.timestamps = list(timestep_values)
-            elif hasattr(timestep_values, "__iter__") and not isinstance(
-                timestep_values, str
-            ):
-                # Handle numpy arrays or other iterables
-                self.timestamps = list(timestep_values)
-            else:
-                # Single value - wrap in a list
-                self.timestamps = (
-                    [timestep_values] if timestep_values is not None else []
-                )
+            # update internal state
+            self._valid = True
+            self.time_values
+            self._variables = self.reader.GetClientSideObject().GetVariables()
+            self._dimensions = self.reader.GetClientSideObject().GetDimensions()
+            self._slicing = {k: 0 for k in self._dimensions}
 
-            # Step 1: Extract and transform atmospheric data
-            atmos_center = EAMCenterMeridian(
-                registrationName="AtmosCenter", Input=self.data
-            )
-            atmos_extract = EAMExtract(  # noqa: F821
-                registrationName="AtmosExtract", Input=atmos_center
-            )
-            atmos_extract.LongitudeRange = [-180.0, 180.0]
-            atmos_extract.LatitudeRange = [-90.0, 90.0]
-            atmos_extract.UpdatePipeline()
-            self.extents = atmos_extract.GetDataInformation().GetBounds()
-
-            # Step 2: Apply map projection to atmospheric data
-            atmos_proj = EAMProject(  # noqa: F821
-                registrationName="AtmosProj", Input=OutputPort(atmos_extract, 0)
-            )
-            atmos_proj.Projection = self.projection
-            atmos_proj.Translate = 0
-            atmos_proj.UpdatePipeline()
-
-            atmos_polydata = ExtractSurface(
-                registrationName="AtmosPolyData", Input=atmos_proj
-            )
-            self.moveextents = atmos_polydata.GetDataInformation().GetBounds()
-
-            # Step 3: Load and process continent outlines
-            if self.globe is None:
-                globe_file = os.path.join(
-                    os.path.dirname(__file__), "data", "globe.vtk"
-                )
-                globe_reader = LegacyVTKReader(
-                    registrationName="ContReader", FileNames=[globe_file]
-                )
-                cont_contour = Contour(
-                    registrationName="ContContour", Input=globe_reader
-                )
-                cont_contour.ContourBy = ["POINTS", "cstar"]
-                cont_contour.Isosurfaces = [0.5]
-                cont_contour.PointMergeMethod = "Uniform Binning"
-                self.globe = cont_contour
-
-            # Step 4: Extract and transform continent data
-            cont_extract = EAMTransformAndExtract(  # noqa: F821
-                registrationName="ContExtract", Input=self.globe
-            )
-            cont_extract.LongitudeRange = [-180.0, 180.0]
-            cont_extract.LatitudeRange = [-90.0, 90.0]
-
-            # Step 5: Apply map projection to continents
-            cont_proj = EAMProject(  # noqa: F821
-                registrationName="ContProj", Input=OutputPort(cont_extract, 0)
-            )
-            cont_proj.Projection = self.projection
-            cont_proj.Translate = 0
-            cont_proj.UpdatePipeline()
-
-            # Step 6: Generate lat/lon grid lines
-            grid_gen = EAMGridLines(registrationName="GridGen")  # noqa: F821
-            grid_gen.UpdatePipeline()
-
-            # Step 7: Apply map projection to grid lines
-            grid_proj = EAMProject(  # noqa: F821
-                registrationName="GridProj", Input=OutputPort(grid_gen, 0)
-            )
-            grid_proj.Projection = self.projection
-            grid_proj.Translate = 0
-            grid_proj.UpdatePipeline()
-
-            # Step 8: Cache all projected views for rendering
-            self.views["atmosphere_data"] = OutputPort(atmos_polydata, 0)
-            self.views["continents"] = OutputPort(cont_proj, 0)
-            self.views["grid_lines"] = OutputPort(grid_proj, 0)
-
-            self.valid = True
-            self.observer.clear()
         except Exception as e:
-            # print("Error in UpdatePipeline :", e)
-            # traceback.print_stack()
             print(e)
-            self.valid = False
 
         return self.valid
+
+    @property
+    def variables(self):
+        return self._variables
+
+    @property
+    def dimensions(self):
+        return self._dimensions
+
+    @property
+    def projection(self):
+        return self._projection
+
+    @projection.setter
+    def projection(self, value):
+        self._projection = value
+        self.proj.Projection = value
+
+    def update_slicing(self, dimension, value):
+        current_value = self._slicing.get(dimension, 0)
+
+        if current_value == value:
+            return False
+
+        self._slicing[dimension] = value
+        self.reader.Slicing = json.dumps(self._slicing)
+        return True
+
+    def update(self, time=0.0):
+        if not self.valid:
+            return
+
+        self.geometry.UpdatePipeline(time)
+
+    def crop(self, longitude_min_max, latitude_min_max):
+        self._crop.LongitudeRange = longitude_min_max
+        self._crop.LatitudeRange = latitude_min_max
+
+
+class EAMVisSource:
+    def __init__(self):
+        self.projection = "Mollweide"
+
+        load_plugins()
+        self.data_reader = DataReader(self.projection)
+        self.continent = Continent(self.projection)
+        self.grid_lines = GridLines(self.projection)
+        self.views = {}
+
+    @property
+    def valid(self):
+        return self.data_reader.valid
+
+    @property
+    def variables(self):
+        return self.data_reader.variables
+
+    @property
+    def dimensions(self):
+        return self.data_reader.dimensions
+
+    def ApplyClipping(self, cliplong, cliplat):
+        if not self.valid:
+            return
+
+        self.data_reader.crop(cliplong, cliplat)
+        self.continent.crop(cliplong, cliplat)
+        self.grid_lines.crop(cliplong, cliplat)
+
+    def UpdateProjection(self, proj):
+        if not self.valid:
+            return
+
+        if self.projection != proj:
+            self.projection = proj
+            self.data_reader.projection = proj
+            self.grid_lines.projection = proj
+            self.continent.projection = proj
+
+    def UpdatePipeline(self, time=0.0):
+        self.data_reader.update(time)
+
+    def UpdateSlicing(self, dimension, slice):
+        self.data_reader.update_slicing(dimension, slice)
+
+    def Update(self, data_file, conn_file):  # force_reload
+        if self.data_reader.load(data_file, conn_file):
+            self.views["atmosphere_data"] = self.data_reader.geometry
+            self.views["continents"] = self.continent.proj
+            self.views["grid_lines"] = self.grid_lines.proj
+            return True
+
+        return False
 
     def LoadVariables(self, vars):
         if not self.valid:
             return
-        self.data.Variables = vars
+        self.data_reader.reader.Variables = vars
 
 
 if __name__ == "__main__":
