@@ -2,7 +2,7 @@ from pathlib import Path
 
 from paraview import simple
 
-ALL_PRESETS = set(simple.GetLookupTableNames())
+ALL_PRESETS = set(simple.ListColorPresetNames())
 COLOR_BLIND_SAFE = set()
 
 # Import any missing preset
