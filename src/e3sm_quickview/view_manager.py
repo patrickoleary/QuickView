@@ -305,10 +305,6 @@ class VariableView(TrameComponent):
                     )
                     self.ctx[self.name] = handler
 
-                    # pvw.VtkRemoteView(
-                    #     self.view, interactive_ratio=1, ctx_name=self.name
-                    # )
-
                 tview.create_bottom_bar(self.config, self.update_color_preset)
 
 
