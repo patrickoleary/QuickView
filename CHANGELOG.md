@@ -2,6 +2,58 @@
 
 <!-- version list -->
 
+## v2.0.1 (2026-03-23)
+
+### Bug Fixes
+
+- Typo, store cached array not in array
+  ([`3ca8328`](https://github.com/Kitware/QuickView/commit/3ca8328cf16aaaf32666c791165040b096b1e054))
+
+- **color**: Use BuGnYl as default
+  ([`cec7c3b`](https://github.com/Kitware/QuickView/commit/cec7c3b033c22f7d841579e983a8feac2839a374))
+
+- **dataclass**: Bump version to latest
+  ([`46a656b`](https://github.com/Kitware/QuickView/commit/46a656bc8c1fd6cd7a715b3f1466c86166ba372b))
+
+- **defaults**: Lock view by default
+  ([`ac4dc3e`](https://github.com/Kitware/QuickView/commit/ac4dc3e748561375a1374680a4c6e9779b9ad4b8))
+
+- **defaults**: Show data slicing and animation
+  ([`8b52dbc`](https://github.com/Kitware/QuickView/commit/8b52dbc921d446206297fa3c5c929b29068dba04))
+
+- **deprecation**: Use new ParaView method
+  ([`27ce971`](https://github.com/Kitware/QuickView/commit/27ce9718c240a00c85d2a57ff3d01de6cdb6a7c4))
+
+- **paraview**: Bump dependency to v6+
+  ([`22b9b23`](https://github.com/Kitware/QuickView/commit/22b9b23491d21476f891bc6ac31c25c503935106))
+
+- **pipeline**: Cleanup data processing
+  ([`d562eef`](https://github.com/Kitware/QuickView/commit/d562eefcc2b04b08fa2691baf9470841d8e2a721))
+
+- **projection**: Update default projection to Mollweide
+  ([`8274e45`](https://github.com/Kitware/QuickView/commit/8274e45a508b7ec281d7a8b218926bb08e827bc6))
+
+- **rca**: Use RemoteControlledArea instead of trame-vtK
+  ([`6f8edb5`](https://github.com/Kitware/QuickView/commit/6f8edb5c681a5337e62ec5f9a2d5a9148f4367dd))
+
+- **ui**: Improve spacing in field loading
+  ([`2e19e38`](https://github.com/Kitware/QuickView/commit/2e19e3805709a0a1523a5928f6b7fe070f89cb4d))
+
+- **view**: Use 2 columns by default
+  ([`22decff`](https://github.com/Kitware/QuickView/commit/22decff53acbc50d39fa35943340c521beb37975))
+
+- **vtk**: Start migrating rendering to VTK
+  ([`d55b3e2`](https://github.com/Kitware/QuickView/commit/d55b3e2dd7352f1a8c02deb3a9615e076f8f5d9b))
+
+- **vtk**: Use vtk for rendering
+  ([`1b2159d`](https://github.com/Kitware/QuickView/commit/1b2159d49ff011ebce48c1eb05075e518393b5c5))
+
+### Code Style
+
+- **pre-commit**: Apply style
+  ([`3f4cfd5`](https://github.com/Kitware/QuickView/commit/3f4cfd51fb3d0f5c004d380149ebe90b2065e68e))
+
+
 ## v2.0.0 (2026-03-19)
 
 ### Bug Fixes
