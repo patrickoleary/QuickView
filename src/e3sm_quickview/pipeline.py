@@ -143,6 +143,7 @@ class DataReader:
             Translate=0,
         )
         self.geometry = simple.ExtractSurface(Input=self.proj)
+        self.vtk_geometry = self.geometry.GetClientSideObject()
 
         # Add observer to
         vtk_obj = self.reader.GetClientSideObject()

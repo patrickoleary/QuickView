@@ -4,10 +4,10 @@ from paraview import simple
 from trame.app import TrameComponent
 from trame.decorators import controller
 from trame.ui.html import DivLayout
-from trame.widgets import client, html
-from trame.widgets import paraview as pvw
+from trame.widgets import client, html, rca
 from trame.widgets import vuetify3 as v3
 from trame_dataclass.core import StateDataModel
+from vtkmodules.vtkRenderingCore import vtkActor, vtkPolyDataMapper
 
 from e3sm_quickview.components import view as tview
 from e3sm_quickview.presets import COLOR_BLIND_SAFE
@@ -72,38 +72,45 @@ class ViewConfiguration(StateDataModel):
 class VariableView(TrameComponent):
     def __init__(self, server, source, variable_name, variable_type):
         super().__init__(server)
-        self.config = ViewConfiguration(server, variable=variable_name)
         self.source = source
         self.variable_name = variable_name
         self.variable_type = variable_type
+        self.disable_render = False
         self.name = f"view_{self.variable_name}"
+        self.config = ViewConfiguration(server, variable=variable_name)
+
+        # ParaView
         self.view = simple.CreateRenderView()
-        self.view.GetRenderWindow().SetOffScreenRendering(True)
         self.view.InteractionMode = "2D"
         self.view.OrientationAxesVisibility = 0
         self.view.UseColorPaletteForBackground = 0
         self.view.BackgroundColorMode = "Gradient"
         self.view.CameraParallelProjection = 1
-        self.view.Size = 0  # make the interactive widget non responsive
-        self.representation = simple.Show(
-            proxy=source.views["atmosphere_data"],
-            view=self.view,
-        )
+
+        # VTK
+        self._camera = self.view.GetActiveCamera()
+        self.renderer = self.view.GetRenderer()
+        self.render_window = self.view.GetRenderWindow()
+        self.render_window.SetOffScreenRendering(True)
+
+        input = source.data_reader.vtk_geometry
+        self.mapper = vtkPolyDataMapper(input_connection=input.output_port)
+        self.actor = vtkActor(mapper=self.mapper)
+        self.renderer.AddActor(self.actor)
 
         # Lookup table color management
-        simple.ColorBy(self.representation, ("CELLS", variable_name))
         self.lut = simple.GetColorTransferFunction(variable_name)
         self.lut.NanOpacity = 0.0
 
-        self.view.ResetActiveCameraToNegativeZ()
-        self.view.ResetCamera(True, 0.9)
-        self.disable_render = False
+        # Color mapping
+        self.mapper.SetScalarVisibility(1)
+        self.mapper.SetScalarModeToUseCellFieldData()
+        self.mapper.SelectColorArray(variable_name)
+        self.mapper.SetLookupTable(self.lut.GetClientSideObject())
 
-        # Add annotation to the view
-        # - continents
-        self.view.GetRenderer().AddActor(source.continent.actor)
-        # - gridlines
-        self.view.GetRenderer().AddActor(source.grid_lines.actor)
+        # Add annotation to the view (continents, gridlines)
+        self.renderer.AddActor(source.continent.actor)
+        self.renderer.AddActor(source.grid_lines.actor)
 
         # Reactive behavior
         self.config.watch(
@@ -119,8 +126,14 @@ class VariableView(TrameComponent):
             eager=True,
         )
 
+        # Initial flush
+        simple.Render(self.view)
+
         # GUI
         self._build_ui()
+
+        # Need to be after RCA initialization (gui build)
+        self.reset_camera()
 
     def render(self):
         if self.disable_render or not self.ctx.has(self.name):
@@ -132,13 +145,11 @@ class VariableView(TrameComponent):
 
     @property
     def camera(self):
-        return self.view.GetActiveCamera()
+        return self._camera
 
     def reset_camera(self):
-        self.view.InteractionMode = "2D"
-        self.view.ResetActiveCameraToNegativeZ()
         self.view.ResetCamera(True, 0.9)
-        self.ctx[self.name].update()
+        self.render()
 
     def update_color_preset(self, name, invert, log_scale, n_colors=255):
         self.config.preset = name
@@ -174,6 +185,12 @@ class VariableView(TrameComponent):
         if self.config.color_value_min_valid and self.config.color_value_max_valid:
             self.config.color_range = [min_value, max_value]
 
+    @property
+    def data_array(self):
+        self.source.data_reader.vtk_geometry.Update()
+        ds = self.source.data_reader.vtk_geometry.GetOutput()
+        return ds.GetCellData().GetArray(self.variable_name)
+
     def update_color_range(self, *_):
         if self.config.override_range:
             skip_update = False
@@ -190,12 +207,7 @@ class VariableView(TrameComponent):
 
             self.lut.RescaleTransferFunction(*self.config.color_range)
         else:
-            self.representation.RescaleTransferFunctionToDataRange(False, True)
-            data_array = (
-                self.source.views["atmosphere_data"]
-                .GetCellDataInformation()
-                .GetArray(self.variable_name)
-            )
+            data_array = self.data_array
             if data_array:
                 data_range = data_array.GetRange()
                 self.config.color_range = data_range
@@ -286,9 +298,16 @@ class VariableView(TrameComponent):
                         """,
                     ),
                 ):
-                    pvw.VtkRemoteView(
-                        self.view, interactive_ratio=1, ctx_name=self.name
+                    display = rca.RemoteControlledArea(display="image")
+                    handler = display.create_view_handler(
+                        self.view.GetRenderWindow(),
+                        encoder="turbo-jpeg",
                     )
+                    self.ctx[self.name] = handler
+
+                    # pvw.VtkRemoteView(
+                    #     self.view, interactive_ratio=1, ctx_name=self.name
+                    # )
 
                 tview.create_bottom_bar(self.config, self.update_color_preset)
 
@@ -302,7 +321,7 @@ class ViewManager(TrameComponent):
         self._last_vars = {}
         self._active_configs = {}
 
-        pvw.initialize(self.server)
+        rca.initialize(self.server)
 
         self.state.luts_normal = [
             {"name": k, "url": v["normal"], "safe": k in COLOR_BLIND_SAFE}
@@ -343,10 +362,8 @@ class ViewManager(TrameComponent):
     def get_view(self, variable_name, variable_type):
         view = self._var2view.get(variable_name)
         if view is None:
-            view = self._var2view.setdefault(
-                variable_name,
-                VariableView(self.server, self.source, variable_name, variable_type),
-            )
+            view = VariableView(self.server, self.source, variable_name, variable_type)
+            self._var2view[variable_name] = view
             view.set_camera_modified(self.sync_camera)
 
         return view
