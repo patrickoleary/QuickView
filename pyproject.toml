@@ -27,7 +27,7 @@ dependencies = [
     "trame-rca[turbo]>=2.3.1",
     "pyproj>=3.6.1",
     "netCDF4>=1.6.5",
-    "trame-dataclass >=2.0.1",
+    "trame-dataclass >=2.0.2",
     "trame-components",
     "trame-tauri>=0.6.2",
     "Pillow",
