@@ -1,12 +1,11 @@
 import math
 
 from paraview import simple
-from trame.app import TrameComponent
+from trame.app import TrameComponent, dataclass
 from trame.decorators import controller
 from trame.ui.html import DivLayout
 from trame.widgets import client, html, rca
 from trame.widgets import vuetify3 as v3
-from trame_dataclass.core import StateDataModel
 from vtkmodules.vtkRenderingCore import vtkActor, vtkPolyDataMapper
 
 from e3sm_quickview.components import view as tview
@@ -46,27 +45,27 @@ def lut_name(element):
     return element.get("name").lower()
 
 
-class ViewConfiguration(StateDataModel):
-    variable: str
-    preset: str = "BuGnYl"
-    invert: bool = False
-    color_blind: bool = False
-    use_log_scale: bool = False
-    color_value_min: str = "0"
-    color_value_max: str = "1"
-    color_value_min_valid: bool = True
-    color_value_max_valid: bool = True
-    color_range: list[float] = (0, 1)
-    override_range: bool = False
-    order: int = 0
-    size: int = 6
-    offset: int = 0
-    break_row: bool = False
-    menu: bool = False
-    swap_group: list[str]
-    search: str | None
-    n_colors: int = 255
-    lut_img: str
+class ViewConfiguration(dataclass.StateDataModel):
+    variable: str = dataclass.Sync(str)
+    preset: str = dataclass.Sync(str, "BuGnYl")
+    invert: bool = dataclass.Sync(bool, False)
+    color_blind: bool = dataclass.Sync(bool, False)
+    use_log_scale: bool = dataclass.Sync(bool, False)
+    color_value_min: str = dataclass.Sync(str, "0")
+    color_value_max: str = dataclass.Sync(str, "1")
+    color_value_min_valid: bool = dataclass.Sync(bool, True)
+    color_value_max_valid: bool = dataclass.Sync(bool, True)
+    color_range: list[float] = dataclass.Sync(tuple[float, float], (0, 1))
+    override_range: bool = dataclass.Sync(bool, False)
+    order: int = dataclass.Sync(int, 0)
+    size: int = dataclass.Sync(int, 6)
+    offset: int = dataclass.Sync(int, 0)
+    break_row: bool = dataclass.Sync(bool, False)
+    menu: bool = dataclass.Sync(bool, False)
+    swap_group: list[str] = dataclass.Sync(list[str], list)
+    search: str | None = dataclass.Sync(str)
+    n_colors: int = dataclass.Sync(int, 255)
+    lut_img: str = dataclass.Sync(str)
 
 
 class VariableView(TrameComponent):
@@ -183,7 +182,7 @@ class VariableView(TrameComponent):
             self.config.color_value_max_valid = False
 
         if self.config.color_value_min_valid and self.config.color_value_max_valid:
-            self.config.color_range = [min_value, max_value]
+            self.config.color_range = (min_value, max_value)
 
     @property
     def data_array(self):
