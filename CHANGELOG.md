@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.0.2 (2026-03-24)
+
+### Bug Fixes
+
+- **dataclass**: Use latest trame-dataclass implementation
+  ([`0d14c97`](https://github.com/Kitware/QuickView/commit/0d14c97331c8cfc3bcb84feb67714b5cb67b57fc))
+
+
 ## v2.0.1 (2026-03-23)
 
 ### Bug Fixes
