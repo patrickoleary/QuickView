@@ -2,6 +2,55 @@
 
 <!-- version list -->
 
+## v2.1.0 (2026-03-31)
+
+### Bug Fixes
+
+- Compare points and cell arrays modification time
+  ([`db50c2b`](https://github.com/Kitware/QuickView/commit/db50c2b6263c7a29d09ac6a75890fbe370c0354b))
+
+- Fix the non-projection side
+  ([`8f9192d`](https://github.com/Kitware/QuickView/commit/8f9192dd00036f72a8bf99c863b2cd046220cc0f))
+
+- Keep a reference to cached_output so it is not deleted
+  ([`1847c35`](https://github.com/Kitware/QuickView/commit/1847c35db9e974eb932c7f7d85fb0970a2dfc331))
+
+- Remove Register/Unregister: use python references instead
+  ([`8eff1cd`](https://github.com/Kitware/QuickView/commit/8eff1cdc44179777dad8cb76fa565514d232c49c))
+
+- Use pythonic interface
+  ([`28ccaba`](https://github.com/Kitware/QuickView/commit/28ccaba63042188986cd4bb999934536a559afd0))
+
+- Use the Trim instead of Range interface for data
+  ([`8339a8f`](https://github.com/Kitware/QuickView/commit/8339a8fec8cd01327f0f75fb9ec8f7825884a682))
+
+- **crop**: Use PVGeometryFilter
+  ([`9c93c21`](https://github.com/Kitware/QuickView/commit/9c93c2135ebd2faaeeb0f5fdff75e4225958e85f))
+
+- **loading**: Provide instant feedback and report loading time
+  ([`e38e4dd`](https://github.com/Kitware/QuickView/commit/e38e4dd9580739d65c3ff0bb6afa532d780f9ebf))
+
+- **proj**: Ensure projection to properly update
+  ([`e788b7f`](https://github.com/Kitware/QuickView/commit/e788b7f85c5cba3cbdce63f6391b69902936d470))
+
+- **view**: Use a single vtkRenderView
+  ([`4da6cab`](https://github.com/Kitware/QuickView/commit/4da6cab3233b5329df4b601c04098bd50d0b8050))
+
+### Features
+
+- Add caching to EAMProject
+  ([`06a97e4`](https://github.com/Kitware/QuickView/commit/06a97e49739cf42301351a8109a8972b996ddb4e))
+
+- Cache cell_centers and ghosts in EAMExtract
+  ([`91599b0`](https://github.com/Kitware/QuickView/commit/91599b002ebecea3f69a4239e5d63bd930bd5cc5))
+
+- EAMExtract with any lon range. Use hidden cells for extract.
+  ([`6570c33`](https://github.com/Kitware/QuickView/commit/6570c33a45fac348a8d4286d979fbd6c0f0cd3a7))
+
+- **fast**: Add a fast option to choose rendering pipeline
+  ([`d301496`](https://github.com/Kitware/QuickView/commit/d30149618803032438aa885a967303fc56f48dc8))
+
+
 ## v2.0.2 (2026-03-24)
 
 ### Bug Fixes
