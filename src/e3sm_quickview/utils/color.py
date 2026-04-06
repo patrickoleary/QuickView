@@ -32,6 +32,11 @@ def generate_colormaps():
     writer.SetCompressionLevel(1)
 
     for name in names:
+        if name.endswith(")"):
+            skip_number = name[-2]
+            if skip_number in "0123456789":
+                continue
+
         imgs = []
         for inverted in range(2):
             lut.ApplyPreset(name, True)
