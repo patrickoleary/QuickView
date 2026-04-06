@@ -2,6 +2,26 @@
 
 <!-- version list -->
 
+## v2.1.1 (2026-04-06)
+
+### Bug Fixes
+
+- **colors**: Update colors in palette
+  ([`d4907e5`](https://github.com/Kitware/QuickView/commit/d4907e5ecab55300de2e63e2448874f196c074a9))
+
+- **presets**: Skip numbered gradient preset
+  ([`0d09ece`](https://github.com/Kitware/QuickView/commit/0d09ece2241d39f93a1f0ed531aa0df1d9aa3400))
+
+- **render**: Call render when changing color preset or range
+  ([`4a264de`](https://github.com/Kitware/QuickView/commit/4a264dec9ae1820d42ccf71ecfed0c41680ed16f))
+
+- **selection**: Improve variable selection
+  ([`80ed33b`](https://github.com/Kitware/QuickView/commit/80ed33b52f9e0ce4aa7bf142760e432eb3687d8a))
+
+- **url**: Provide url to user when using from conda
+  ([`8cc5a97`](https://github.com/Kitware/QuickView/commit/8cc5a9764fcf311337445a3aa2af7a793593f7fe))
+
+
 ## v2.1.0 (2026-03-31)
 
 ### Bug Fixes
