@@ -122,7 +122,13 @@ class EAMApp(TrameApp):
                 "/index.html?ui=main&reconnect=auto\n\n".encode(),
             )
         else:
+            base_url = "http://localhost"
             os.write(1, f"tauri-server-port={self.server.port}\n".encode())
+            os.write(
+                1,
+                "\nUse URL below to connect to the application:\n\n  => "
+                f"{base_url}:{self.server.port}/\n\n".encode(),
+            )
 
     @life_cycle.client_connected
     def _tauri_show(self, **_):
