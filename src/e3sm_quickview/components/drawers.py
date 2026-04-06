@@ -75,6 +75,15 @@ class FieldSelection(v3.VNavigationDrawer):
         )
 
         self.state.setdefault("loading_time", 0)
+        self.state.setdefault(
+            "visible_selection_icons",
+            [
+                "mdi-eye-outline",  # 0 => all
+                "mdi-eye-check-outline",  # 1 => only-checked
+                "mdi-eye-remove-outline",  # 2 => only-unchecked
+            ],
+        )
+        self.state.setdefault("visible_selection_icon_idx", 0)
 
         with self:
             with html.Div(
@@ -112,6 +121,7 @@ class FieldSelection(v3.VNavigationDrawer):
                         ),
                         size="small",
                         closable=True,
+                        click="variables_filter === vtype.name ? (variables_filter = '') : (variables_filter = vtype.name)",
                         click_close=(
                             "variables_selected = variables_selected.filter(id => variables_listing.find(v => v.id === id)?.type !== vtype.name)"
                         ),
@@ -127,18 +137,27 @@ class FieldSelection(v3.VNavigationDrawer):
 
                 v3.VTextField(
                     v_model=("variables_filter", ""),
-                    hide_details=True,
+                    # hide_details=True,
                     color="primary",
                     placeholder="Filter",
                     density="compact",
                     variant="outlined",
                     classes="mx-2 flex-0-0",
+                    prepend_icon=[
+                        "visible_selection_icons[visible_selection_icon_idx]"
+                    ],
                     prepend_inner_icon="mdi-magnify",
                     clearable=True,
+                    click_prepend=self.toggle_visible_selection,
+                    messages=[
+                        "['Show selected and unselected variables','Show only selected variables', 'Show only unselected variables'][visible_selection_icon_idx]"
+                    ],
                 )
                 with html.Div(style="margin:1px;padding:1px;", classes="flex-fill"):
                     with client.SizeObserver("var_selection_size"):
+                        # All
                         with v3.VDataTable(
+                            v_if="visible_selection_icon_idx === 0",
                             v_model=("variables_selected", []),
                             show_select=True,
                             item_value="id",
@@ -169,6 +188,81 @@ class FieldSelection(v3.VNavigationDrawer):
                                     classes="text-break text-caption",
                                 )
 
+                        # Checked only
+                        with v3.VDataTable(
+                            v_if="visible_selection_icon_idx === 1",
+                            v_model=("variables_selected", []),
+                            show_select=True,
+                            item_value="id",
+                            density="compact",
+                            fixed_header=True,
+                            headers=(
+                                "variables_headers",
+                                constants.VAR_HEADERS,
+                            ),
+                            items=(
+                                "variables_listing.filter((v) => variables_selected.includes(v.id))",
+                            ),
+                            height=["var_selection_size?.size.height || '30vh'"],
+                            style="user-select: none; cursor: pointer;top:0;left:0;",
+                            classes="position-absolute show-scrollbar",
+                            hover=True,
+                            search=("variables_filter", ""),
+                            items_per_page=-1,
+                            hide_default_footer=True,
+                        ):
+                            with v3.Template(raw_attrs=['#item.name="{ value }"']):
+                                html.Div(
+                                    "{{ value }}",
+                                    classes="text-break",
+                                    title=["`${value}`"],
+                                )
+                            with v3.Template(raw_attrs=['#item.type="{ value }"']):
+                                html.Div(
+                                    "{{ value }}",
+                                    classes="text-break text-caption",
+                                )
+
+                        # Unhecked only
+                        with v3.VDataTable(
+                            v_if="visible_selection_icon_idx === 2",
+                            v_model=("variables_selected", []),
+                            show_select=True,
+                            item_value="id",
+                            density="compact",
+                            fixed_header=True,
+                            headers=(
+                                "variables_headers",
+                                constants.VAR_HEADERS,
+                            ),
+                            items=(
+                                "variables_listing.filter((v) => !variables_selected.includes(v.id))",
+                            ),
+                            height=["var_selection_size?.size.height || '30vh'"],
+                            style="user-select: none; cursor: pointer;top:0;left:0;",
+                            classes="position-absolute show-scrollbar",
+                            hover=True,
+                            search=("variables_filter", ""),
+                            items_per_page=-1,
+                            hide_default_footer=True,
+                        ):
+                            with v3.Template(raw_attrs=['#item.name="{ value }"']):
+                                html.Div(
+                                    "{{ value }}",
+                                    classes="text-break",
+                                    title=["`${value}`"],
+                                )
+                            with v3.Template(raw_attrs=['#item.type="{ value }"']):
+                                html.Div(
+                                    "{{ value }}",
+                                    classes="text-break text-caption",
+                                )
+
     @change("variables_selected")
     def _on_dirty_variable_selection(self, **_):
         self.state.variables_loaded = False
+
+    def toggle_visible_selection(self):
+        self.state.visible_selection_icon_idx += 1
+        if self.state.visible_selection_icon_idx >= 3:
+            self.state.visible_selection_icon_idx = 0
