@@ -3,55 +3,69 @@
 layout: home
 
 hero:
-  name: "E3SM QuickView"
-  text: "Tools for climate data"
+  name: "The QuickView Family"
+  text: "Intuitive Analysis Tools for Earth System Models"
   tagline:
-    Get started with the QuickView suite of tools to better explore and compare
-    your climate data.
+    Get started with the QuickView family of tools to quickly explore and compare
+    your simulation output from Earth system models.
   image: /banner.png
   actions:
-    - theme: brand
-      text: Running at NERSC
-      link: /nersc/
-    - theme: alt
-      text: Getting started
-      link: /guides/data
     - theme: alt
       text: Installation
       link: /guides/installation
+    - theme: alt
+      text: Getting started
+      link: /guides/data
+    - theme: brand
+      text: Running at NERSC
+      link: /nersc/
 
 features:
   - icon:
-      src: /logos/opensource.svg
-      width: 60px
-    # title: OpenSource
+      src: /logos/E3SM_Logo.png.png
+      width: 120px
+      title: Purpose
     details:
-      E3SM QuickView is an open-source, interactive visualization tool designed
-      for scientists working with the atmospheric component of the Energy
-      Exascale Earth System Model (E3SM), known as the E3SM Atmosphere Model
-      (EAM). Its Python- and Trame-based Graphical User Interface (GUI) provides
+      The QuickView family is a collection of open-source, interactive
+      visualization tools designed
+      for scientists working with the Exascale Earth System Model (E3SM).
+  - icon:
+      src: /logos/ParaView_Mark.png
+      width: 60px
+      src: /logos/trame-icon.svg
+      width: 60px
+      title: Engine and UI 
+    details:
+      The Python- and Trame-based User Interface (UI) provides
       intuitive access to ParaView's powerful analysis and visualization
-      capabilities, without the steep learning curve.
+      capabilities but without requiring a steep learning curve.
   - icon:
       src: /logos/nersc.png
       width: 170px
-    # title: NERSC
+      title: Remote Data 
     details:
-      The applications from the QuickView suite are installed at NERSC so you
-      can just login and use them directly. They are available from within the
-      JupyterHub terminal so you can start one or more instance from your
-      reserved node. When running them, they will provide you with a URL that
-      you can click to enable a full screen experience within your browser while
-      allowing multi-screen usage.
+      Tools in this family have been deployed at NERSC so that users can
+      directly access simulation data there.
+      No installation is required on the user's end, as the UI shows up in
+      a brower window.
   - icon:
-      src: /logos/pnnl.svg
+      src: /logos/SciDAC-logo.png
       width: 140px
-    # title: Collarative research
+      title: Funding Source 
     details:
-      E3SM QuickView is a product of an interdisciplinary collaboration
+      The development of this tool suite is an ongoing interdisciplinary collaboration
       supported by the U.S. Department of Energy Office of Science’s Advanced
       Scientific Computing Research (ASCR) and Biological and Environmental
       Research (BER) via the Scientific Discovery through Advanced Computing
-      (SciDAC) program. The project is lead by Hui Wan and Kai Zhang at Pacific
-      Northwest National Laboratory.
+      (SciDAC) program.
+  - icon:
+      src: /logos/PNNL_Abbreviated_Logo.png
+      width: 140px
+      src: /logos/Kitware.png
+      width: 140px
+      title: Collaborators 
+    details:
+      The tool family is collaboratively designed by
+      Earth system scientists at Pacific Northwest National Laboratory
+      and visual analytics specialists at Kitware Inc. 
 ---
