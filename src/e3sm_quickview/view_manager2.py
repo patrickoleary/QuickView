@@ -163,6 +163,10 @@ class VariableView(TrameComponent):
     def size(self):
         return self._size
 
+    def render(self):
+        if self.ctx.view:
+            self.ctx.view.update()
+
     def update_color_preset(self, name, invert, log_scale, n_colors=255):
         self.config.preset = name
         self.lut.UseLogScale = 0
@@ -178,6 +182,7 @@ class VariableView(TrameComponent):
             self.lut.NumberOfTableValues = n_colors
 
         self.config.lut_img = lut_to_img(self.lut)
+        self.render()
 
     def color_range_str_to_float(self, color_value_min, color_value_max):
         try:
@@ -226,6 +231,8 @@ class VariableView(TrameComponent):
                 self.config.color_value_min_valid = True
                 self.config.color_value_max_valid = True
                 self.lut.RescaleTransferFunction(*data_range)
+
+        self.render()
 
     def _build_ui(self):
         with DivLayout(
