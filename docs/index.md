@@ -34,8 +34,8 @@ features:
       src: /logos/paraview_trame_python.png
       width: 180px
     details:
-      User Interfaces (UIs) based on Python and [trame](https://kitware.github.io/trame/)
-      provide intuitive access to [ParaView's](https://www.paraview.org/)
+      User Interfaces (UIs) based on Python and trame
+      provide intuitive access to ParaView's
       powerful analysis and visualization
       capabilities without requiring a steep learning curve.
     link: https://www.paraview.org/ 
@@ -48,7 +48,7 @@ features:
       directly access simulation data there.
       No installation is required on the user's end,
       as the UI shows up in a brower window.
-    link: https://www.nersc.gov/
+    link: /guides/nersc/index
   - title: Funding Source 
     icon:
       src: /logos/SciDAC-logo.png

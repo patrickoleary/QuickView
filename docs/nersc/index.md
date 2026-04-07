@@ -13,7 +13,8 @@ or how to have their own installation are referred to [this page](installation_a
 ## Quickstart for users familiar with JupyterHub
 
 - Login to [JupytherHub](https://jupyter.nersc.gov/hub/login) and start a terminal window.
-- Optional but recommended: in the terminal, use the `cd` command to go to the directory where your data files are located.
+- *Optional but recommended*: in the terminal, use the `cd` command to go to the directory
+  where your data files are located (or a directory closer to the data files than your home directory).
 - QuickView version 2 can be launched using the following command:
 ```
 /global/common/software/m4359/quickview2
@@ -24,7 +25,7 @@ or how to have their own installation are referred to [this page](installation_a
 ```
 - After a few seconds, the Terminal window will say "Use URL below to connect to the application:"
   and shows a URL starting with `https://`.
-  A click on the URS will bring up the graphical UI in a brower window.
+  A click on the URL will bring up the graphical UI in a brower window.
 
 ::: tip Tip: Choosing a server for your analysis session
 JupyterHub's control panel allows users to choose from serveral different types of resources
@@ -40,9 +41,9 @@ are used to launch our tools in the QuickView family.
 ## For NERSC user's who have not used JupyterHub
 
 Please visit [NERSC's Jupyter documentation](https://docs.nersc.gov/services/jupyter/)
-to learn how to use the JupyterHub service.
+to learn how to use the service.
 
 ## If you do not yet have any user account at  NERSC
 
-Please visit [this page](https://docs.nersc.gov/accounts/#obtaining-an-account)
-to understand how to get started.
+Information on [this page](https://docs.nersc.gov/accounts/#obtaining-an-account)
+can help get you started.
