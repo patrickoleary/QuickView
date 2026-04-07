@@ -1,7 +1,7 @@
 # Installation
 
 All tools of the **QuickView** family are available as
-**conda** packages as well as pre-compiled desktop bundles
+**conda** packages as well as **pre-compiled desktop bundles**
 for various OS's like Mac, Windows, and Linux.
 The table below summarizes where the different packages
 and bundles can be found.
@@ -17,7 +17,7 @@ To deliver pre-compiled standalone desktop applications,
 we use [PyInstaller](https://pyinstaller.org/en/stable/) and [Tauri](https://tauri.app/)
 to bundle each of our Python-based tools and their dependencies
 into a standalone graphical application.
-The creation of such bundles is done by triggering a release using GitHub Actions. 
+The creation of such a bundle is done by triggering a release using GitHub Actions. 
 Hence, the bundles are available from the corresponding GitHub repo's Releases page.
 The links are given in the summary table above.
 
@@ -49,7 +49,7 @@ conda activate quickview-env
 conda install e3sm-quickview
 ```
 
-:::tip First execution on macOS
+:::tip Tip: First execution on macOS
 On macOS, the first execution after installation via conda will also take a while
 (e.g., a minute or more),
 as the system will validate each Python file for security. But any following
