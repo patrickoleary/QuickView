@@ -11,13 +11,13 @@ hero:
   actions:
     - theme: brand 
       text: Installation
-      link: /guides/installation
+      link: /guides/install_and_launch
     - theme: brand 
       text: User's Guide 
       link: /guides/reminders
     - theme: brand 
       text: Using it at NERSC
-      link: /nersc/
+      link: /nersc/index
 
 features:
   - title: Purpose

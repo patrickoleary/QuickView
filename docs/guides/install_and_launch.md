@@ -1,4 +1,4 @@
-# Instal and launch
+# Install and launch
 
 All tools of the **QuickView** family are available as
 **conda** packages as well as **pre-compiled desktop bundles**
