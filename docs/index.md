@@ -32,8 +32,6 @@ features:
   - icon:
       src: /logos/ParaView_Mark.png
       width: 60px
-      src: /logos/trame-icon.svg
-      width: 60px
       title: Engine and UI 
     details:
       The Python- and Trame-based User Interface (UI) provides
@@ -59,8 +57,6 @@ features:
       Research (BER) via the Scientific Discovery through Advanced Computing
       (SciDAC) program.
   - icon:
-      src: /logos/PNNL_Abbreviated_Logo.png
-      width: 140px
       src: /logos/Kitware.png
       width: 140px
       title: Collaborators 
