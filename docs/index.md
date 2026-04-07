@@ -6,7 +6,7 @@ hero:
   name: "QuickView"
   text: "for Earth system models"
   tagline:
-    Intuitive and interative exploration of simulation data.
+    Intuitive and interactive exploration of simulation data.
   image: /banner.png
   actions:
     - theme: brand 

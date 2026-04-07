@@ -17,7 +17,7 @@ export default defineConfig({
       { text: "Home", link: "/" },
       { text: "News", link: "/news" },
       { text: "Gallery", link: "/gallery/" },
-      { text: "User's Guide", link: "/guides/data" },
+      { text: "User's Guide", link: "/guides/reminders" },
       { text: "At NERSC", link: "/nersc/login" },
       { text: "Repo", link: "https://github.com/Kitware/QuickView" },
       { text: "Bugs and Requests", link: "https://github.com/Kitware/QuickView/issues" },
@@ -47,6 +47,8 @@ export default defineConfig({
         {
           text: "Introduction",
           items: [
+            { text: "Key Reminders", link: "/guides/reminders" },
+            { text: "Connecitiviy Files", link: "/guides/connectivity" },
             { text: "Data Format", link: "/guides/data" },
             { text: "Installation", link: "/guides/installation" },
           ],
@@ -55,6 +57,7 @@ export default defineConfig({
           text: "QuickView",
           items: [
             { text: "Getting started", link: "/guides/quickview" },
+            { text: "Toolbar", link: "/guides/quickview/toolbar" },
             { text: "Resources", link: "/guides/quickview/resources" },
           ],
         },
