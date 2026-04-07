@@ -1,4 +1,4 @@
-# Installation
+# Instal and launch
 
 All tools of the **QuickView** family are available as
 **conda** packages as well as **pre-compiled desktop bundles**
@@ -54,7 +54,7 @@ conda install conda-forge::e3sm_compareview
 
 To update the tools to newer versions, first find the most recent version
 numbers using the links in the summary table near the top of this page,
-then use the following commands, replacing the version numbers by yours:
+then use the following commands, replacing the version numbers by what you need:
 
 ```sh
 conda activate quickview-env
@@ -62,7 +62,7 @@ conda install "e3sm-quickview>=2.1.1"
 conda install "e3sm_compareview>=1.3.4"
 ```
 
-## Using the tools installed via conda
+## Launching a tool installed via conda
 
 To use the tools installed via conda, open a Terminal window and
 activate the conda environment using
@@ -83,7 +83,7 @@ quickcompare -p 0
 ```
 
 After some seconds, the Terminal window should indicate that the app has
-loaded various plugins and give an URL similar to `http://localhost:50329/`.
+loaded various plugins, and then provide an URL similar to `http://localhost:50329/`.
 **Enter the URL into a web brower** to access the graphical UL.
 
  
