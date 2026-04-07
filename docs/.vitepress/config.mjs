@@ -57,8 +57,9 @@ export default defineConfig({
           text: "QuickView",
           items: [
             { text: "Getting started", link: "/guides/quickview" },
-            { text: "Toolbar", link: "/guides/quickview/toolbar" },
-            { text: "Resources", link: "/guides/quickview/resources" },
+            { text: "Toolbar",  link: "/guides/quickview/toolbar" },
+            { text: "Viewport", link: "/guides/quickview/viewport" },
+            { text: "Resources",link: "/guides/quickview/resources" },
           ],
         },
         {
