@@ -48,7 +48,7 @@ features:
       directly access simulation data there.
       No installation is required on the user's end,
       as the UI shows up in a brower window.
-    link: /guides/nersc/index
+    link: /nersc/index
   - title: Funding Source 
     icon:
       src: /logos/SciDAC-logo.png
