@@ -33,8 +33,8 @@ for their computing and analyais needs, including, e.g., login node, shared GPU 
 exclusive nodes, as explained in [NERSC's documentation](https://docs.nersc.gov/services/jupyter/reference/).
 
 Since login nodes are shared by users and hence can get very busy or run into memory constraints,
-and since our tools can make use of GPUs for interactive rendering.
-we recommend that users choose a shared GPU node or an exclusive GPU node.
+and since our tools can make use of GPUs for interactive rendering,
+**we recommend** that users choose a **shared GPU node**.
 
 Keep in mind, though, that time spent on shared GPU nodes or exclusive nodes
 will be charged to your project's allocation.
@@ -46,22 +46,22 @@ are used to launch our tools in the QuickView family.
 :::
 
 ::: tip Tip 3: No need to manually load `conda`.
-When one of the commands provided above is used to lunch tools in the QuickView family,
+When one of the commands provided above is used to launch tools in the QuickView family,
 there is no need to manually load `conda` or the conda environment that our tools are installed in.
 This is because the above-mentioned commands are in fact scripts that have included those steps.
 :::
 
 ::: warning Reminder: Shut down the server when you are done.
 After finishing your analysis, please remember to shut down the connection to your selected
-server (node) to stop the charging of ours to your project's allocation. 
+server (node) to stop the charging of hours to your project's allocation. 
 This is explained at the end of
 [this video](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
-and here is a recap of the steps (clicks):
+and below is a recap of the steps (clicks):
 - go to the JupytherHub window/tab in your browser,
-- click `File`,
+- click `File` in the top-left corner,
 - scroll down and choose `Hub Control Panel`,
-- in the Control Panel that brought up in a new brower tab/window, click on the red "stop" button
-  for the server to shut down. An example is shown in the screenshot below.
+- in the Control Panel brought up in a new browser tab/window, click on the red "stop" button
+  for the server to be shut down. An example is shown in the screenshot below.
 
 ![JupyterHub_control_panel_with_stop_button.png](/nersc/JupyterHub_control_panel_with_stop_button.png)
 :::
