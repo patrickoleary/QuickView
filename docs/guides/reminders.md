@@ -1,4 +1,4 @@
-## Key reminders for using QuickView and other tools in the family
+# Key reminders for using QuickView and other tools in the family
 
 ::: info Two modes of use
 QuickView can be used in two modes:
@@ -26,7 +26,7 @@ button at the top of the "Select Variables" control panel for the new selection 
 ::: info Show/hide control panels
 Most of the buttons in the vertical [toolbar](/guides/quickview/toolbar.md)
 are toggles for showing or hiding the corresponding control panels.
-These toggles have 1-key shortcuts--see cheatsheet [here](/guides/quickview/shortcuts.md).
+These toggles have 1-key shortcuts--see cheat sheet [here](/guides/quickview/shortcuts.md).
 Detailed descriptions of the control panels can be found on
 [this page](/guides/quickview/control_panels.md).
 :::

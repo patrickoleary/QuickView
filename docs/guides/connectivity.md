@@ -1,24 +1,22 @@
-
 # Connectivity files
 
-::: tip "Tip: Connecitivity File Download"
+::: tip Connecitivity File Download
 
 A collection of connectivity files can
 be found on [Zenodo](https://doi.org/10.5281/zenodo.16908566). The archive is
-continually updated as more users inform us about the grids their data files
-use.
+continually updated as more users inform us about the grids use.
 :::
 
-The horizontal grids used by EAM are cubed spheres. Since these are unstructed
-grids, QuickView needs to know how to map data to the globe. Therefore, for each
-simulation data file, a "connectivity file" needs to be provided.
+The horizontal grids used by E3SM's atmosphere component EAM, and sometimes the
+land component ELM as well, are cubed spheres. Since these are unstructed
+grids from ParaView's perspective, QuickView needs to know how to map data to the globe.
+Therefore, for each simulation data file, a "connectivity file" needs to be provided.
 
 In EAMv2, v3, and v4, most of the variables (physical quantities) are written
 out on a "physics grid" (also referred to as "physgrid", "FV grid", or "control
-volume mesh") described in
-[Hannah et al. (2021)](https://doi.org/10.1029/2020MS002419). The naming
-convention for such grids is `ne*pg2`, with `*` being a number, e.g., 4, 30,
-120, 256. Further details about EAM's cubed-sphere grids can be found in EAM's
+volume mesh") described in [Hannah et al. (2021)](https://doi.org/10.1029/2020MS002419).
+The naming convention for such grids is `ne*pg2`, with `*` being a number, e.g., 4, 30,
+120, 256, 1024. Further details about EAM's cubed-sphere grids can be found in EAM's
 documentation, for example in
 [this overview](https://e3sm.atlassian.net/wiki/spaces/DOC/pages/34113147/SE+Atmosphere+Grid+Overview+EAM+CAM)
 and
@@ -28,7 +26,7 @@ Future versions of QuickView will also support the cubed-sphere meshes used by
 EAM's dynamical core, i.e., the `ne*np4` grids (also referred to as "native
 grids" or "GLL grids").
 
-## Generate connectivity files
+## Generating connectivity files
 
 Users can generate connectivity files with
 [`TempestRemap`](https://github.com/ClimateGlobalChange/tempestremap)
