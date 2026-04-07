@@ -12,7 +12,7 @@ Users who would like to understand how our installation was done
 are referred to [this page](./public_installation).
 
 Users who would like to their own installations at NERSC are referred to
-[this example](./user_installation.md).
+[this example](./users_installation.md).
 
 Users who would like to install the tools on their laptop or desktop
 can find relevant information [here](/guides/install_and_launch).
