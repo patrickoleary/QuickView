@@ -1,8 +1,18 @@
 # NERSC setup explained
 
-Since the QuickView applications are just Python packages, we install them inside conda environment related to their funding project (`/global/common/software/m4359/`).
+The QuickView family of tools are Python packages.
+We have installed them and have been frequently updating them under
+NERSC project m4359 associated with the SciDAC project that
+has been funding our development.
 
-## Custom conda environments
+We are working on making the installation publicly accessible by
+all NERSC users. In the meantime, NERSC users can use the following
+command to access QuickView and QuickCompare, instead.
+
+If you want to have your own installation at a location of your choices,
+please take a look at [this page](./users_installation.md).
+
+## Create custom conda environments
 
 Create a directory for all the conda environments we aim to enable for our users.
 
