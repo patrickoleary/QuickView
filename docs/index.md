@@ -34,7 +34,7 @@ features:
       src: /logos/paraview_trame_python.png
       width: 180px
     details:
-      User Interfaces (UI) based on Python and trame provide
+      User Interfaces (UIs) based on Python and trame provide
       intuitive access to ParaView's powerful analysis and visualization
       capabilities without requiring a steep learning curve.
     link: https://www.paraview.org/ 

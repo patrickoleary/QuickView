@@ -15,8 +15,10 @@ export default defineConfig({
     logo: "/icon-full.png",
     nav: [
       { text: "Home", link: "/" },
-      { text: "NERSC", link: "/nersc/login" },
-      { text: "Guides", link: "/guides/data" },
+      { text: "News", link: "/news" },
+      { text: "User's Guide", link: "/guides/data" },
+      { text: "At NERSC", link: "/nersc/login" },
+      { text: "Gallery", link: "/gallery/" },
     ],
 
     sidebar: {
