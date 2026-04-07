@@ -50,14 +50,14 @@ export default defineConfig({
             { text: "Key Reminders",      link: "/guides/reminders" },
             { text: "Connecitiviy Files", link: "/guides/connectivity" },
             { text: "Simulation Files",   link: "/guides/simulation_data" },
-            { text: "Installation",       link: "/guides/installation" },
+            { text: "Install and Launch", link: "/guides/install_and_launch" },
           ],
         },
         {
           text: "QuickView",
           items: [
             { text: "Resources",        link: "/guides/quickview/resources" },
-            { text: "One-key Shortcuts",link: "/guides/quickview/resources" },
+            { text: "Shortcuts",        link: "/guides/quickview/shortcuts" },
             { text: "Toolbar",          link: "/guides/quickview/toolbar" },
             { text: "Control Panels",   link: "/guides/quickview/control_panels" },
             { text: "Viewport",         link: "/guides/quickview/viewport" },

@@ -41,14 +41,52 @@ require specific features in [Python](https://www.python.org/),
 we use conda to facilitate the setup.
 
 For example, to create a conda environment named `quickview-env`
-and install QuickView, we can use the following commands:
+then install QuickView and QuickCompare, we can use the following commands:
 
 ```sh
 conda create --name quickview-env python=3.13
 conda activate quickview-env
 conda install conda-forge::e3sm-quickview
+conda install conda-forge::e3sm_compareview
 ```
 
+## Updating conda installation
+
+To update the tools to newer versions, first find the most recent version
+numbers using the links in the summary table near the top of this page,
+then use the following commands, replacing the version numbers by yours:
+
+```sh
+conda activate quickview-env
+conda install "e3sm-quickview>=2.1.1"
+conda install "e3sm_compareview>=1.3.4"
+```
+
+## Using conda installation
+
+To use the tools installed via conda, open a Terminal window and
+activate the conda environment using
+
+```
+ conda activate quickview-env
+```
+
+Then, in the same window, use one of the following depending on
+which tool you'd like to use
+
+```
+quickview -p 0
+```
+
+```
+quickcompare -p 0
+```
+
+After some seconds, the Terminal window should indicate that the app has
+loaded various plugins and give an URL similar to `http://localhost:50329/`.
+**Enter the URL into a web brower** to access the graphical UL.
+
+ 
 :::tip Tip: First execution on macOS
 On macOS, the first execution after installation via conda will also take a while
 (e.g., a minute or more),
