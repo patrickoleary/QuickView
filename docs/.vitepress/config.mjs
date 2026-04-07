@@ -48,14 +48,14 @@ export default defineConfig({
           ],
         },
         {
-          text: "Quick View",
+          text: "QuickView",
           items: [
             { text: "Getting started", link: "/guides/quickview" },
             { text: "Resources", link: "/guides/quickview/resources" },
           ],
         },
         {
-          text: "Quick Compare",
+          text: "QuickCompare",
           items: [
             { text: "Getting started", link: "/guides/quickcompare" },
             { text: "Resources", link: "/guides/quickcompare/resources" },

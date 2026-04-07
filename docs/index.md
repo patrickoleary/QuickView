@@ -3,53 +3,57 @@
 layout: home
 
 hero:
-  name: "The QuickView Family"
-  text: "for Earth System Models"
+  name: "QuickView"
+  text: "for Earth system models"
   tagline:
-    Quick, intuitive, and interative exploration of simulation data.
+    Intuitive and interative exploration of simulation data.
   image: /banner.png
   actions:
-    - theme: alt
+    - theme: brand 
       text: Installation
       link: /guides/installation
     - theme: brand 
-      text: Getting Started 
+      text: User's Guide 
       link: /guides/data
     - theme: brand 
-      text: Running at NERSC
+      text: Using it at NERSC
       link: /nersc/
 
 features:
-  - icon:
+  - title: Purpose
+    icon:
       src: /logos/E3SM_Logo.png
       width: 120px
-      title: Purpose
     details:
-      Currently supported are simulation output from   
-      the Exascale Earth System Model (E3SM) model
-      on cubed-sphere "physics" grids.
-  - icon:
-      src: /logos/ParaView_Mark.png
-      width: 60px
-      title: Engine and UI 
+      Currently supported are simulation input and output files   
+      of the Energy Exascale Earth System Model (E3SM)
+      on the cubed-sphere "physics" grids.
+    link: https://e3sm.org/
+  - title: Engine and UI 
+    icon:
+      src: /logos/paraview_trame_python.png
+      width: 180px
     details:
-      Python- and Trame-based User Interfaces (UI) provide
+      User Interfaces (UI) based on Python and trame provide
       intuitive access to ParaView's powerful analysis and visualization
-      capabilities but without requiring a steep learning curve.
-  - icon:
+      capabilities without requiring a steep learning curve.
+    link: https://www.paraview.org/ 
+  - title: Remote Data 
+    icon:
       src: /logos/nersc.png
-      width: 170px
-      title: Remote Data 
+      width: 150px
     details:
-      The tools have been deployed at NERSC so that users can
+      The tools have been deployed to NERSC so that users can
       directly access simulation data there.
       No installation is required on the user's end,
       as the UI shows up in a brower window.
-  - icon:
+    link: https://www.nersc.gov/
+  - title: Funding Source 
+    icon:
       src: /logos/SciDAC-logo.png
-      width: 140px
-      title: Funding Source 
+      width: 160px
     details:
-      The development of this tool suite is supported by the
+      The QuickView family of tools are developed using funding from the
       U.S. Department of Energy's SciDAC program.
+    link: https://www.energy.gov/science/articles/accelerating-scientific-discovery-through-advanced-computing
 ---
