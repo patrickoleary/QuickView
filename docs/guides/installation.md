@@ -46,7 +46,7 @@ and install QuickView, we can use the following commands:
 ```sh
 conda create --name quickview-env python=3.13
 conda activate quickview-env
-conda install e3sm-quickview
+conda install conda-forge::e3sm-quickview
 ```
 
 :::tip Tip: First execution on macOS
