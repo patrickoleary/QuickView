@@ -35,6 +35,7 @@ export default defineConfig({
         {
           text: "Step-by-step Guides",
           items: [
+            { text: "JupyterHub", link: "/nersc/jupyter_at_nersc" },
             { text: "QuickView", link: "/nersc/perlmutter-run-quickview" },
             {
               text: "QuickCompare",
