@@ -1,13 +1,13 @@
 # Key reminders for using QuickView and other tools in the family
 
-::: info Two modes of use
+::: warning Two modes of use
 QuickView can be used in two modes:
 a *new-viz* mode (for starting a new visualization) or
 a *resume* mode (for resuming an analysis). Further details can be found on
 the [toolbar description page](/guides/quickview/toolbar.md).
 :::
 
-::: warning Connectivity Files
+::: info Connectivity files
 Since E3SM's horizontal grids are unstructured meshes from ParaView's perspective,
 connectivity files are needed in addition to  the simulation data files.
 Further details can be found on the documentation pages
@@ -15,7 +15,13 @@ describing the [connectivity files](/guides/connectivity.md) and the
 [toolbar](/guides/quickview/toolbar.md).
 :::
 
-::: tip The `LOAD VARIABLES` Button
+::: tip Consistency between connecitivity and simulation files
+One of the repeatedly encountered causes of error when loading files in QuickView is
+that the grid described by the connecitivity file does not match the grid in the
+simulation data file. Please double check when you run into a loading error.
+:::
+
+::: warning The `LOAD VARIABLES` Button
 Most buttons, sliders, and selection boxes in the UI apply their effects
 immediately upon user interaction. The only exception is variable
 selection: After variables are chosen for the first time following file load
@@ -41,4 +47,3 @@ Furthermore, if a user saves a state file after these
 adjustments, they can later resume their analysis with the customized
 arrangement.
 :::
-
