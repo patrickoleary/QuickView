@@ -62,7 +62,7 @@ conda install "e3sm-quickview>=2.1.1"
 conda install "e3sm_compareview>=1.3.4"
 ```
 
-## Using conda installation
+## Using the tools installed via conda
 
 To use the tools installed via conda, open a Terminal window and
 activate the conda environment using
