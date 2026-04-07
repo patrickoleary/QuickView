@@ -8,7 +8,7 @@ The following sections on this page contain instructions for users who would lik
 [[toc]]
 
 User's who would like to understand how our installation was done
-or how to do their own installations are referred to [this page](installation_at_nersc.md).
+or how to do their own installations are referred to [this page](public_installation.md).
 
 ## Quickstart for users familiar with JupyterHub
 
