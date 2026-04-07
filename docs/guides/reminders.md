@@ -16,7 +16,7 @@ describing the [connectivity files](/guides/connectivity.md) and the
 :::
 
 ::: tip Consistency between connecitivity and simulation files
-One of the repeatedly encountered causes of error when loading files in QuickView is
+One of the often encountered causes of error when loading files in QuickView is
 that the grid described by the connecitivity file does not match the grid in the
 simulation data file. Please double check when you run into a loading error.
 :::
@@ -25,7 +25,7 @@ simulation data file. Please double check when you run into a loading error.
 Most buttons, sliders, and selection boxes in the UI apply their effects
 immediately upon user interaction. The only exception is variable
 selection: After variables are chosen for the first time following file load
-or after the selection is changed, the user *must* click the `LOAD VARIABLES`
+or after the selection is changed, the user **must** click the `LOAD VARIABLES`
 button at the top of the "Select Variables" control panel for the new selection to take effect.
 :::
 
@@ -38,7 +38,7 @@ Detailed descriptions of the control panels can be found on
 :::
 
 ::: tip Viewport Layout
-The QuickView app is designed to present multiple variables simultaneously
+QuickView is designed to present multiple variables simultaneously
 in an informative way. Users can *rearrange* the individual views
 (i.e., contour plots) in the [viewport](/guides/quickview/viewport.md)
 and *resize* them.
