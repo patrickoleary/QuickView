@@ -2,7 +2,7 @@
 
 To use QuickView at NERSC to directly access and analyze data files there,
 users need to first connect to NERSC using JupyterHub, as described
-[on this page](/guides/nersc/jupyter_at_nersc.md).
+[on this page](./jupyter_at_nersc.md).
 
 Once connected,
 
@@ -10,7 +10,7 @@ Once connected,
   You will likely need to scroll down in the Launcher in order to
   see the "Other" section and the Terminal icon there, as shown in the screenshot below.
   Click on the Terminal icon, and the Launcher window should turn into a shell.
-  !["Other" section of JupyterHub Launcher window](/guides/nersc/jupyter_launcher_terminal.png)
+  !["Other" section of JupyterHub Launcher window](./jupyter_launcher_terminal.png)
 
 - *Optional but recommended*: in the shell, use the `cd` command to go to
   the directory where your data files are located (or a directory closer to the data files than your home directory).
