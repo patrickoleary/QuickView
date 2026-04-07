@@ -14,7 +14,7 @@ hero:
       link: /guides/installation
     - theme: brand 
       text: User's Guide 
-      link: /guides/data
+      link: /guides/reminders
     - theme: brand 
       text: Using it at NERSC
       link: /nersc/
