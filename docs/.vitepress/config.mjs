@@ -5,7 +5,7 @@ export default defineConfig({
   base: "/QuickView",
   title: "E3SM QuickView",
   description:
-    "How to start with the E3SM QuickView suite to look at your climate data",
+    "How to start with the E3SM QuickView suite to look at your simulation data",
   head: [["link", { rel: "stylesheet", href: "/custom.css" }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -49,7 +49,7 @@ export default defineConfig({
           items: [
             { text: "Key Reminders",      link: "/guides/reminders" },
             { text: "Connecitiviy Files", link: "/guides/connectivity" },
-            { text: "Simulation Files",   link: "/guides/data" },
+            { text: "Simulation Files",   link: "/guides/simulation_data" },
             { text: "Installation",       link: "/guides/installation" },
           ],
         },
