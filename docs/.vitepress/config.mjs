@@ -18,7 +18,7 @@ export default defineConfig({
       { text: "News", link: "/news" },
       { text: "Gallery", link: "/gallery/" },
       { text: "User's Guide", link: "/guides/reminders" },
-      { text: "At NERSC", link: "/nersc/login" },
+      { text: "At NERSC", link: "/nersc/index" },
       { text: "Repo", link: "https://github.com/Kitware/QuickView" },
       { text: "Bugs and Requests", link: "https://github.com/Kitware/QuickView/issues" },
     ],
