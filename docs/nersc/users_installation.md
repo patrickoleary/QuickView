@@ -40,7 +40,7 @@ In the same environment, also install QuickCompare:
 conda install conda-forge::e3sm_compareview
 ```
 
-## Using the installed apps
+## Using the installed applications
 
 At this point, the user should be able to use the following commands to launch
 the individual tools, assuming the conda environment has been activated.
@@ -110,12 +110,13 @@ Again, the same commands can be used regardless of whether the terminal
 window is connected to a login node or a shared GPU node etc. 
 
 
-## Updating an application
+## Updating the installations 
 
 In order to update the tools to the newest available versions on conda-forge
-(see links in the summary table on [this page](/guides/install_and_launch.md),
-you will need to find the versions you want to install and then run something like
-the following.
+you will need to 
+- identify the versions you want to update to (see links in the summary table
+  on [this page](/guides/install_and_launch.md), and then
+- do something like the following after adapting the syntax to your shell.
 
 ```sh
 pathRoot="/global/cfs/projectdirs/m4359/tools/"
