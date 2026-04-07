@@ -11,7 +11,7 @@ analysis and visualization capabilities without requiring a steep learning curve
 
 ## Quick Start
 
-- [Install](../installation) and launch the app.
+- [Install and launch](../instal_and_launch) the app.
 - Download [connectivity files](https://doi.org/10.5281/zenodo.16908566) of
   EAM's cubed-sphere grids from Zenodo.
 - Optional: download
