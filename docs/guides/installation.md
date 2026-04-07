@@ -1,46 +1,57 @@
 # Installation
 
-The application that belong to the **Quick View** suite are available as
-**conda** package and standalone desktop application across OS like Mac, Windows
-and Linux.
+All tools of the **QuickView** family are available as
+**conda** packages as well as pre-compiled desktop bundles
+for various OS's like Mac, Windows, and Linux.
+The table below summarizes where the different packages
+and bundles can be found.
 
-| Applications | conda package    | Releases                                                         | Conda                                                                                                                                   | PyPI                                                                                                                        |
-| ------------ | ---------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| QuickView    | e3sm-quickview   | [Download](https://github.com/Kitware/QuickView/releases)        | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview)     | [![PyPI](https://img.shields.io/pypi/v/e3sm-quickview?label=pypi%20package)](https://pypi.org/project/e3sm-quickview/)      |
-| QuickCompare | e3sm_compareview | [Download](https://github.com/Kitware/E3SMQuickCompare/releases) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm_compareview.svg)](https://anaconda.org/conda-forge/e3sm_compareview) | [![PyPI](https://img.shields.io/pypi/v/e3sm-compareview?label=pypi%20package)](https://pypi.org/project/e3sm-compareview/)  |
+| Tool name    | Desktop bundle | conda package name | Conda  | PyPI  |
+| ------------ | -------------- | ------------------ | ------ | ----- |
+| QuickView    | [Download page](https://github.com/Kitware/QuickView/releases) | e3sm-quickview   | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview)     | [![PyPI](https://img.shields.io/pypi/v/e3sm-quickview?label=pypi%20package)](https://pypi.org/project/e3sm-quickview/)      |
+| QuickCompare | [Download page](https://github.com/Kitware/E3SMQuickCompare/releases) | e3sm_compareview | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm_compareview.svg)](https://anaconda.org/conda-forge/e3sm_compareview) | [![PyPI](https://img.shields.io/pypi/v/e3sm-compareview?label=pypi%20package)](https://pypi.org/project/e3sm-compareview/)  |
 
-## Desktop bundle
+## Desktop bundles
 
-For standalone application delivery we rely on PyInstaller and Tauri to bundle
-our Python applications into a standalone graphical application.
+To deliver pre-compiled standalone desktop applications,
+we use [PyInstaller](https://pyinstaller.org/en/stable/) and [Tauri](https://tauri.app/)
+to bundle each of our Python-based tools and their dependencies
+into a standalone graphical application.
+The creation of such bundles is done by triggering a release using GitHub Actions. 
+Hence, the bundles are available from the corresponding GitHub repo's Releases page.
+The links are given in the summary table above.
 
-The Continuous integration does the building and bundling of those, therefore,
-you will need to download such application from the release page on Github.
-
-:::danger macOS requirement On macOS you will need to unquarantine the binary as
-we are not signing it. To do so, you will need to run in your terminal the
-following line.
+:::danger ATTENTION Mac Users!!
+The binaries compiled for Macs have not been signed using an Apple Developer ID.
+Hence, after downloading a binary for Mac, the user needs to use the following
+command to remove quarantine on the binary.
 
 ```
 xattr -d com.apple.quarantine <your_filename>.dmg
 ```
 
-Then the **first execution will take a while** as macOS check and validate the
-full application file tree.
+Also note that the **first execution of the app will take a while** as macOS
+will check and validate the full application file tree.
 :::
 
 ## Conda installation
 
-As our application depend on ParaView and Python we rely on conda to deliver a
-easy to use setup.
+As our tools depend on [ParaView](https://www.paraview.org/) and
+require specific features in [Python](https://www.python.org/),
+we use conda to facilitate the setup.
+
+For example, to create a conda environment named `quickview-env`
+and install QuickView, we can use the following commands:
 
 ```sh
 conda create --name quickview-env python=3.13
 conda activate quickview-env
-conda install e3sm-quickview # replace with application name
+conda install e3sm-quickview
 ```
 
-:::warning macOS specificity On macOS, the first execution will also take a
-while as the system validate each python file for security. But any following
-execution should be very quick.
+:::tip First execution on macOS
+On macOS, the first execution after installation via conda will also take a while
+(e.g., a minute or more),
+as the system will validate each Python file for security. But any following
+execution should be very quick (a few seconds).
 :::
