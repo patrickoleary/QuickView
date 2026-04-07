@@ -1,12 +1,5 @@
 # Connectivity files
 
-::: tip Connecitivity File Download
-
-A collection of connectivity files can
-be found on [Zenodo](https://doi.org/10.5281/zenodo.16908566). The archive is
-continually updated as more users inform us about the grids use.
-:::
-
 The horizontal grids used by E3SM's atmosphere component EAM, and sometimes the
 land component ELM as well, are cubed spheres. Since these are unstructed
 grids from ParaView's perspective, QuickView needs to know how to map data to the globe.
@@ -25,6 +18,13 @@ and
 Future versions of QuickView will also support the cubed-sphere meshes used by
 EAM's dynamical core, i.e., the `ne*np4` grids (also referred to as "native
 grids" or "GLL grids").
+
+## Connecitivity file download
+
+A collection of connectivity files can
+be found on [Zenodo](https://doi.org/10.5281/zenodo.16908566). The archive is
+continually updated as more users inform us about the grids use.
+
 
 ## Generating connectivity files
 

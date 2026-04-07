@@ -47,10 +47,10 @@ export default defineConfig({
         {
           text: "Introduction",
           items: [
-            { text: "Key Reminders", link: "/guides/reminders" },
+            { text: "Key Reminders",      link: "/guides/reminders" },
             { text: "Connecitiviy Files", link: "/guides/connectivity" },
-            { text: "Data Format", link: "/guides/data" },
-            { text: "Installation", link: "/guides/installation" },
+            { text: "Simulation Files",   link: "/guides/data" },
+            { text: "Installation",       link: "/guides/installation" },
           ],
         },
         {

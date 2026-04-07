@@ -1,36 +1,11 @@
-# Data
+# Simulation Files 
 
-QuickView has been developed using EAM's history output on the physics grids
-(`pg2` grids) written by EAMv2, v3, and an intermediate version towards v4
-(EAMxx). Those sample output files can be found on
+The QuickView family of tools has been developed using history output
+on the physics grids (`pg2` grids) of the E3SM Atmosphere Model, EAM,
+generated using EAMv2, v3, and intermediate versions towards v4
+(EAMxx). Sample output files can be found on
 [Zenodo](https://zenodo.org/records/16922607).
 
-Developers and users of EAM often use tools like NCO and CDO or write their own
-scripts to calculate time averages and/or select a subset of variables from the
-original model output. For those use cases, we clarify below the features of the
-data format that QuickView expects in order to properly read and visualize the
-simulation data.
-
-::: tip Tip: Consistency Between Simulation File and Connecitivity File One of
-the repeatedly encountered causes of error when loading files in QuickView is
-that the grid described by the connecitivity file does not match the grid in the
-simulation data file.
-:::
-
-::: warning Caution: Newer EAMxx Output Files The EAMxx output file that
-QuickView has been tested for was generated in late 2024. As EAMxx further
-evolves and its output format changes, QuickView might need to be updated
-accordingly. If the user encounters such a case, we recommend reaching out to
-our developers or using the
-[Issue tab on GitHub](https://github.com/Kitware/QuickView/issues) to start a
-discussion.
-:::
-
-## Overview
-
-The ParaView Reader behind the QuickView GUI detects and categorizes variables
-based on their dimensions. Variables with dimensions not matching the expected
-patterns are ignored.
 
 ## 2D variables
 

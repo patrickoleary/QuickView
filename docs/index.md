@@ -6,7 +6,7 @@ hero:
   name: "QuickView"
   text: "for Earth system models"
   tagline:
-    Intuitive and interactive exploration of simulation data.
+    Efficient, intuitive, and interactive exploration of simulation data.
   image: /banner.png
   actions:
     - theme: brand 
@@ -34,8 +34,9 @@ features:
       src: /logos/paraview_trame_python.png
       width: 180px
     details:
-      User Interfaces (UIs) based on Python and trame provide
-      intuitive access to ParaView's powerful analysis and visualization
+      User Interfaces (UIs) based on Python and [trame](https://kitware.github.io/trame/)
+      provide intuitive access to [ParaView's](https://www.paraview.org/)
+      powerful analysis and visualization
       capabilities without requiring a steep learning curve.
     link: https://www.paraview.org/ 
   - title: Remote Data 
@@ -51,9 +52,9 @@ features:
   - title: Funding Source 
     icon:
       src: /logos/SciDAC-logo.png
-      width: 160px
+      width: 170px
     details:
-      The QuickView family of tools are developed using funding from the
+      The QuickView family of tools is developed using funding from the
       U.S. Department of Energy's SciDAC program.
     link: https://www.energy.gov/science/articles/accelerating-scientific-discovery-through-advanced-computing
 ---
