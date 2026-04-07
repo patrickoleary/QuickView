@@ -71,7 +71,7 @@ and below is a recap of the steps (clicks):
 ![JupyterHub_control_panel_with_stop_button.png](/nersc/JupyterHub_control_panel_with_stop_button.png)
 :::
 
-## For NERSC user's who have not used JupyterHub
+## For NERSC users who have not used JupyterHub
 
 Please see
 [this section of NERSC's documentation](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
