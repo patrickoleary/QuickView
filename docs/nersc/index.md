@@ -16,6 +16,7 @@ Users who would like to their own installations at NERSC are referred to
 
 Users who would like to install the tools on their laptop or desktop
 can find relevant information [here](/guides/install_and_launch).
+:::
 
 ## Quickstart for users familiar with JupyterHub
 
