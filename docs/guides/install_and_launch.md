@@ -11,6 +11,15 @@ and bundles can be found.
 | QuickView    | [Download page](https://github.com/Kitware/QuickView/releases) | e3sm-quickview   | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview)     | [![PyPI](https://img.shields.io/pypi/v/e3sm-quickview?label=pypi%20package)](https://pypi.org/project/e3sm-quickview/)      |
 | QuickCompare | [Download page](https://github.com/Kitware/E3SMQuickCompare/releases) | e3sm_compareview | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm_compareview.svg)](https://anaconda.org/conda-forge/e3sm_compareview) | [![PyPI](https://img.shields.io/pypi/v/e3sm-compareview?label=pypi%20package)](https://pypi.org/project/e3sm-compareview/)  |
 
+::: warning The contents below were written with desktop and laptop computers in mind.
+
+Users who would like to access our tools installed at NERSC are referred to
+[this quickstart guide](/nersc/index.md).
+
+Users who would like to do their own installation at NERSC are referred to
+[this description](/nersc/users_installation.md).
+:::
+
 ## Desktop bundles
 
 To deliver pre-compiled standalone desktop applications,

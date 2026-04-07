@@ -7,8 +7,15 @@ The following sections on this page contain instructions for users who would lik
 
 [[toc]]
 
-User's who would like to understand how our installation was done
-or how to do their own installations are referred to [this page](public_installation.md).
+::: warning
+Users who would like to understand how our installation was done
+are referred to [this page](./public_installation).
+
+Users who would like to their own installations at NERSC are referred to
+[this example](./user_installation.md).
+
+Users who would like to install the tools on their laptop or desktop
+can find relevant information [here](/guides/install_and_launch).
 
 ## Quickstart for users familiar with JupyterHub
 
