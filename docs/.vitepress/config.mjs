@@ -26,18 +26,18 @@ export default defineConfig({
     sidebar: {
       "/nersc/": [
         {
-          text: "Connecting to NERSC",
+          text: "At NERSC",
           items: [
-            { text: "Login", link: "/nersc/login" },
-            { text: "Installation", link: "/nersc/installation" },
+            { text: "Quickstart",   link: "/nersc/index" },
+            { text: "Installation", link: "/nersc/installation_at_nersc" },
           ],
         },
         {
-          text: "Perlmutter",
+          text: "Step-by-step Guides",
           items: [
-            { text: "Quick View", link: "/nersc/perlmutter-run-quickview" },
+            { text: "QuickView", link: "/nersc/perlmutter-run-quickview" },
             {
-              text: "Quick Compare",
+              text: "QuickCompare",
               link: "/nersc/perlmutter-run-quickcompare",
             },
           ],
@@ -66,12 +66,12 @@ export default defineConfig({
         {
           text: "QuickCompare",
           items: [
-            { text: "Getting started", link: "/guides/quickcompare" },
             { text: "Resources", link: "/guides/quickcompare/resources" },
+            { text: "Getting started", link: "/guides/quickcompare" },
           ],
         },
         {
-          text: "Development",
+          text: "For app Developers",
           items: [
             { text: "Setup", link: "/guides/dev/setup" },
             { text: "Continuous Integration", link: "/guides/dev/ci" },
@@ -84,4 +84,16 @@ export default defineConfig({
       { icon: "github", link: "https://github.com/Kitware/QuickView" },
     ],
   },
+
+  markdown: {
+    // Options for the Table of Contents plugin
+    toc: { 
+      level: [2, 3] // Only include <h2> and <h3> in the TOC
+    },
+    // Options for heading anchors (optional)
+    anchor: {
+      permalink: true // Enables clickable anchor links on headings
+    }
+  },
+
 });

@@ -1,9 +1,11 @@
 # The QuickView tool family at NERSC
 
 Our tools have been installed at NERSC,
-the National Energy Research Scientific Computing Center,
+the [National Energy Research Scientific Computing Center](https://www.nersc.gov/)
 and are continually updated there.
-Below are instructions for users who would like to use our installations.
+The following sections on this page contain instructions for users who would like to use our installations.
+
+[[toc]]
 
 User's who would like to understand how our installation was done
 or how to have their own installation are referred to [this page](installation_at_nersc.md).
