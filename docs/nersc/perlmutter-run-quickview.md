@@ -30,6 +30,8 @@ Once connected,
 - Finally select the variables you want to load and inspect.
   ![](./quickview/quickview-variable-selection.png)
 
+## Shut down the server when you are done
+
 ::: warning Reminder: Shut down the server when you are done.
 After finishing your analysis, please remember to shut down the connection to your selected
 server (node) to stop the charging of hours to your project's allocation.
