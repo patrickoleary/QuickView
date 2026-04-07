@@ -40,7 +40,7 @@ Keep in mind, though, that time spent on shared GPU nodes or exclusive nodes
 will be charged to your project's allocation.
 :::
 
-::: tip Tip 2: Same executable for all kinds of nodes.
+::: tip Tip 2: Same executable for all types of nodes.
 Regardless of which type of node is chosen, the same commands (as listed above)
 are used to launch our tools in the QuickView family.
 :::
@@ -51,7 +51,7 @@ there is no need to manually load `conda` or the conda environment that our tool
 This is because the above-mentioned commands are in fact scripts that have included those steps.
 :::
 
-::: warning Reminder: Shut down the server when you are done.
+::: warning IMPORTANT: Shut down the server when you are done.
 After finishing your analysis, please remember to shut down the connection to your selected
 server (node) to stop the charging of hours to your project's allocation. 
 This is explained at the end of
@@ -68,10 +68,12 @@ and below is a recap of the steps (clicks):
 
 ## For NERSC user's who have not used JupyterHub
 
-Please see this section of
-[NERSC's documentation](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
+Please see
+[this section of NERSC's documentation](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
 especially the video "How to log in to Perlmutter with Jupyter",
 to learn how to use the service.
+
+Alternatively, follow our step-by-step description [here](./jupyter_at_nersc.md)
 
 ## If you do not yet have any user account at  NERSC
 

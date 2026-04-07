@@ -1,5 +1,7 @@
 # QuickView @ NERSC
 
+## Log in to NERSC
+
 To use QuickView at NERSC to directly access and analyze data files there,
 users need to first connect to NERSC using JupyterHub, as described
 [on this page](./jupyter_at_nersc.md).

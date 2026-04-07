@@ -2,7 +2,7 @@ Contents on this page
 
 [[toc]]
 
-# Using JupyterHub to log in to NERSC
+## Using JupyterHub to log in to NERSC
 
 To use the QuickView family of tools at NERSC, you first need to login to JupyterHub using
 [this link](https://jupyter.nersc.gov/hub/login), which will bring you to a page like the screenshot below.
@@ -29,7 +29,7 @@ likely have to wait for some seconds for the service to be ready.
 
 ![](./login/login-03.png)
 
-# Shut down the server when you are done
+## Shut down the server when you are done
 
 ::: warning IMPORTANT: Shut down the server when you are done!
 After finishing your analysis, please remember to shut down the connection to your selected
