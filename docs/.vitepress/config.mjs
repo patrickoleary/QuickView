@@ -16,9 +16,11 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "News", link: "/news" },
+      { text: "Gallery", link: "/gallery/" },
       { text: "User's Guide", link: "/guides/data" },
       { text: "At NERSC", link: "/nersc/login" },
-      { text: "Gallery", link: "/gallery/" },
+      { text: "Repo", link: "https://github.com/Kitware/QuickView" },
+      { text: "Bugs and Requests", link: "https://github.com/Kitware/QuickView/issues" },
     ],
 
     sidebar: {
