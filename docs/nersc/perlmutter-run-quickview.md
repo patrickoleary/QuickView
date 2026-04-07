@@ -16,7 +16,7 @@ Once connected,
 
 - *Optional but recommended*: in the shell, use the `cd` command to go to
   the directory where your data files are located (or a directory closer to the data files than your home directory).
-  While that step is optional, it may save you quick some clicks later in the graphical UI.
+  While that step is optional, it may save you quite some clicks later in the graphical UI.
 
 - Starting **QuickView** using the command `/global/common/software/m4359/quickview` in the shell.
 

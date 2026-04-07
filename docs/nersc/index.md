@@ -1,28 +1,33 @@
 # The QuickView tool family at NERSC
 
 Our tools have been installed at NERSC,
-the [National Energy Research Scientific Computing Center](https://www.nersc.gov/)
+the [National Energy Research Scientific Computing Center](https://www.nersc.gov/),
 and are continually updated there.
 The following sections on this page contain instructions for users who would like to use our installations.
 
 [[toc]]
 
 User's who would like to understand how our installation was done
-or how to have their own installation are referred to [this page](installation_at_nersc.md).
+or how to do their own installations are referred to [this page](installation_at_nersc.md).
 
 ## Quickstart for users familiar with JupyterHub
 
 - Login to [JupytherHub](https://jupyter.nersc.gov/hub/login) and start a terminal window.
+
 - *Optional but recommended*: in the terminal, use the `cd` command to go to the directory
   where your data files are located (or a directory closer to the data files than your home directory).
+  While this step is optional, it may save you quite some clicks later in the graphical UI.
+
 - QuickView version 2 can be launched using the following command:
 ```
 /global/common/software/m4359/quickview2
 ```  
+
 - QuickCompare can be launched using the following command:
 ```
 /global/common/software/m4359/quickcompare
 ```
+
 - After a few seconds, the Terminal window will say "Use URL below to connect to the application:"
   and shows a URL starting with `https://`.
   A click on the URL will bring up the graphical UI in a brower window.
