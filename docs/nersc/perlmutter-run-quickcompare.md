@@ -1,47 +1,59 @@
 # QuickCompare @ NERSC
 
-To use QuickCompare at NERSC, you first need to login
+To use QuickCompare at NERSC to directly access and analyze data files there,
+users need to first connect to NERSC using JupyterHub, as described
+[on this page](./jupyter_at_nersc.md).
 
-[![](./login/login-00.png) Click on the image to go to the login page](https://jupyter.nersc.gov/hub/login)
+Once connected,
 
-Once you've enter your __login__ and __password__ you will need to feel a OTP.
+- Start a Terminal from the Launcher options of JupyterHub.
+  You will likely need to scroll down in the Launcher in order to
+  see the "Other" section and the Terminal icon there, as shown in the screenshot below.
+  Click on the Terminal icon, and the Launcher window should turn into a shell.
+  !["Other" section of JupyterHub Launcher window](./jupyter_launcher_terminal.png)
 
-![](./login/login-01.png)
+- *Optional but recommended*: in the shell, use the `cd` command to go to
+  the directory where your data files are located (or a directory closer to the data files than your home directory).
+  While that step is optional, it may save you quick some clicks later in the graphical UI.
 
-At that point you will presented with a list of options on where you would like to run your application.
-For QuickView it is better to have hardware with a GPU to allow interactive rendering.
+- Starting QuickCompare using the command `/global/common/software/m4359/quickcompare` in the shell.
 
-![](./login/login-02.png)
-
-Once you picked your target location and allocation, you will have to wait for the service to start.
-
-![](./login/login-03.png)
-
-## QuickCompare
-
-Once connected, you should start the terminal from the Launcher options of JupyterHub. Then you should go to the directory that contains the data you would like to see. While that step is optional, it may save you some navigation time with the application UI.
-
-Once ready, you should start the application by running:
-
-```sh
-/global/common/software/m4359/quickcompare
-```
+- After a few seconds, the Terminal window will provide a URL, similar to the screenshot below.
+  A click on the URL will bring up the graphical UI in a separate brower window or tab.
+  <!-- ![](./quickview/quickview-terminal-with-url.png) -->
 
 :::danger FIXME - image
 :::
 
-Click on the link provided by the application execution.
-Then in the new graphical interface showing in the new browser tab, select the files you aim to load.
+- The graphical UI will prompt you to choose connectivity and simulation files, see example below.
+  Double click your connecitivity file and then the simulation files, then
+  click on the blue "Load Files" button in the bottom-right corner
+  <!-- ![](./quickview/quickview-file-loading.png) -->
 
 :::danger FIXME - image
 :::
 
-Finally select the fields you want to load and inspect.
+- **Need to talk about two-sim or multi-sim comparisons** 
 
 :::danger FIXME - image
 :::
 
+- Finally, select the variables you want to load and inspect.
+  <!-- ![](./quickview/quickview-variable-selection.png) -->
 
-## Release resources
+## Shut down the server when you are done
+
+::: warning IMPORTANT: Shut down the server when you are done.
+After finishing your analysis, please remember to shut down the connection to your selected
+server (node) to stop the charging of hours to your project's allocation.
+This is explained at the end of
+[this video](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
+and below is a recap of the steps (clicks):
+- go to the JupytherHub window/tab in your browser,
+- click `File` in the top-left corner,
+- scroll down and choose `Hub Control Panel`,
+- in the Control Panel brought up in a new browser tab/window, click on the red "stop" button
+  for the server to be shut down. An example is shown in the screenshot below.
 
 ![](./login/login-04.png)
+:::

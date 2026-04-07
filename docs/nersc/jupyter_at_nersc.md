@@ -1,3 +1,7 @@
+Contents on this page
+
+[[toc]]
+
 # Using JupyterHub to log in to NERSC
 
 To use the QuickView family of tools at NERSC, you first need to login to JupyterHub using
@@ -19,7 +23,7 @@ Hence, after you are done with the analysis, remember to
 
 ![](./login/login-02.png)
 
-After clicking on one of the "start" buttons in the image above,
+After clicking on one of the "start" buttons,
 you will see something like the screenshot below and will
 likely have to wait for some seconds for the service to be ready.
 
@@ -27,7 +31,7 @@ likely have to wait for some seconds for the service to be ready.
 
 # Shut down the server when you are done
 
-::: warning Reminder: Shut down the server when you are done.
+::: warning IMPORTANT: Shut down the server when you are done!
 After finishing your analysis, please remember to shut down the connection to your selected
 server (node) to stop the charging of hours to your project's allocation.
 This is explained at the end of
