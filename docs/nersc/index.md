@@ -14,7 +14,7 @@ on separate pages:
 - How to install your own copy at NERSC: see [this example](./users_installation.md).
 - How to install the tools on a laptop or desktop computer: see [this page](/guides/install_and_launch).
 
-## Quickstart for users familiar with JupyterHub
+## Quickstart for NERSC users familiar with JupyterHub
 
 - Login to [JupytherHub](https://jupyter.nersc.gov/hub/login) and start a terminal window.
 
@@ -32,14 +32,13 @@ on separate pages:
 /global/common/software/m4359/quickcompare
 ```
 
-- After a few seconds, the terminal window will say "Use URL below to connect to the application:"
-  and show a URL starting.
-  A click on the URL will bring up the graphical UI in a brower window.
+- After a few seconds, the terminal window will say "Use URL below to connect to the application"
+  and show a URL. A click on the URL will bring up the graphical UI in a brower window.
 
 ::: tip Tip 1: Choosing a server for your analysis session.
-JupyterHub's control panel offers to NERSC users serveral different types of resources (nodes)
-for their computing and analyais needs, including, e.g., login node, shared GPU node,
-exclusive nodes, as explained in [NERSC's documentation](https://docs.nersc.gov/services/jupyter/reference/).
+JupyterHub's control panel provides NERSC users access to serveral different types of resources (nodes),
+including, e.g., login node, shared GPU node, exclusive nodes, as explained in
+[NERSC's documentation](https://docs.nersc.gov/services/jupyter/reference/).
 
 Since login nodes are shared by users and hence can get very busy or run into memory constraints,
 and since our tools can make use of GPUs for interactive rendering,
@@ -50,15 +49,15 @@ will be charged to your project's allocation.
 :::
 
 ::: tip Tip 2: The same executables work for all types of nodes.
-Regardless of which type of node is chosen, the same commands (as listed above)
-are used to launch our tools in the QuickView family.
+Regardless of which type of nodes a user choses in JupyterHub's control panel,
+the same commands (executables) are used to launch our tools in the QuickView family.
 :::
 
 ::: tip Tip 3: No need for manual `module load conda`.
-When one of the commands provided above is used to launch tools in the QuickView family,
-there is no need to manually apply `module load conda` or activate the environment
-that our tools are installed in. This is because the above-mentioned commands are
-in fact scripts that have included those steps.
+When the commands provided above are used to launch tools in the QuickView family,
+there is no need to manually apply `module load conda` or activate the conda environment
+in which the tools are installed. This is because the commands mentioned earlier
+on this page are in fact scripts that have included those steps.
 :::
 
 ::: warning ATTENTION: Shut down the server when you are done!

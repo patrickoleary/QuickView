@@ -8,9 +8,10 @@ generated using EAMv2, v3, and intermediate versions towards v4
 
 ## The horizontal dimension 
 
-Starting from version 2, QuickView has been generalized to handle all NetCDF
-variables on `pg2` cubed-sphere meshes regardless of what name is used
-for the horizontal dimension (e.g., `ncol` in EAM files and
+Starting from version 2, the ParaView Reader used in the tools
+has been generalized to handle all NetCDF
+variables on `ne*pg2` cubed-sphere meshes regardless of what name is used
+for the horizontal dimension (e.g., `ncol` in EAM files or
 `lndgrid` in ELM files). 
 
 Furthermore, QuickView2 has been generalized to visualize all variables
@@ -32,4 +33,7 @@ If a variable has an attribute named `missing_value` or `_FillValue`, the value
 is converted to NaN and ignored in the calculation of global averages and for
 the visualization.
 
-## File groups 
+## File groups
+
+:::danger FIXME - add contents
+::: 
