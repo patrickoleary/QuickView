@@ -45,17 +45,19 @@ Once connected,
 
 ## Shut down the server when you are done
 
-::: warning IMPORTANT: Shut down the server when you are done.
-After finishing your analysis, please remember to shut down the connection to your selected
-server (node) to stop the charging of hours to your project's allocation.
-This is explained at the end of
-[this video](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
-and below is a recap of the steps (clicks):
-- go to the JupytherHub window/tab in your browser,
-- click `File` in the top-left corner,
-- scroll down and choose `Hub Control Panel`,
-- in the Control Panel brought up in a new browser tab/window, click on the red "stop" button
-  for the server to be shut down. An example is shown in the screenshot below.
+::: warning ATTENTION: Shut down the server when you are done!
+After finishing your analysis, please remember to shut down the connection to your
+assigned node to avoid keeping the resource idle and unnecessarily charging
+to your project's allocation. This is explained at the end of
+[this video](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter).
+Also see below for a recap of the steps (clicks).
+:::
+
+- Go to the JupytherHub window/tab in your browser.
+- Click on `File` in the top-left corner.
+- Scroll down and choose `Hub Control Panel`.
+- In the Control Panel brought up in a new browser tab or window,
+  click on the red "stop" button for the server to be shut down.
+  An example is shown in the screenshot below.
 
 ![](./login/login-04.png)
-:::
