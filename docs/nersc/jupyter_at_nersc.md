@@ -19,7 +19,7 @@ After a successful login, you will be presented with a list of options for where
 For the QuickView family, it is better to have hardware with a GPU to allow interactive rendering.
 Keep in mind, though, that time spent on anywhere else than a login node will be charged to your project's allocation.
 Hence, after you are done with the analysis, remember to
-[shut down the service](#shut-down-the-server-when-you-are-done) to avoid wasteful use of the resources. 
+[shut down the service](#shutting-down-the-server) to avoid wasteful use of the resources. 
 
 ![](./login/login-02.png)
 
@@ -29,7 +29,7 @@ likely have to wait for some seconds for the service to be ready.
 
 ![](./login/login-03.png)
 
-## Shut down the server when you are done
+## Shutting down the server
 
 ::: warning IMPORTANT: Shut down the server when you are done!
 After finishing your analysis, please remember to shut down the connection to your selected
