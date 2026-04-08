@@ -4,11 +4,11 @@ Our tools have been installed at NERSC,
 the [National Energy Research Scientific Computing Center](https://www.nersc.gov/),
 and are continually updated there.
 The following sections on this page contain instructions for users who would like to
-**use** our installations **for analysis**.
+**use our installations for analysis**.
 
 [[toc]]
 
-Users who are interested in the **installation** process can find relevant information
+Users who are interested in the **installation process** can find relevant information
 on separate pages:
 - How our public installation was done: see [this page](./public_installation).
 - How to install your own copy at NERSC: see [this example](./users_installation.md).
@@ -22,18 +22,18 @@ on separate pages:
   where your data files are located (or a directory closer to the data files than your home directory).
   While this step is optional, it may save you quite some clicks later in the graphical UI.
 
-- QuickView version 2 can be launched using the following command:
+- **QuickView version 2** can be launched using the following command:
 ```
 /global/common/software/m4359/quickview2
 ```  
 
-- QuickCompare can be launched using the following command:
+- **QuickCompare** can be launched using the following command:
 ```
 /global/common/software/m4359/quickcompare
 ```
 
-- After a few seconds, the terminal window will say "Use URL below to connect to the application"
-  and show a URL. A click on the URL will bring up the graphical UI in a brower window.
+- After a few seconds, the terminal window will provide a URL.
+  A click on the URL will bring up the graphical UI in a brower window.
 
 ::: tip Tip 1: Choosing a server for your analysis session.
 JupyterHub's control panel provides NERSC users access to serveral different types of resources (nodes),

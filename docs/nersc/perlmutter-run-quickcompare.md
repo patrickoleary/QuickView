@@ -8,10 +8,10 @@ users need to first connect to NERSC using JupyterHub, as described
 
 Once connected,
 
-- Start a Terminal from the Launcher options of JupyterHub.
+- Start a terminal from the Launcher options of JupyterHub.
   You will likely need to scroll down in the Launcher in order to
-  see the "Other" section and the Terminal icon there, as shown in the screenshot below.
-  Click on the Terminal icon, and the Launcher window should turn into a shell.
+  see the "Other" section and the terminal icon there, as shown in the screenshot below.
+  Click on the terminal icon, and the Launcher window should turn into a shell.
   !["Other" section of JupyterHub Launcher window](./jupyter_launcher_terminal.png)
 
 - *Optional but recommended*: in the shell, use the `cd` command to go to
@@ -20,7 +20,7 @@ Once connected,
 
 - Starting QuickCompare using the command `/global/common/software/m4359/quickcompare` in the shell.
 
-- After a few seconds, the Terminal window will provide a URL, similar to the screenshot below.
+- After some seconds, the terminal window will provide a URL, similar to the screenshot below.
   A click on the URL will bring up the graphical UI in a separate brower window or tab.
   <!-- ![](./quickview/quickview-terminal-with-url.png) -->
 
@@ -43,7 +43,7 @@ Once connected,
 - Finally, select the variables you want to load and inspect.
   <!-- ![](./quickview/quickview-variable-selection.png) -->
 
-## Shut down the server when you are done
+## Shuttin down the server
 
 ::: warning ATTENTION: Shut down the server when you are done!
 After finishing your analysis, please remember to shut down the connection to your

@@ -3,9 +3,9 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: "/QuickView",
-  title: "E3SM QuickView",
+  title: "The QuickView Family",
   description:
-    "How to start with the E3SM QuickView suite to look at your simulation data",
+    "How to use the QuickView family of tools to look at your simulation data",
   head: [["link", { rel: "stylesheet", href: "/custom.css" }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -15,7 +15,7 @@ export default defineConfig({
     logo: "/icon-full.png",
     nav: [
       { text: "Home", link: "/" },
-      { text: "News", link: "/news" },
+      { text: "News", link: "/webnews" },
       { text: "Gallery", link: "/gallery/" },
       { text: "User's Guide", link: "/guides/reminders" },
       { text: "At NERSC", link: "/nersc/index" },
@@ -58,7 +58,7 @@ export default defineConfig({
         {
           text: "QuickView",
           items: [
-            { text: "What is QuickView", link: "/guides/quickview/index" },
+            { text: "What is QuickView?",link: "/guides/quickview/index" },
             { text: "Keyboard Shortcuts",link: "/guides/quickview/shortcuts" },
             { text: "UI Overview",       link: "/guides/quickview/ui_overview" },
             { text: "File Selection",    link: "/guides/quickview/file_selection" },
@@ -75,7 +75,7 @@ export default defineConfig({
           ],
         },
         {
-          text: "For app Developers",
+          text: "For App Developers",
           items: [
             { text: "Setup", link: "/guides/dev/setup" },
             { text: "Continuous Integration", link: "/guides/dev/ci" },
