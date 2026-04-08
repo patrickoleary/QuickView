@@ -1,45 +1,24 @@
-# Resources
-
-## Application binaries
-
-QuickView is available as a desktop bundle that can be downloaded for Windows,
-Mac and Linux directly from our release notes on GitHub.
-
-[Releases (binary download)](https://github.com/Kitware/QuickView/releases)
-
-## Sample data
-
-- [Connecitivity file download](https://zenodo.org/records/16908566)
-- [Sample data download](https://zenodo.org/records/16922607)
-
-## Git repository
-
-- [Repository](https://github.com/Kitware/QuickView)
-- [Bug reports / feature requests](https://github.com/Kitware/QuickView/issues)
-
-
 # What is QuickView?
 
 **QuickView** is an open-source, interactive visualization tool designed for
-scientists working with the
+Earth system modelers with an initial focus on the horizontal meshes used by
+the atmosphere component, EAM, of the
 [Energy Exascale Earth System Model (E3SM)](https://e3sm.org/),
-with an initial focus on the horizontal meshes used by the atmosphere component, EAM.
 QuickView's Python- and
 [trame](https://www.kitware.com/trame/)-based User Interface (UI)
 provides intuitive access to [ParaView](https://www.paraview.org/)'s powerful
 analysis and visualization capabilities without requiring a steep learning curve.
 
-## Quick Start
+## Quickstart
 
-- [Install and launch](../install_and_launch) the app.
+- [Install and launch](../install_and_launch) the app on a personal computer
+  or [use it at NERSC](/nersc/index).
 - Download [connectivity files](https://doi.org/10.5281/zenodo.16908566) of
   EAM's cubed-sphere grids from Zenodo.
 - Optional: download
-  [sample simulation output](https://zenodo.org/records/16922607) to test the
-  app.
-
-For more details, go to the navigation bar of this website and look for our
-User's Guide.
+  [sample simulation output](https://zenodo.org/records/16922607) to test the app.
+- Visit the GitHub [repository](https://github.com/Kitware/QuickView)
+- Report bugs or request features using [GitHub Issues](https://github.com/Kitware/QuickView/issues)
 
 ## Why QuickView?
 
@@ -71,21 +50,19 @@ multivariate visualization and is currently focused on E3SM.
 - Intuitive, minimalist interface tailored for atmospheric modeling.
 - Multi-variable visualization with drag-and-drop layout.
 - Persistent sessions - pick up where you left off.
-- Support for EAM v2, v3, and upcoming v4 output formats.
-
-## Bug reports and feature requests
-
-Please use the
-[Issues tab on GitHub](https://github.com/Kitware/QuickView/issues).
+- Support for EAM v2, v3, and upcoming v4 output formats
+  as well as the E3SM land model ELM's input and output files
+  on ne*pg2 grids.
 
 ## Project Background
 
 The lead developer of QuickView version 2 is
 [Sebastien Jourdain (sebastien.jourdain@kitware.com)](https://www.kitware.com/sebastien-jourdain/)
-at [Kitware](https://www.kitware.com/). Other key contributors at Kitware
-include Berk Geveci, Dan Lipsa, and Will Dunklin.
-Key contributors on the atmospheric science side are Hui Wan and Kai Zhang at
+at [Kitware](https://www.kitware.com/).
+Other key contributors include
+Hui Wan and Kai Zhang at
 [Pacific Northwest National Laboratory](https://www.pnnl.gov/atmospheric-climate-and-earth-sciences-division).
+and Berk Geveci, Dan Lipsa, Patrick O'Leary and Will Dunklin at Kitware.
 
 QuickView is a product of an interdisciplinary collaboration supported by
 the U.S. Department of Energy Office of Science’s
@@ -95,3 +72,23 @@ and
 via the
 [Scientific Discovery through Advanced Computing (SciDAC](https://www.scidac.gov/))
 program.
+
+
+# Resources
+
+## Application binaries
+
+QuickView is available as a desktop bundle that can be downloaded for Windows,
+Mac and Linux directly from our release notes on GitHub.
+
+[Releases (binary download)](https://github.com/Kitware/QuickView/releases)
+
+## Sample data
+
+- [Connecitivity file download](https://zenodo.org/records/16908566)
+- [Sample data download](https://zenodo.org/records/16922607)
+
+## Git repository
+
+
+
