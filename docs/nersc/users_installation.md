@@ -43,7 +43,7 @@ conda install conda-forge::e3sm_compareview
 
 At this point, the user should be able to use the following commands to launch
 the individual tools, assuming the conda environment has been activated.
-(But read the [next section](#recommended:-executable-shortcuts) if you expect to use the tools often.)
+(But read the [next section](#recommended-shortcuts) if you expect to use the tools often.)
 
 QuickView:
 ```
@@ -54,10 +54,10 @@ QuickCompare:
 quickcompare -p 0
 ```
  
-## Recommended: executable shortcuts
+## Recommended shortcuts
 
 Since the conda environment and tools are installed in custom paths, it will
-be useful to create shortcuts so that the apps can be lauched using very short 1-line commands.
+be useful to create shortcuts so that the tools can be lauched using very short 1-line commands.
 
 ### Setup step 1
 
@@ -100,7 +100,7 @@ In the `.bashrc` or `.cshrc` file in your home directory, add something like
 alias quickv='/global/cfs/projectdirs/m4359/tools/quickview2'
 alias quickc='/global/cfs/projectdirs/m4359/tools/quickcompare'
 ```
-### Using the apps through shortcuts
+### Using the tools through shortcuts
 
 After the two setup steps have been completed, the user should be able
 to launch the tools by simply typing `quickv` or `quickc`

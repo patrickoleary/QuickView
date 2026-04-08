@@ -15,7 +15,6 @@ and bundles can be found.
 
 Users who would like to **use** our tools installed at NERSC can find information in
 [this quickstart guide](/nersc/index.md).
-
 Users who would like to **install** their copy at NERSC can find an example
 [here](/nersc/users_installation.md).
 :::
