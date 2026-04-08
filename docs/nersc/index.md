@@ -8,7 +8,7 @@ The following sections on this page contain instructions for users who would lik
 
 [[toc]]
 
-Users who are interested in the installation itself can find relevant information
+Users who are interested in the **installation** process can find relevant information
 on separate pages:
 - How our public installation was done: see [this page](./public_installation).
 - How to install your own copy at NERSC: see [this example](./users_installation.md).
@@ -69,7 +69,7 @@ to your project's allocation. This is explained at the end of
 Also see below for a recap of the steps (clicks).
 :::
 
-### Shuting down a servier in JupyterHub
+#### Shuting down a servier in JupyterHub
 
 - Go to the JupytherHub window/tab in your browser.
 - Click on `File` in the top-left corner.
