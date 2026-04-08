@@ -8,10 +8,10 @@ The following sections on this page contain instructions for users who would lik
 
 [[toc]]
 
-Users who are interested in the installation itself can find related information
+Users who are interested in the installation itself can find relevant information
 on separate pages:
 - How our public installation was done: see [this page](./public_installation).
-- How to get your own installations at NERSC: see [this example](./users_installation.md).
+- How to install your own copy at NERSC: see [this example](./users_installation.md).
 - How to install the tools on a laptop or desktop computer: see [this page](/guides/install_and_launch).
 
 ## Quickstart for users familiar with JupyterHub
@@ -65,17 +65,22 @@ in fact scripts that have included those steps.
 After finishing your analysis, please remember to shut down the connection to your
 assigned node to avoid keeping the resource idle and unnecessarily charging
 to your project's allocation. This is explained at the end of
-[this video](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
-and below is a recap of the steps (clicks):
-- Go to the JupytherHub window/tab in your browser,
-- Click on `File` in the top-left corner,
-- Scroll down and choose `Hub Control Panel`,
+[this video](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter).
+Also see below for a recap of the steps (clicks).
+:::
+
+### Shuting down a servier in JupyterHub
+
+- Go to the JupytherHub window/tab in your browser.
+- Click on `File` in the top-left corner.
+- Scroll down and choose `Hub Control Panel`.
 - In the Control Panel brought up in a new browser tab or window,
   click on the red "stop" button for the server to be shut down.
   An example is shown in the screenshot below.
 
 ![JupyterHub_control_panel_with_stop_button.png](/nersc/JupyterHub_control_panel_with_stop_button.png)
-:::
+
+
 
 ## For NERSC users who have not used JupyterHub
 
