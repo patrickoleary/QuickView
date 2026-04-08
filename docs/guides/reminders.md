@@ -4,7 +4,7 @@
 QuickView can be used in two modes:
 a *new-viz* mode (for starting a new visualization) or
 a *resume* mode (for resuming an analysis). Further details can be found on
-the [toolbar description page](/guides/quickview/toolbar.md).
+the description of [file selection](/guides/quickview/file_selection.md).
 :::
 
 ::: info Connectivity files
@@ -12,7 +12,7 @@ Since E3SM's horizontal grids are unstructured meshes from ParaView's perspectiv
 connectivity files are needed in addition to  the simulation data files.
 Further details can be found on the documentation pages
 describing the [connectivity files](/guides/connectivity.md) and the
-[toolbar](/guides/quickview/toolbar.md).
+[file selection](/guides/quickview/file_selection.md).
 :::
 
 ::: tip Consistency between connecitivity and simulation files
@@ -30,18 +30,16 @@ button at the top of the "Select Variables" control panel for the new selection 
 :::
 
 ::: info Show/hide control panels
-Most of the buttons in the vertical [toolbar](/guides/quickview/toolbar.md)
+Most of the buttons in the vertical toolbar
 are toggles for showing or hiding the corresponding control panels.
 These toggles have 1-key shortcuts--see cheat sheet [here](/guides/quickview/shortcuts.md).
-Detailed descriptions of the control panels can be found on
-[this page](/guides/quickview/control_panels.md).
 :::
 
 ::: tip Viewport Layout
 QuickView is designed to present multiple variables simultaneously
 in an informative way. Users can *rearrange* the individual views
-(i.e., contour plots) in the [viewport](/guides/quickview/viewport.md)
-and *resize* them.
+(i.e., contour plots) in the viewport and *resize* them.
+Further details can be found on the page about [viewport layout](/guides/quickview/viewport_layout.md)
 
 Furthermore, if a user saves a state file after these
 adjustments, they can later resume their analysis with the customized
