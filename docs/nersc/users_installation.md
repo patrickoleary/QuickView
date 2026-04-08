@@ -9,9 +9,8 @@ expect that
 - the conda environment is named `quickview-env`,
   which we refer to as `${envName}` below.
 
-::: warning Note!
-Please **use a login node for the installation**. After that,
-the tools can be used on login nodes or other types of nodes
+::: warning Note: Please use a login node for the installation.
+After that, the tools can be used on login nodes or other types of nodes
 via the same commands/shortcuts.
 :::
 

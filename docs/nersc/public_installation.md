@@ -7,10 +7,22 @@ has been funding our development.
 
 We are working on making the installation publicly accessible by
 all NERSC users. In the meantime, NERSC users can use the following
-command to access QuickView and QuickCompare, instead.
+commands to access QuickView and QuickCompare, instead.
+
+```
+/global/cfs/projectdirs/m4359/tools/quickview2
+```
+
+```
+/global/cfs/projectdirs/m4359/tools/quickcompare
+```
 
 If you want to have your own installation at a location of your choices,
 please take a look at [this page](./users_installation.md).
+
+::: danger The rest of this page will be updated after we consolidate
+QuickView and QuickCompare into one environment.
+:::
 
 ## Create custom conda environments
 
