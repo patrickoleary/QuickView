@@ -3,20 +3,16 @@
 Our tools have been installed at NERSC,
 the [National Energy Research Scientific Computing Center](https://www.nersc.gov/),
 and are continually updated there.
-The following sections on this page contain instructions for users who would like to use our installations.
+The following sections on this page contain instructions for users who would like to
+**use** our installations **for analysis**.
 
 [[toc]]
 
-::: warning
-Users who would like to understand how our installation was done
-are referred to [this page](./public_installation).
-
-Users who would like to their own installations at NERSC are referred to
-[this example](./users_installation.md).
-
-Users who would like to install the tools on their laptop or desktop
-can find relevant information [here](/guides/install_and_launch).
-:::
+Users who are interested in the installation itself can find related information
+on separate pages:
+- How our public installation was done: see [this page](./public_installation).
+- How to get your own installations at NERSC: see [this example](./users_installation.md).
+- How to install the tools on a laptop or desktop computer: see [this page](/guides/install_and_launch).
 
 ## Quickstart for users familiar with JupyterHub
 
@@ -36,12 +32,12 @@ can find relevant information [here](/guides/install_and_launch).
 /global/common/software/m4359/quickcompare
 ```
 
-- After a few seconds, the Terminal window will say "Use URL below to connect to the application:"
-  and shows a URL starting with `https://`.
+- After a few seconds, the terminal window will say "Use URL below to connect to the application:"
+  and show a URL starting.
   A click on the URL will bring up the graphical UI in a brower window.
 
 ::: tip Tip 1: Choosing a server for your analysis session.
-JupyterHub's control panel allows users to choose from serveral different types of resources
+JupyterHub's control panel offers to NERSC users serveral different types of resources (nodes)
 for their computing and analyais needs, including, e.g., login node, shared GPU node,
 exclusive nodes, as explained in [NERSC's documentation](https://docs.nersc.gov/services/jupyter/reference/).
 
@@ -53,28 +49,30 @@ Keep in mind, though, that time spent on shared GPU nodes or exclusive nodes
 will be charged to your project's allocation.
 :::
 
-::: tip Tip 2: Same executable for all types of nodes.
+::: tip Tip 2: The same executables work for all types of nodes.
 Regardless of which type of node is chosen, the same commands (as listed above)
 are used to launch our tools in the QuickView family.
 :::
 
-::: tip Tip 3: No need to manually load `conda`.
+::: tip Tip 3: No need for manual `module load conda`.
 When one of the commands provided above is used to launch tools in the QuickView family,
-there is no need to manually load `conda` or the conda environment that our tools are installed in.
-This is because the above-mentioned commands are in fact scripts that have included those steps.
+there is no need to manually apply `module load conda` or activate the environment
+that our tools are installed in. This is because the above-mentioned commands are
+in fact scripts that have included those steps.
 :::
 
-::: warning IMPORTANT: Shut down the server when you are done.
-After finishing your analysis, please remember to shut down the connection to your selected
-server (node) to stop the charging of hours to your project's allocation. 
-This is explained at the end of
+::: warning ATTENTION: Shut down the server when you are done!
+After finishing your analysis, please remember to shut down the connection to your
+assigned node to avoid keeping the resource idle and unnecessarily charging
+to your project's allocation. This is explained at the end of
 [this video](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
 and below is a recap of the steps (clicks):
-- go to the JupytherHub window/tab in your browser,
-- click `File` in the top-left corner,
-- scroll down and choose `Hub Control Panel`,
-- in the Control Panel brought up in a new browser tab/window, click on the red "stop" button
-  for the server to be shut down. An example is shown in the screenshot below.
+- Go to the JupytherHub window/tab in your browser,
+- Click on `File` in the top-left corner,
+- Scroll down and choose `Hub Control Panel`,
+- In the Control Panel brought up in a new browser tab or window,
+  click on the red "stop" button for the server to be shut down.
+  An example is shown in the screenshot below.
 
 ![JupyterHub_control_panel_with_stop_button.png](/nersc/JupyterHub_control_panel_with_stop_button.png)
 :::
@@ -84,11 +82,11 @@ and below is a recap of the steps (clicks):
 Please see
 [this section of NERSC's documentation](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
 especially the video "How to log in to Perlmutter with Jupyter",
-to learn how to use the service.
+to learn about the service.
 
 Alternatively, follow our step-by-step description [here](./jupyter_at_nersc.md)
 
 ## If you do not yet have any user account at  NERSC
 
 Information on [this page](https://docs.nersc.gov/accounts/#obtaining-an-account)
-can help get you started.
+can help you get started.
