@@ -9,16 +9,9 @@ QuickView's Python- and
 provides intuitive access to [ParaView](https://www.paraview.org/)'s powerful
 analysis and visualization capabilities without requiring a steep learning curve.
 
-## Quickstart
+## Useful links
 
-- [Install and launch](../install_and_launch) the app on a personal computer
-  or [use it at NERSC](/nersc/index).
-- Download [connectivity files](https://doi.org/10.5281/zenodo.16908566) of
-  EAM's cubed-sphere grids from Zenodo.
-- Optional: download
-  [sample simulation output](https://zenodo.org/records/16922607) to test the app.
-- Visit the GitHub [repository](https://github.com/Kitware/QuickView)
-- Report bugs or request features using [GitHub Issues](https://github.com/Kitware/QuickView/issues)
+See [Resources](./resources).
 
 ## Why QuickView?
 
@@ -57,7 +50,7 @@ multivariate visualization and is currently focused on E3SM.
 ## Project Background
 
 The lead developer of QuickView version 2 is
-[Sebastien Jourdain (sebastien.jourdain@kitware.com)](https://www.kitware.com/sebastien-jourdain/)
+[Sebastien Jourdain](https://www.kitware.com/sebastien-jourdain/)
 at [Kitware](https://www.kitware.com/).
 Other key contributors include
 Hui Wan and Kai Zhang at
@@ -73,22 +66,4 @@ via the
 [Scientific Discovery through Advanced Computing (SciDAC](https://www.scidac.gov/))
 program.
 
-
-# Resources
-
-## Application binaries
-
-QuickView is available as a desktop bundle that can be downloaded for Windows,
-Mac and Linux directly from our release notes on GitHub.
-
-[Releases (binary download)](https://github.com/Kitware/QuickView/releases)
-
-## Sample data
-
-- [Connecitivity file download](https://zenodo.org/records/16908566)
-- [Sample data download](https://zenodo.org/records/16922607)
-
-## Git repository
-
-
-
+<img src="/logos/SciDAC-logo.png" alt="SciDAC" width="200"/>

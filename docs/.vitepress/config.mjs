@@ -65,6 +65,7 @@ export default defineConfig({
             { text: "Variable Selection",link: "/guides/quickview/variable_selection" },
             { text: "Viewport Layout",   link: "/guides/quickview/viewport_layout" },
             { text: "Individual Views",  link: "/guides/quickview/individual_views" },
+            { text: "Resources",         link: "/guides/quickview/resources" },
           ],
         },
         {
