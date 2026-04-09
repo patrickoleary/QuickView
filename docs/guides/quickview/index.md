@@ -55,7 +55,8 @@ at [Kitware](https://www.kitware.com/).
 Other key contributors include
 Hui Wan and Kai Zhang at
 [Pacific Northwest National Laboratory](https://www.pnnl.gov/atmospheric-climate-and-earth-sciences-division).
-and Berk Geveci, Dan Lipsa, Patrick O'Leary and Will Dunklin at Kitware.
+and Berk Geveci, Dan Lipsa, Patrick O'Leary and Will Dunklin
+at [Kitware](https://www.kitware.com/).
 
 QuickView is a product of an interdisciplinary collaboration supported by
 the U.S. Department of Energy Office of Science’s
@@ -66,4 +67,6 @@ via the
 [Scientific Discovery through Advanced Computing (SciDAC](https://www.scidac.gov/))
 program.
 
+<img src="/logos/Kitware_logo_with_text.png" alt="Kitware" width="100"/>
+<img src="/logos/PNNL_logo_with_text_abbr.png" alt="PNNL" width="100"/>
 <img src="/logos/SciDAC-logo.png" alt="SciDAC" width="200"/>
