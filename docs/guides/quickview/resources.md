@@ -9,15 +9,14 @@
 - *Optional*: download
   [sample simulation output](https://zenodo.org/records/16922607) to test the app.
 
-## How to use QuickView
-
-- [The graphical UI](./ui_overview)
-- [Keyboard shortcuts](./shortcuts)
-- [Connectivity files: what are they?](../connectivity)
-- [Simulation files: what is supported?](../simulation_data.md)
-- [Our comprehensive options for variable selection](./variable_selection)
-- [Arrange your variable layout to facilitate analysis](./viewport_layout)
-- [Customize individual images](./individual_views)
+- How to use QuickView
+  - [The graphical UI](./ui_overview)
+  - [Keyboard shortcuts](./shortcuts)
+  - [Connectivity files: what are they?](../connectivity)
+  - [Simulation files: what is supported?](../simulation_data.md)
+  - [Our comprehensive options for variable selection](./variable_selection)
+  - [Arrange your variable layout to facilitate analysis](./viewport_layout)
+  - [Customize individual images](./individual_views)
 
 ## Miscellaneous 
 
