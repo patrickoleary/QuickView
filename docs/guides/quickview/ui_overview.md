@@ -1,1 +1,1 @@
-## Overview of the QuickView graphical UI
+# QuickView's graphical UI
