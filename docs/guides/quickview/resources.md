@@ -12,7 +12,7 @@
 - Concepts 
   - [Connectivity files: what are they?](../connectivity)
   - [Simulation files: what is supported?](../simulation_data)
-  - [State files: how to use them?](../file_selection)
+  - [State files: how to use them?](./file_selection)
 
 - How to use QuickView
   - [The graphical UI](./ui_overview)
