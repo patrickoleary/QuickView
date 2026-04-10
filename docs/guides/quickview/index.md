@@ -1,9 +1,13 @@
 # What is QuickView?
 
-**QuickView** is an open-source, interactive visualization tool designed for
-Earth system modelers with an initial focus on the horizontal meshes used by
-the atmosphere component, EAM, of the
-[Energy Exascale Earth System Model (E3SM)](https://e3sm.org/),
+**QuickView** is an open-source, interactive visualization
+tool designed to help Earth system modelers take a quick look at
+a collection of physical quantities in their simulation files.
+The physical quantities are presented in the form of global or regional maps.
+Currently, QuickView supports only the cubed-sphere "physics" grids,
+i.e., the ne\*pg2 meshes used by the atmosphere component of the
+[Energy Exascale Earth System Model (E3SM)](https://e3sm.org),
+but extensions to other grids are underway.
 QuickView's Python- and
 [trame](https://www.kitware.com/trame/)-based User Interface (UI)
 provides intuitive access to [ParaView](https://www.paraview.org/)'s powerful
