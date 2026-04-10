@@ -2,6 +2,40 @@
 
 <!-- version list -->
 
+## v2.1.2 (2026-04-10)
+
+### Bug Fixes
+
+- Allow trimming beyond mid point
+  ([`9d56424`](https://github.com/Kitware/QuickView/commit/9d56424f2eed9352b5b65550090a8cfe658b3160))
+
+- Better fix for MTime() issue
+  ([`6653657`](https://github.com/Kitware/QuickView/commit/665365717d65d3045856736d777d84cbab724f21))
+
+- Cache output for EAMExtract
+  ([`78f8d96`](https://github.com/Kitware/QuickView/commit/78f8d96294a15e0784d3622f5a26a07fe7ee8f88))
+
+- Check self MTime (projection was modified) as well
+  ([`f0db939`](https://github.com/Kitware/QuickView/commit/f0db93989ee5ed7c68cdb6eec9fb20ee147e29c5))
+
+- Fix crash when: trim_lon = 200 then trim_lon = 0
+  ([`d4cce24`](https://github.com/Kitware/QuickView/commit/d4cce24b5816e0305905466f90a07056d185a265))
+
+- Fix the filter for polydata input
+  ([`3ec9870`](https://github.com/Kitware/QuickView/commit/3ec987060120029444529aa2a32e336f48ca7430))
+
+- No need to do something different for latlon projection
+  ([`d479e89`](https://github.com/Kitware/QuickView/commit/d479e89f2cc1e7b96b4e8e0e78f4fa0005d57cc3))
+
+- Remove vtkPVGeometryFilter as it is applied in EAMExtract
+  ([`a6857be`](https://github.com/Kitware/QuickView/commit/a6857bef265b907a224d3d667233018efc75d2a9))
+
+### Documentation
+
+- Update info on landing page
+  ([`687ac6c`](https://github.com/Kitware/QuickView/commit/687ac6cf07e4e80df587d42e630eefe25e1e8c7f))
+
+
 ## v2.1.1 (2026-04-06)
 
 ### Bug Fixes
