@@ -2,21 +2,24 @@
 
 ## Quickstart
 
-- [Install and launch](../install_and_launch) the app on a personal computer
-  or [use it at NERSC](/nersc/index).
+- Install and launch the app [on a personal computer](../install_and_launch) 
+  or use it [at NERSC](/nersc/index).
 - Download [connectivity files](https://doi.org/10.5281/zenodo.16908566) for
   EAM's cubed-sphere grids.
 - *Optional*: download
-  [sample simulation output](https://zenodo.org/records/16922607) to test the app.
+  [sample simulation files](https://zenodo.org/records/16922607) to test the app.
+
+- Concepts 
+  - [Connectivity files: what are they?](../connectivity)
+  - [Simulation files: what is supported?](../simulation_data)
+  - [State files: how to use them?](../file_selection)
 
 - How to use QuickView
   - [The graphical UI](./ui_overview)
   - [Keyboard shortcuts](./shortcuts)
-  - [Connectivity files: what are they?](../connectivity)
-  - [Simulation files: what is supported?](../simulation_data.md)
-  - [Our comprehensive options for variable selection](./variable_selection)
-  - [Arrange your variable layout to facilitate analysis](./viewport_layout)
-  - [Customize individual images](./individual_views)
+  - [Comprehensive variable-selection capability](./variable_selection)
+  - [Viewport layout options](./viewport_layout)
+  - [Customization of individual plots](./individual_views)
 
 ## Miscellaneous 
 
