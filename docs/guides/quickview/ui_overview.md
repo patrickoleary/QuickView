@@ -1,5 +1,7 @@
 # QuickView's Graphical UI
 
+![QuickView UI](./screenshots/quickview_ui.png){ width="95%" }
+
 QuickView's UI contains three main components.
 
 - The **viewport** displays global or regional maps for the user-selected
@@ -22,6 +24,5 @@ QuickView's UI contains three main components.
   colorful QuickView icon at the top of the toolbar or press the
   `H` key on the keyboard. 
 
-![QuickView UI](./screenshots/quickview_ui.png){ width="90%" }
 
-![Toolbar expanded](./screenshots/toolbar_expanded.png){ width="20%" }
+<!-- ![Toolbar expanded](./screenshots/toolbar_expanded.png){ width="20%" } -->
