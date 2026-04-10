@@ -24,12 +24,12 @@ on separate pages:
 
 - **QuickView version 2** can be launched using the following command:
 ```
-/global/common/software/m4359/quickview2
+/global/cfs/projectdirs/m4359/tools/quickview2
 ```  
 
 - **QuickCompare** can be launched using the following command:
 ```
-/global/common/software/m4359/quickcompare
+/global/cfs/projectdirs/m4359/tools/quickcompare
 ```
 
 - After a few seconds, the terminal window will provide a URL.
