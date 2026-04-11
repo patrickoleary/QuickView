@@ -6,12 +6,7 @@ QuickView can be used in two modes:
 
 ## New-viz mode: starting a new visualization
 
-<!-- ![File loading window](./screenshots/file-upload-outline.svg){ width="8%", align=right } -->
-
-<img src="./screenshots/file-upload-outline.svg"
-     alt="File loading window"
-     class="img-right"
-     style="--img-width: 5%;" />
+![File loading window](./screenshots/file-upload-outline.png){ width="5%", align=right }
 
 When QuickView is launched using a shell command or the desktop bundle,
 or when the user clicks the "File loading" icon on the toolbar,
@@ -31,7 +26,6 @@ have it registered as a simulation file in the app.
 
 After both connectivity and simulation files are selected,
 click the blue `Load Files` button. 
-
 When the files are loaded correctly, the UI will change into a layout like
 the example below, with the [Variable Selection control panel](./variable_selection)
 on the left showing a list of recognized variables in the simulation file
