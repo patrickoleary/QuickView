@@ -12,26 +12,6 @@ below.
 
 ---
 
-## Variable selection
-
-### Variable categories
-
-![variable selection sections](../../images/control_panel_variable_selection.png){
-width="240", align=right }
-
-EAM's simulation output files typically contain many variables corresponding to
-physical quantities with spatial coverages over the entire globe.
-
-- Some of those variables may not have a vertical dimension; these are referred
-  to as "surface variables" in our app.
-- Some of those variables have "lev" or "ilev" as the vertical dimension; these
-  are referred to as "variables at layer midpoints" and "variables at layer
-  interfaces", respectively.
-
-The three variable categories each have their own collapsible submenu in the
-control panel, as shown in the screenshot here. Variables of other dimension
-sizes are currently ignored by the app but can be supported upon request.
-
 ### Select and load
 
 !!! warning inline end "The `LOAD VARIABLE` button"
