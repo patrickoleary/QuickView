@@ -1,0 +1,6 @@
+.img-right {
+  float: right;
+  margin-left: 12px;
+  margin-bottom: 8px;   /* adds space below so text doesn’t hug the bottom edge */
+  width: var(--img-width, 10%);
+}
