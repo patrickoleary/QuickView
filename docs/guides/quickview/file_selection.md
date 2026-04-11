@@ -37,6 +37,9 @@ The user can now start to search for and load variables to inspect.
 
 ![File loaded](./screenshots/file_loaded.png){ width="95%", align=center }
 
+::: tip Tip: File system navigation 
+:::
+
 ::: tip Tip: Loading a file series from the same simulation 
 :::
 
