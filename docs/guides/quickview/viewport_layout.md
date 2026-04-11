@@ -1,6 +1,6 @@
 # Customizing Viewport Layout
 
-::: For users of QuickView version 1
+::: tip Tip for users of QuickView version 1
 QuickView version 1 allowed the user to change the size and sequence
 of different views (map plots) in the viewport by drag-and-drop.
 Users' feedback indicated that arbitrary drag-and-drop can get confusing,
@@ -20,7 +20,7 @@ The viewport is evenly divided into the selected number of columns.
 When the user adjusts the size of their browser window, the
 sizes of the map plots will be automatically adjusted to fit into the adjusted browser window.
 
-![Viewport column size](./screenshots/viewport_with_column_size_menu.png){ width="95%", align=center }
+![Viewport column size](./screenshots/viewport_with_column_size_menu.png){ width="100%", align=center }
 
 ## Grouped or ungrouped views
 

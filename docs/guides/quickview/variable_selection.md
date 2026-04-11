@@ -7,12 +7,12 @@ the tool to handle arbitrarily-shaped arrays,
 and partly due to the intention to help users navigate through simulation
 files containing many (e.g., hundreds of) variables.
 
+![File loaded](./screenshots/variable_list_none_selected.png){ width="55%", align=right }
 Here, we use a simulation file with more than one thousand variables as an example
 to explain the search and selection capabilities.
 
 ## Checkboxes for selecting and unselecting variables
 
-![File loaded](./screenshots/variable_list_none_selected.png){ width="55%", align=right }
 The first screenshot here shows the Variable Selection panel
 right after the files have been loaded.
 - The checkboxes to the left of each variable name can be used
@@ -20,11 +20,11 @@ right after the files have been loaded.
 - The first checkbox, to the left of "Name" and below the eye icon,
   can be used to select or unselect all variables.
 
-## Variable proups
+## Variable groups
 
 ![File loaded](./screenshots/variable_list_all_selected.png){ width="55%", align=right }
 QuickView sorts variables into different groups according to their dimensions
-and allows the users to select, unselect, and inspect groups.
+and, subsequently, allows the users to select, unselect, and inspect groups.
 
 In the same example as discussed above, when all variables are selected
 using the first checkbox in the Variable Selection control panel,
