@@ -26,11 +26,10 @@ When all variables are selected using the first checkbox, we get the second scre
 - The **colorful tabs** correspond to different variable shapes (dimension
   combinations). The different cominations, as well as the number
   of displayable variables in each group, are shown in the tabs.
+  Each tab has a close button that can be used to unselect the entire group.
 
 Note that at this point, QuickView has *not* loaded all the variables into memory.
 It has finished a scan and *is ready to load* these variables.
-The user can deselect groups of variables by clicking on the close buttons
-on the right of each tab.
 
 
 Additional talk points:
