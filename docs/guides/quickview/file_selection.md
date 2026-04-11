@@ -10,11 +10,11 @@ QuickView can be used in two modes:
 
 When QuickView is launched using a shell command or the desktop bundle,
 or when the user clicks the "File loading" icon on the toolbar,
-the a dialogue window like the screenshot below will be brought up.
+a dialogue window like the screenshot below will be brought up.
 The user is expected to select a connecitivy file and at least one a simulation data file
 from the file system.
 
-![File loading window](./screenshots/file_loading_dialogue.png){ width="80%", align=center }
+![File loading window](./screenshots/file_loading_dialogue.png){ width="95%", align=center }
 
 The user can single-click a file name and then click the "simulation" or "connectivity"
 button to clarify file type, and repeat these two clicks to have both files specified.
@@ -22,22 +22,26 @@ button to clarify file type, and repeat these two clicks to have both files spec
 Alternatively, if a filename starts with "connecitivity", then
 the user can double-click the file to have it automatically recognized as a connectivity file.
 Double-clicking a filename not starting with "connectivity" will
-have it registered as a simulation file in the app.
+have it treated as a simulation file.
 
 After both connectivity and simulation files are selected,
-click the blue `Load Files` button. 
-When the files are loaded correctly, the UI will change into a layout like
+the `Load Files` button in the bottom-right corner will light up.
+Single-click the button to start file loading.
+
+If the files are loaded correctly, the UI will change into a layout like
 the example below, with the [Variable Selection control panel](./variable_selection)
-on the left showing a list of recognized variables in the simulation file
-and the viewport on the right showing the landing page.
+on the left showing a list of recognized variables in the simulation file(s)
+and the viewport on the right showing a brief introduction to QuickView.
 The user can now start to search for and load variables to inspect.
 
-![File loaded](./screenshots/file_loaded.png){ width="80%", align=center }
+![File loaded](./screenshots/file_loaded.png){ width="95%", align=center }
 
+::: tip Tip: Loading a file series from the same simulation 
+:::
 
-## Resume mode: pick up where you left off
+## Resume mode: picking up where you left off
 
-::: error TO-DO: check and explain state file download and upload
+::: danger TO-DO: check and explain state file download and upload
 :::
 
 ::: info Info: What's in a State File?
