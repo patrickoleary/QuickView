@@ -8,7 +8,7 @@ QuickView can be used in two modes:
 
 <!-- ![File loading window](./screenshots/file-upload-outline.svg){ width="8%", align=right } -->
 
-<img src="file-upload-outline.svg"
+<img src="./screenshots/file-upload-outline.svg"
      alt="File loading window"
      class="img-right"
      style="--img-width: 5%;" />
