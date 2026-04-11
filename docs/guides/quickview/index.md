@@ -71,6 +71,6 @@ via the
 [Scientific Discovery through Advanced Computing (SciDAC](https://www.scidac.gov/))
 program.
 
-<img src="/logos/Kitware_logo_with_text.png" alt="Kitware" width="100"/>
-<img src="/logos/PNNL_logo_with_text_abbr.png" alt="PNNL" width="100"/>
-<img src="/logos/SciDAC-logo.png" alt="SciDAC" width="200"/>
+##  
+
+![Kitware](/logos/Kitware_logo_with_text.png){ width="15%", align=center} ![PNNL](/logos/PNNL_logo_with_text_abbr.png){ width="15%", align=center } ![SciDAC](/logos/SciDAC-logo.png){ width="25%", align=center }
