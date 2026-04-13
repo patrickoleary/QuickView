@@ -4,7 +4,7 @@
 
 QuickView's UI contains three main components.
 
-- *The **viewport** displays global or regional maps for the user-selected
+- *The **viewport** displaying global or regional maps for the user-selected
   physical quantities (variables in the NetCDF files):*
   The sequence of the displayed variables and the size of the maps
   can be adjusted using the [Viewport Layout](./viewport_layout.md) control panel.
