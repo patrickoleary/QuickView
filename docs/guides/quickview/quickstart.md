@@ -1,6 +1,4 @@
-# Resources
-
-## Quickstart
+# Quickstart
 
 - Install and launch the app [on a personal computer](../install_and_launch) 
   or use it [at NERSC](/nersc/index).
@@ -20,8 +18,6 @@
   - [Comprehensive variable-selection capability](./variable_selection)
   - [Viewport layout options](./viewport_layout)
   - [Customization of individual plots](./individual_views)
-
-## Miscellaneous 
 
 - Visit the GitHub [repository](https://github.com/Kitware/QuickView)
 - Report bugs or request features using [GitHub Issues](https://github.com/Kitware/QuickView/issues)

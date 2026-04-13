@@ -59,13 +59,13 @@ export default defineConfig({
           text: "QuickView",
           items: [
             { text: "What is QuickView?",link: "/guides/quickview/index" },
+            { text: "Quickstart",        link: "/guides/quickview/quickstart" },
             { text: "UI Overview",       link: "/guides/quickview/ui_overview" },
             { text: "Keyboard Shortcuts",link: "/guides/quickview/shortcuts" },
             { text: "File Selection",    link: "/guides/quickview/file_selection" },
             { text: "Variable Selection",link: "/guides/quickview/variable_selection" },
             { text: "Viewport Layout",   link: "/guides/quickview/viewport_layout" },
             { text: "Individual Views",  link: "/guides/quickview/individual_views" },
-            { text: "Resources",         link: "/guides/quickview/resources" },
           ],
         },
         {
