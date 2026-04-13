@@ -15,7 +15,7 @@ analysis and visualization capabilities without requiring a steep learning curve
 
 ## Useful links
 
-See [Resources](./resources).
+See [Quickstart](./quickstart).
 
 ## Why QuickView?
 
