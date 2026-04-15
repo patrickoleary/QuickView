@@ -164,7 +164,7 @@ class EAMApp(TrameApp):
                 ProjectionMollweide="projection = ['Mollweide']",
                 ToggleViewLock="lock_views = !lock_views",
                 FileOpen=(self.toggle_toolbar, "['load-data']"),
-                SaveState="trigger('download_state')",
+                SaveState="trigger('download_state_dialog')",
                 UploadState="utils.get('document').querySelector('#fileUpload').click()",
                 ToggleHelp="compact_drawer = !compact_drawer",
             ) as mt:

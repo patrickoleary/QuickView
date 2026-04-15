@@ -280,7 +280,7 @@ class StateImportExport(v3.VTooltip):
                                     "is_tauri ? 'Save state file' : 'Download state file'",
                                 ),
                                 prepend_icon="mdi-file-download-outline",
-                                click=self.download_state,
+                                click=self.download_state_dialog,
                                 disabled=("!variables_loaded",),
                             )
                             v3.VListItem(
@@ -300,8 +300,8 @@ class StateImportExport(v3.VTooltip):
                         style="position: absolute;left:-1000px;width:1px;",
                     )
 
-    @trigger("download_state")
-    def download_state(self):
+    @trigger("download_state_dialog")
+    def download_state_dialog(self):
         if not self.state.is_tauri:
             self.state.show_export_dialog = True
             return
