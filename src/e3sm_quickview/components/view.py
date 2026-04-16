@@ -125,9 +125,9 @@ def create_bottom_bar(config, update_color_preset):
                     with v3.VCardItem(classes="py-0 px-2"):
                         with html.Div(classes="d-flex align-center"):
                             v3.VIconBtn(
-                                raw_attrs=[
-                                    '''v-tooltip:bottom="config.color_blind ? 'Toggle for all color presets' : 'Toggle for colorblind safe color presets'"'''
-                                ],
+                                v_tooltip_bottom=(
+                                    "config.color_blind ? 'Toggle for all color presets' : 'Toggle for colorblind safe color presets'",
+                                ),
                                 icon=(
                                     "config.color_blind ? 'mdi-shield-check-outline' : 'mdi-palette'",
                                 ),
@@ -139,9 +139,9 @@ def create_bottom_bar(config, update_color_preset):
                                 variant="text",
                             )
                             v3.VIconBtn(
-                                raw_attrs=[
-                                    '''v-tooltip:bottom="config.invert ? 'Toggle to normal preset' : 'Toggle to inverted preset'"'''
-                                ],
+                                v_tooltip_bottom=(
+                                    "config.invert ? 'Toggle to normal preset' : 'Toggle to inverted preset'",
+                                ),
                                 icon=(
                                     "config.invert ? 'mdi-invert-colors' : 'mdi-invert-colors-off'",
                                 ),
@@ -153,9 +153,9 @@ def create_bottom_bar(config, update_color_preset):
                                 variant="text",
                             )
                             v3.VIconBtn(
-                                raw_attrs=[
-                                    '''v-tooltip:bottom="config.use_log_scale ? 'Toggle to linear scale' : 'Toggle to log scale'"'''
-                                ],
+                                v_tooltip_bottom=(
+                                    "config.use_log_scale ? 'Toggle to linear scale' : 'Toggle to log scale'"
+                                ),
                                 icon=(
                                     "config.use_log_scale ? 'mdi-math-log' : 'mdi-stairs'",
                                 ),
@@ -167,9 +167,9 @@ def create_bottom_bar(config, update_color_preset):
                                 variant="text",
                             )
                             v3.VIconBtn(
-                                raw_attrs=[
-                                    '''v-tooltip:bottom="config.override_range ? 'Toggle to use data range' : 'Toggle to use custom range'"'''
-                                ],
+                                v_tooltip_bottom=(
+                                    "config.override_range ? 'Toggle to use data range' : 'Toggle to use custom range'",
+                                ),
                                 icon=(
                                     "config.override_range ? 'mdi-arrow-expand-horizontal' : 'mdi-pencil'",
                                 ),
