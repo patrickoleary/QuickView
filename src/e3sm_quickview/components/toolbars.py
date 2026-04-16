@@ -403,7 +403,7 @@ class DataSelection(html.Div):
                                     ),
                                     key=("track + '_' + t_idx",),
                                     min=[0],
-                                    max=[("t_values ? t_values.length - 1 : 0")],
+                                    max=["t_values ? t_values.length - 1 : 0"],
                                     step=[1],
                                     hide_details=True,
                                     density="comfortable",
