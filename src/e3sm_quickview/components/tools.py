@@ -68,7 +68,7 @@ class ActionButton(v3.VTooltip):
                                 keys=keybinding,
                                 variant="contained",
                                 inline=True,
-                                classes="mt-n2",
+                                classes="mt-n2 border-md border-grey-darken-1 border-opacity-100 rounded-lg",
                             )
 
 
@@ -111,6 +111,7 @@ class ToggleButton(v3.VTooltip):
                     prepend_icon=icon,
                     value=value,
                     title=(f"{compact} ? null : '{title}'",),
+                    active_class="border-primary border-md border-primary border-opacity-100",
                     **add_on,
                 ):
                     if keybinding:
@@ -119,7 +120,7 @@ class ToggleButton(v3.VTooltip):
                                 keys=keybinding,
                                 variant="contained",
                                 inline=True,
-                                classes="mt-n2",
+                                classes="mt-n2 border-md border-grey-darken-1 border-opacity-100 rounded-lg",
                             )
 
 

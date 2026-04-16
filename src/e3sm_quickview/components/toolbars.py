@@ -191,11 +191,18 @@ class Cropping(v3.VToolbar):
         super().__init__(**to_kwargs("adjust-databounds"))
 
         with self:
-            v3.VIcon(
-                "mdi-web",
-                classes="pl-6 opacity-50",
-                click="crop_slider_edit = !crop_slider_edit",
-            )
+            with v3.VTooltip(
+                text=(
+                    "crop_slider_edit ? 'Toggle to text edit' : 'Toggle to slider edit'",
+                ),
+            ):
+                with v3.Template(v_slot_activator="{ props }"):
+                    v3.VIcon(
+                        "mdi-web",
+                        v_bind="props",
+                        classes="pl-6 opacity-50",
+                        click="crop_slider_edit = !crop_slider_edit",
+                    )
             with v3.VRow(
                 classes="ma-0 px-2 align-center", v_if=("crop_slider_edit", True)
             ):
@@ -318,9 +325,24 @@ class DataSelection(html.Div):
         super().__init__(**style)
 
         with self:
-            v3.VIcon("mdi-tune-variant", classes="ml-3 mr-2 opacity-50")
+            with v3.VTooltip(
+                text=(
+                    "slice_slider_edit ? 'Toggle to text edit' : 'Toggle to slider edit'",
+                ),
+            ):
+                with v3.Template(v_slot_activator="{ props }"):
+                    v3.VIcon(
+                        "mdi-tune-variant",
+                        v_bind="props",
+                        classes="ml-3 mr-2 opacity-50",
+                        click="slice_slider_edit = !slice_slider_edit",
+                    )
 
-            with v3.VRow(classes="ma-0 pr-2 flex-wrap flex-grow-1", dense=True):
+            with v3.VRow(
+                classes="ma-0 pr-2 flex-wrap flex-grow-1",
+                dense=True,
+                v_if=("slice_slider_edit", True),
+            ):
                 # Debug: Show animation_tracks array
                 # html.Div(
                 #     "Animation Tracks: {{ JSON.stringify(available_animation_tracks) }}",
@@ -344,7 +366,7 @@ class DataSelection(html.Div):
                                 )
                                 v3.VSpacer()
                                 v3.VLabel(
-                                    "{{ parseFloat(t_values[t_idx]).toFixed(2) }} hPa (k={{ t_idx }})",
+                                    "{{ t_values ? parseFloat(t_values[t_idx]).toFixed(2) : '' }} hPa (k={{ t_idx }})",
                                     classes="text-body-2",
                                 )
                             v3.VSlider(
@@ -360,10 +382,49 @@ class DataSelection(html.Div):
                                 density="compact",
                                 hide_details=True,
                             )
+            with v3.VRow(
+                classes="ma-0 pl-6 pr-2 align-center ga-4",
+                v_if="!slice_slider_edit",
+            ):
+                with v3.VCol(
+                    v_for="(track, idx) in available_animation_tracks",
+                    key="idx",
+                ):
+                    with client.Getter(name=("track",), value_name="t_values"):
+                        with client.Getter(
+                            name=("track + '_idx'",), value_name="t_idx"
+                        ):
+                            with v3.VRow(classes="ma-0 align-center", dense=True):
+                                v3.VNumberInput(
+                                    model_value=("Number(t_idx)",),
+                                    update_modelValue=(
+                                        self.on_update_slider,
+                                        "[track, Number($event)]",
+                                    ),
+                                    key=("track + '_' + t_idx",),
+                                    min=[0],
+                                    max=["t_values ? t_values.length - 1 : 0"],
+                                    step=[1],
+                                    hide_details=True,
+                                    density="comfortable",
+                                    variant="plain",
+                                    flat=True,
+                                    control_variant="stacked",
+                                    style="max-width: 100px;",
+                                    reverse=True,
+                                )
+                                v3.VLabel(
+                                    "{{track}}",
+                                    classes="text-subtitle-2 ml-2 mt-1",
+                                )
+                                v3.VLabel(
+                                    "{{ t_values ? parseFloat(t_values[Number(t_idx)]).toFixed(2) : '' }} hPa",
+                                    classes="text-body-2 text-no-wrap ml-2 mt-1",
+                                )
 
     def on_update_slider(self, dimension, index, *_, **__):
         with self.state:
-            self.state[f"{dimension}_idx"] = index
+            self.state[f"{dimension}_idx"] = int(index)
 
 
 class Animation(v3.VToolbar):
