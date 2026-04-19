@@ -61,7 +61,7 @@ conda install conda-forge::e3sm_compareview
 ## Updating conda installation
 
 To update the tools to newer versions, first find the most recent version
-numbers using the links in the summary table near the top of this page,
+numbers using the links in the summary table above,
 then use the following commands, replacing the version numbers by what you need:
 
 ```sh

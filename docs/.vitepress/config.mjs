@@ -76,10 +76,11 @@ export default defineConfig({
           ],
         },
         {
-          text: "SiteView",
-        },
-        {
-          text: "CondiDiagViewer",
+          text: "Tools Under Development",
+          items: [
+            { text: "Site View" },
+            { text: "CondiDiagViewer", },
+          ],
         },
         {
           text: "For App Developers",

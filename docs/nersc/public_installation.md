@@ -19,7 +19,6 @@ respectively.
 
 For installing the tools at a location of the user's choice,
 an example is provided on [this page](./users_installation.md).
-
 The remainder of this page documents how the developers' installation was done.
 
 

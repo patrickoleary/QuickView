@@ -35,13 +35,14 @@ Once connected,
 :::danger FIXME - image
 :::
 
-- **Need to talk about two-sim or multi-sim comparisons** 
+- Choosing between two-simulation or multi-simulation comparisons
 
 :::danger FIXME - image
 :::
 
 - Finally, select the variables you want to load and inspect.
-  <!-- ![](./quickview/quickview-variable-selection.png) -->
+  The variable search and selection functionalities are the same
+  in QuickCompare and QuickView.
 
 ## Shuttin down the server
 

@@ -13,16 +13,14 @@ QuickView's Python- and
 provides intuitive access to [ParaView](https://www.paraview.org/)'s powerful
 analysis and visualization capabilities without requiring a steep learning curve.
 
-## Useful links
-
-See [Quickstart](./quickstart).
+## Useful links: see [Quickstart](./quickstart).
 
 ## Why QuickView?
 
 While comprehensive visualization tools like
 [ParaView](https://www.paraview.org/) and
 [VisIt](https://visit-dav.github.io/visit-website/index.html) are widely used in
-the scientific community, they often present a steep learning curve—requiring
+the scientific community, they often have very steep learning curves—requiring
 users who are not experts in visual analytics to navigate unfamiliar interfaces,
 functions, and jargon. Moreover, these general-purpose tools may lack
 out-of-the-box support for key requirements in atmospheric sciences, such as
@@ -44,9 +42,9 @@ multivariate visualization and is currently focused on E3SM.
 
 ## Key Features
 
-- Intuitive, minimalist interface tailored for atmospheric modeling.
-- Multi-variable visualization with drag-and-drop layout.
-- Persistent sessions - pick up where you left off.
+- Intuitive, minimalist interface tailored for Earth system modeling.
+- Multi-variable visualization.
+- Persistent sessions—pick up where you left off.
 - Support for EAM v2, v3, and upcoming v4 output formats
   as well as the E3SM land model ELM's input and output files
   on ne*pg2 grids.
@@ -73,4 +71,6 @@ program.
 
 ##  
 
-![Kitware](/logos/Kitware_logo_with_text.png){ width="15%", align=center} ![PNNL](/logos/PNNL_logo_with_text_abbr.png){ width="15%", align=center } ![SciDAC](/logos/SciDAC-logo.png){ width="25%", align=center }
+![SciDAC](/logos/SciDAC-logo.png){ width="25%", align=left }
+![Kitware](/logos/Kitware_logo_with_text.png){ width="15%", align=left}
+![PNNL](/logos/PNNL_logo_with_text_abbr.png){ width="15%", align=left }
