@@ -1,6 +1,6 @@
 # The QuickView tool family at NERSC
 
-![NERSC logo](/logos/nersc.png)
+![NERSC logo](/logos/nersc.png){ width="40%", align=right }
 Our tools have been installed at NERSC,
 the [National Energy Research Scientific Computing Center](https://www.nersc.gov/),
 and are continually updated there.

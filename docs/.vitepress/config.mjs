@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: "/QuickView",
-  title: "The QuickView Family",
+  title: "QuickView Family",
   description:
     "How to use the QuickView family of tools to look at your simulation data",
   head: [["link", { rel: "stylesheet", href: "/custom.css" }]],
@@ -71,9 +71,15 @@ export default defineConfig({
         {
           text: "QuickCompare",
           items: [
-            { text: "Resources", link: "/guides/quickcompare/resources" },
-            { text: "Getting started", link: "/guides/quickcompare" },
+            { text: "What is QuickCompare?",link: "/guides/quickcompare/index" },
+            { text: "Quickstart",           link: "/guides/quickcompare/quickstart" },
           ],
+        },
+        {
+          text: "SiteView",
+        },
+        {
+          text: "CondiDiagViewer",
         },
         {
           text: "For App Developers",

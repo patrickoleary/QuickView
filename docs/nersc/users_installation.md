@@ -1,4 +1,4 @@
-# Installing your own copy of the QuickView tool family at NERSC 
+# Installing User's Copy of the QuickView Family at NERSC 
 
 The steps described below follow the same logic as documented on
 [this page](./public_installation.md),
@@ -29,11 +29,16 @@ conda create --prefix ${pathRoot}/conda-envs/${envName} python=3.13
 
 ## Activate the environment and install our tools
 
-Install QuickView
+Activate environment:
 ```sh
 conda activate ${pathRoot}/conda-envs/${envName}
+```
+
+Install QuickView:
+```sh
 conda install conda-forge::e3sm-quickview
 ```
+
 In the same environment, also install QuickCompare:
 ```sh
 conda install conda-forge::e3sm_compareview
@@ -115,7 +120,8 @@ In order to update the tools to the newest available versions on conda-forge
 you will need to 
 - identify the versions you want to update to (see links in the summary table
   on [this page](/guides/install_and_launch.md), and then
-- do something like the following after adapting the syntax to your shell.
+- do something like the following after adapting the syntax to your shell and
+  specifying the desired version numbers.
 
 ```sh
 pathRoot="/global/cfs/projectdirs/m4359/tools/"

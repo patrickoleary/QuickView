@@ -25,7 +25,7 @@ The remainder of this page documents how the developers' installation was done.
 
 ## Setting default permissions
 
-To allow any developer in project m4359 to install, uninstall, or update
+To allow any developer in project m4359 to install, uninstall, or update,
 and to allow all NERSC users to use the installtion, we set the default permission using
 ```
 umask 002
@@ -54,7 +54,7 @@ conda install conda-forge::e3sm_compareview
 Different members of the QuickView tool family are versioned separately.
 The current (newest) version numbers are summarized in the table at the beginning
 of [this page](/guides/install_and_launch).
-The following commands were used to update QuickView to version 2.1.1
+The following commands were used to update QuickView to version 2.1.2
 and QuickCompare to version 1.3.5.
 
 ```sh
