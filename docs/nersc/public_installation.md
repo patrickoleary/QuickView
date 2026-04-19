@@ -53,7 +53,7 @@ conda install conda-forge::e3sm_compareview
 
 Different members of the QuickView tool family are versioned separately.
 The current (newest) version numbers are summarized in the table at the beginning
-of [this page](../guides/install_and_lauch).
+of [this page](/guides/install_and_launch).
 The following commands were used to update QuickView to version 2.1.1
 and QuickCompare to version 1.3.5.
 
