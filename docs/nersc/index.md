@@ -1,6 +1,7 @@
+![NERSC logo](/logos/nersc.png){ width="40%", align=left }
+
 # The QuickView tool family at NERSC
 
-![NERSC logo](/logos/nersc.png){ width="40%", align=right }
 Our tools have been installed at NERSC,
 the [National Energy Research Scientific Computing Center](https://www.nersc.gov/),
 and are continually updated there.
@@ -17,7 +18,7 @@ on separate pages:
 
 ## Quickstart for NERSC users familiar with JupyterHub
 
-- Login to [JupytherHub](https://jupyter.nersc.gov/hub/login) and start a terminal window.
+- Login to [JupytherHub](https://jupyter.nersc.gov/hub/login) and start a terminal window (shell).
 
 - *Optional but recommended*: in the terminal, use the `cd` command to go to the directory
   where your data files are located (or a directory closer to the data files than your home directory).
@@ -34,17 +35,15 @@ on separate pages:
 ```
 
 - After a few seconds, the terminal window will provide a URL.
-  A click on the URL will bring up the graphical UI in a brower window.
+  A click on the URL will bring up the graphical UI in a separate brower window or tab.
 
 ::: tip Tip 1: Choosing a server for your analysis session.
 JupyterHub's control panel provides NERSC users access to serveral different types of resources (nodes),
 including, e.g., login node, shared GPU node, exclusive nodes, as explained in
 [NERSC's documentation](https://docs.nersc.gov/services/jupyter/reference/).
-
 Since login nodes are shared by users and hence can get very busy or run into memory constraints,
 and since our tools can make use of GPUs for interactive rendering,
 **we recommend** that users choose a **shared GPU node**.
-
 Keep in mind, though, that time spent on shared GPU nodes or exclusive nodes
 will be charged to your project's allocation.
 :::

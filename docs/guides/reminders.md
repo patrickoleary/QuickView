@@ -21,25 +21,25 @@ that the grid described by the connecitivity file does not match the grid in the
 simulation data file. Please double check when you run into a loading error.
 :::
 
-::: warning The `Load X Variables` Button
+::: warning The `Load ... Variables` Button
 Most buttons, sliders, and selection boxes in the UI apply their effects
 immediately upon user interaction. The only exception is variable
 selection: After variables are chosen for the first time following file load
-or after the selection is changed, the user **must** click the `Load X Variables`
+or after the selection is changed, the user **must** click the `Load ... Variables`
 button at the top of the "Select Variables" control panel for the new selection to take effect.
 :::
 
 ::: info Show/hide control panels
 Most of the buttons in the vertical toolbar
 are toggles for showing or hiding the corresponding control panels.
-These toggles have 1-key shortcuts--see the summary [here](/guides/quickview/shortcuts.md).
+These toggles have 1-key shortcuts, as summarized [here](/guides/quickview/shortcuts.md).
 :::
 
 ::: tip Viewport Layout
 QuickView is designed to present multiple variables simultaneously
-and in an informative way. Users can rearrange the individual views
+in an informative way. Users can rearrange the individual views
 (i.e., map plots) in the viewport and resize them.
-Further details can be found on [this page](/guides/quickview/viewport_layout.md)
+Details can be found on [this page](/guides/quickview/viewport_layout.md)
 
 Furthermore, if a user saves a state file after these
 adjustments, they can later resume their analysis with the customized
