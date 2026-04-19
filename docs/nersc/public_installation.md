@@ -1,74 +1,92 @@
-# NERSC setup explained
+# Developers' Installation at NERSC
 
 The QuickView family of tools are Python packages.
-We have installed them and have been frequently updating them under
-NERSC project m4359 associated with the SciDAC project that
-has been funding our development.
+They have been installed and are frequently updated at NERSC under project m4359.
 
-We are working on making the installation publicly accessible by
-all NERSC users. In the meantime, NERSC users can use the following
-commands to access QuickView and QuickCompare, instead.
-
-```
-/global/cfs/projectdirs/m4359/tools/quickview2
-```
+NERSC users who would like to **use** the developers' installation
+can start a terminal (shell) window through NERSC's JupyterHub
+(see step-by-step guide [here](./jupyter_at_nersc))
+and then use the following commands to start QuickView and QuickCompare,
+respectively.
 
 ```
-/global/cfs/projectdirs/m4359/tools/quickcompare
+/global/common/software/m4359/quickview2
 ```
 
-If you want to have your own installation at a location of your choices,
-please take a look at [this page](./users_installation.md).
+```
+/global/common/software/m4359/quickcompare
+```
 
-::: danger The rest of this page will be updated after we consolidate
-QuickView and QuickCompare into one environment.
-:::
+For installing the tools at a location of the user's choice,
+an example is provided on [this page](./users_installation.md).
 
-## Create custom conda environments
+The remainder of this page documents how the developers' installation was done.
 
-Create a directory for all the conda environments we aim to enable for our users.
+
+## Setting default permissions
+
+To allow any developer in project m4359 to install, uninstall, or update
+and to allow all NERSC users to use the installtion, we set the default permission using
+```
+umask 002
+```
+
+## One-time action: creating custom conda environment
+
 
 ```sh
 mkdir -p /global/common/software/m4359/conda-envs
+
+module load conda
+conda create --prefix /global/common/software/m4359/conda-envs/quickview-family python=3.13
 ```
 
-Then for each project we will create an environment inside that directory.
+## First installation
+
+```
+conda activate /global/common/software/m4359/conda-envs/quickview-family
+conda install conda-forge::e3sm-quickview 
+conda install conda-forge::e3sm_compareview 
+```
+
+## Updating to newer versions 
+
+Different members of the QuickView tool family are versioned separately.
+The current (newest) version numbers are summarized in the table at the beginning
+of [this page](../guides/install_and_lauch).
+The following commands were used to update QuickView to version 2.1.1
+and QuickCompare to version 1.3.5.
 
 ```sh
 module load conda
-conda create --prefix /global/common/software/m4359/conda-envs/e3sm-quickview python=3.13
+conda activate /global/common/software/m4359/conda-envs/quickview-family
+
+conda install "e3sm-quickview>=2.1.2"
+conda install "e3sm_compareview>=1.3.5"
 ```
 
-After that you can activate such environment and install the application like QuickView
+## Shortcuts to the executables
 
-```sh
-conda activate /global/common/software/m4359/conda-envs/e3sm-quickview
-conda install e3sm-quickview
-```
+The commands listed at the beginning of this page are in fact scripts
+with the following contents. These scripts were created to allow
+the users to start any tool in the QuickView family using a single command.
 
-## Executable Shortcut
-
-Inside `/global/common/software/m4359/` you can create shell script that will provide a shortcut for starting each application.
-
-For example, we've created `/global/common/software/m4359/quickview` with the following content
+`/global/common/software/m4359/quickview2` is a script with the following contents
 
 ```sh
 #!/usr/bin/env bash
 
 module load conda
-conda activate /global/common/software/m4359/conda-envs/e3sm-quickview
+conda activate /global/common/software/m4359/conda-envs/quickview-family
 quickview -p 0
 ```
 
-And to make that file executable, you can run `chmod +x /global/common/software/m4359/quickview` to streamline its usage.
-
-## Updating an application
-
-In order to update a given application you will need to find the version you want to install and then run something like:
+Similarly, `/global/common/software/m4359/quickcompare` is a script with the following contents
 
 ```sh
-module load conda
-conda activate /global/common/software/m4359/conda-envs/e3sm-quickview
+#!/usr/bin/env bash
 
-conda install "e3sm-quickview>=1.3.3" # <== fix version
+module load conda
+conda activate /global/common/software/m4359/conda-envs/quickview-family
+quickcompare -p 0
 ```
