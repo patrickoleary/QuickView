@@ -13,7 +13,7 @@ Users who are interested in the **installation process** can find relevant infor
 on separate pages:
 - How our public installation was done: see [this page](./public_installation).
 - How to install your own copy at NERSC: see [this example](./users_installation.md).
-- How to install the tools on a laptop or desktop computer: see [this page](/guides/install_and_launch).
+- How to install the tools on a laptop or desktop computer: see [this page](../guides/install_and_launch.md).
 
 ## Quickstart for NERSC users familiar with JupyterHub
 
