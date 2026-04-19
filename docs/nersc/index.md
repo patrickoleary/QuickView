@@ -1,5 +1,6 @@
 # The QuickView tool family at NERSC
 
+![NERSC logo](/logos/nersc.png)
 Our tools have been installed at NERSC,
 the [National Energy Research Scientific Computing Center](https://www.nersc.gov/),
 and are continually updated there.
@@ -24,12 +25,12 @@ on separate pages:
 
 - **QuickView version 2** can be launched using the following command:
 ```
-/global/cfs/projectdirs/m4359/tools/quickview2
+/global/common/software/m4359/quickview2
 ```  
 
 - **QuickCompare** can be launched using the following command:
 ```
-/global/cfs/projectdirs/m4359/tools/quickcompare
+/global/common/software/m4359/quickcompare
 ```
 
 - After a few seconds, the terminal window will provide a URL.
@@ -81,7 +82,7 @@ Also see below for a recap of the steps (clicks).
 
 
 
-## For NERSC users who have not used JupyterHub
+## Tips for NERSC users who have not used JupyterHub
 
 Please see
 [this section of NERSC's documentation](https://docs.nersc.gov/beginner-guide/#keypad-entry-log-in-using-jupyter),
@@ -90,7 +91,7 @@ to learn about the service.
 
 Alternatively, follow our step-by-step description [here](./jupyter_at_nersc.md)
 
-## If you do not yet have any user account at  NERSC
+## Information for users who do not yet have an account at  NERSC
 
 Information on [this page](https://docs.nersc.gov/accounts/#obtaining-an-account)
 can help you get started.
