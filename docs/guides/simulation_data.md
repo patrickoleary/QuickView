@@ -8,16 +8,26 @@ generated using EAMv2, v3, and intermediate versions towards v4
 
 ## The horizontal dimension 
 
-Starting from version 2, the ParaView Reader used in the tools
+Starting from QuickView version 2 and QuickCompare version 1,
+the ParaView Reader used in the tool family
 has been generalized to handle all NetCDF
 variables on `ne*pg2` cubed-sphere meshes regardless of what name is used
 for the horizontal dimension (e.g., `ncol` in EAM files or
-`lndgrid` in ELM files). 
+`lndgrid` in ELM files).
 
-Furthermore, QuickView2 has been generalized to visualize all variables
-in a NetCDF file that have a horizontal dimension matching the connecitivity file,
-regardless of how many additional dimensions the variables have.
+## Multi-dimensional variables
 
+Starting from QuickView version 2 and QuickCompare version 1,
+the tool family has been generalized to visualize any variable
+in a NetCDF file that has a horizontal dimension matching the connecitivity file,
+regardless of how many additional dimensions the variables has.
+Here are some examples of variable dimensions (array shapes) from EAM output files:
+
+- `(ncol)`
+- `(time,lev,ncol)`
+- `(time,cosp_prs,cosp_tau,ncol)`
+- `(time,ncol,swband,lev)`
+- `(time,ncol,num_phys_constituents)`
 
 ## Global averages
 

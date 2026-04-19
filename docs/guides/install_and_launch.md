@@ -11,7 +11,7 @@ and bundles can be found.
 | QuickView    | [Download page](https://github.com/Kitware/QuickView/releases) | e3sm-quickview   | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm-quickview.svg)](https://anaconda.org/conda-forge/e3sm-quickview)     | [![PyPI](https://img.shields.io/pypi/v/e3sm-quickview?label=pypi%20package)](https://pypi.org/project/e3sm-quickview/)      |
 | QuickCompare | [Download page](https://github.com/Kitware/E3SMQuickCompare/releases) | e3sm_compareview | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/e3sm_compareview.svg)](https://anaconda.org/conda-forge/e3sm_compareview) | [![PyPI](https://img.shields.io/pypi/v/e3sm-compareview?label=pypi%20package)](https://pypi.org/project/e3sm-compareview/)  |
 
-::: warning Note: The contents below were written with desktop and laptop computers in mind.
+:::tip Note: The contents below were written with desktop and laptop computers in mind.
 
 Users who would like to **use** our tools installed at NERSC can find information in
 [this quickstart guide](/nersc/index.md).
@@ -29,7 +29,7 @@ The creation of such a bundle is done by triggering a release using GitHub Actio
 Hence, the bundles are available from the corresponding GitHub repo's Releases page.
 The links are given in the summary table above.
 
-:::danger ATTENTION Mac Users!!
+:::warning ATTENTION Mac Users!!
 The binaries compiled for Macs have not been signed using an Apple Developer ID.
 Hence, after downloading a binary for Mac, the user needs to use the following
 command to remove quarantine on the binary.

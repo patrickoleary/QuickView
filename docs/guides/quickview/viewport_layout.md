@@ -12,13 +12,13 @@ configuring the viewport in version 2.
 ## View size
 
 QuickView version 2 supports showing 1, 2, 3, 4, or 6 columns of views (map plots)
-in the view port. The number of columns can be changed by pressing the desired number
-on the keyboard or using the Viewport Layout control panel, via the "Size" menu
+in the view port. The number of columns can be changed by pressing the corresponding
+number keys on the keyboard or using the Viewport Layout control panel, via the "Size" menu
 on the right of that panel, as shown in the screenshot below.
 
 The viewport is evenly divided into the selected number of columns.
-When the user adjusts the size of their browser window, the
-sizes of the map plots will be automatically adjusted to fit into the adjusted browser window.
+When the user changes the width of their browser window,
+the individual views (map plots) will be automatically readjusted.
 
 ![Viewport column size](./screenshots/viewport_with_column_size_menu.png){ width="100%", align=center }
 
