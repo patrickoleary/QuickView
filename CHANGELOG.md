@@ -2,6 +2,48 @@
 
 <!-- version list -->
 
+## v2.2.0 (2026-04-20)
+
+### Bug Fixes
+
+- Add tooltips and improve toolbar UI
+  ([`323acd9`](https://github.com/Kitware/QuickView/commit/323acd911c5c0a381078752332264b10c7864393))
+
+- Correct typo amimation_step_max to animation_step_max
+  ([`701f2b9`](https://github.com/Kitware/QuickView/commit/701f2b9bca93a164c42f2725fe6f74e0a58c658a))
+
+- Correct VNumberInput max expression syntax
+  ([`15819a7`](https://github.com/Kitware/QuickView/commit/15819a76d8c8276c85463c19f5c8b9ce32d4f6b5))
+
+- Prevent animation toolbar crash when no data is loaded
+  ([`a91b9e2`](https://github.com/Kitware/QuickView/commit/a91b9e2e6472eacec9ebf878193f438b9fa4c3af))
+
+- Replace raw_attrs tooltips with v_tooltip_bottom and fix VNumberInput min/max syntax
+  ([`25dd5b7`](https://github.com/Kitware/QuickView/commit/25dd5b7f681fd716aa00fb56628267dcd69de827))
+
+- **fieldSelector**: Improve query handling
+  ([`b044ac6`](https://github.com/Kitware/QuickView/commit/b044ac6a408bbf5d61b2ea00883a19145bf3e307))
+
+- **state**: Fix download state button
+  ([`abb7daf`](https://github.com/Kitware/QuickView/commit/abb7daf0fb6cb096d52f16536e51e41d3545ea72))
+
+### Features
+
+- Support dimensions without coordinate variables
+  ([`491006b`](https://github.com/Kitware/QuickView/commit/491006b72b1ccff796ec0e76b8ffb2c4cd77f009))
+
+### Performance Improvements
+
+- Avoid unnecessary array copies in reader
+  ([`829ddd4`](https://github.com/Kitware/QuickView/commit/829ddd4766490536938f6aa66fc33f5b79000cf9))
+
+- Skip fill value scan and copy for variables without fill values
+  ([`6baca76`](https://github.com/Kitware/QuickView/commit/6baca76077c9aebc31eeabee95a27ada902492df))
+
+- Skip reloading variables unaffected by slice changes
+  ([`1cd54b9`](https://github.com/Kitware/QuickView/commit/1cd54b9723f5d0e9172bc43ff14ea772cafbe70d))
+
+
 ## v2.1.2 (2026-04-10)
 
 ### Bug Fixes
