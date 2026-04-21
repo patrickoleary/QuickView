@@ -180,20 +180,22 @@ class VariableView(TrameComponent):
         self._apply_linear_to_lut(invert)
         self.lut.RescaleTransferFunction(*self.config.color_range)
 
+        if n_colors is not None:
+            self.lut.NumberOfTableValues = n_colors
+
+        # Capture the colorbar image and tick marks from the LINEAR LUT
+        # before any log/symlog transform so the bar always looks linear.
+        self.config.lut_img = lut_to_img(self.lut)
+        self._compute_ticks()
+
         if log_scale == "log":
             self._apply_log_to_lut()
         elif log_scale == "symlog":
             self._apply_symlog_to_lut()
 
-        if n_colors is not None:
-            self.lut.NumberOfTableValues = n_colors
-
         # Read the actual LUT range (may differ from color_range for log scale)
         ctf = self.lut.GetClientSideObject()
         self.config.effective_color_range = ctf.GetRange()
-
-        self.config.lut_img = lut_to_img(self.lut)
-        self._compute_ticks()
 
         # Force mapper to pick up LUT changes
         self.mapper.SetLookupTable(ctf)
@@ -347,24 +349,25 @@ class VariableView(TrameComponent):
         )
 
     def _compute_ticks(self):
-        vmin, vmax = self.config.effective_color_range
+        vmin, vmax = self.config.color_range
         ticks = compute_color_ticks(vmin, vmax, scale=self.config.use_log_scale, n=5)
-        # Sample colors exactly as lut_to_img does: use RGBPoints range
-        rgb_points = self.lut.RGBPoints
-        if len(rgb_points) < 4:
+        if not ticks:
             self.config.color_ticks = []
             return
+        # The colorbar image is always rendered from the linear LUT, so
+        # sample contrast colors using the linear color_range.
         ctf = self.lut.GetClientSideObject()
         rgb = [0.0, 0.0, 0.0]
-        img_min = rgb_points[0]
-        img_max = rgb_points[-4]
-        img_range = img_max - img_min
-        if img_range == 0:
+        cr_min, cr_max = float(vmin), float(vmax)
+        cr_range = cr_max - cr_min
+        if cr_range == 0:
             self.config.color_ticks = []
             return
         for tick in ticks:
+            # tick position is already in the correct visual space (0-100%)
             t = tick["position"] / 100.0
-            value = img_min + t * img_range
+            # Map back to the linear data range to sample the color
+            value = cr_min + t * cr_range
             ctf.GetColor(value, rgb)
             tick["color"] = tick_contrast_color(rgb[0], rgb[1], rgb[2])
         self.config.color_ticks = ticks
