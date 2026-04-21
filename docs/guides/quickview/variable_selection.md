@@ -66,28 +66,29 @@ can be used to search for variables by their names or dimensions.
 
 ## Variable list display modes
 
-![Eye icon variations](./screenshots/eye_icon_variations.png){ width="30%", align=right }
 
 The eye icon to the left of the text input box (filter box)
 is a button for cycling through three display modes.
 The icon changes to reflect the current mode:
 
-- **Eye icon** – shows the **full list** of variables in the file.
-- **Eye with check mark** – shows only the variables currently **selected** via the checkboxes.
-- **Eye with cross** – shows the variables that are **not currently selected**.
+![Eye icon variations](./screenshots/eye_icon_variations.png){ width="30%", align=right }
+
+- Eye icon – shows the **full list** of variables in the file.
+- With check mark – shows only the variables currently **selected** via the checkboxes.
+- With a cross – shows the variables that are **not currently selected**.
 
 When a search or filter is active, these modes apply to the filtered list rather than
 the full set of variables in the simulation file.
 
 Also note that:
 
-![Filter box with close button](./screenshots/filter_box_close.png){ width="50%", align=right }
+![Filter box with close button](./screenshots/filter_box_close.png){ width="55%", align=right }
 
 - If the user wants to return to the full list, the filter can be cleared
   by first hovering the cursor over the filter box and then clicking the cross button
   at the right end.
 
-![Filter group](./screenshots/filter_group.png){ width="60%", align=right }
+![Filter group](./screenshots/filter_group.png){ width="55%", align=right }
 
 - Clicking a colored group tab sets the filter to that group.
   The three display modes then apply to the selection state within that group.

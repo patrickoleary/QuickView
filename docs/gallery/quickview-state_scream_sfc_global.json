@@ -1,0 +1,88 @@
+{
+  "origin": {
+    "user": "huiwan",
+    "created": "2026-04-21 13:34:09.600466",
+    "comment": "For documentation on slice selection"
+  },
+  "files": {
+    "simulation": "/global/cfs/cdirs/m4359/www/huiwan/vis/202601_ne1024/output.scream.Cess.hourly2DVars.INSTANT.nhours_x1.2019-09-02-03600.nc",
+    "connectivity": "/global/cfs/cdirs/m4359/www/huiwan/vis/202601_ne1024/connectivity_ne1024pg2_TEMPEST.scrip.nc"
+  },
+  "variables-selection": [
+    "LW_flux_up_at_model_top",
+    "precip_total_surf_mass_flux"
+  ],
+  "layout": {
+    "aspect-ratio": 2,
+    "grouped": false,
+    "active": "auto_layout",
+    "tools": [
+      "select-slice-time"
+    ],
+    "help": false
+  },
+  "data-selection": {
+    "time_idx": 50,
+    "midpoint_idx": 0,
+    "interface_idx": 0,
+    "crop_longitude": [
+      -180,
+      180
+    ],
+    "crop_latitude": [
+      -90,
+      90
+    ],
+    "projection": [
+      "Mollweide"
+    ]
+  },
+  "views": [
+    {
+      "type": [
+        "time",
+        "ncol"
+      ],
+      "name": "LW_flux_up_at_model_top",
+      "config": {
+        "preset": "BuGnYl",
+        "invert": true,
+        "use_log_scale": "linear",
+        "order": 1,
+        "size": 6,
+        "offset": 0,
+        "break_row": false,
+        "override_range": true,
+        "color_range": [
+          30.0,
+          300.0
+        ],
+        "color_value_min": "30",
+        "color_value_max": "300"
+      }
+    },
+    {
+      "type": [
+        "time",
+        "ncol"
+      ],
+      "name": "precip_total_surf_mass_flux",
+      "config": {
+        "preset": "erdc_iceFire_H",
+        "invert": false,
+        "use_log_scale": "log",
+        "order": 2,
+        "size": 6,
+        "offset": 0,
+        "break_row": false,
+        "override_range": true,
+        "color_range": [
+          1e-10,
+          1e-05
+        ],
+        "color_value_min": "1e-10",
+        "color_value_max": "1e-05"
+      }
+    }
+  ]
+}

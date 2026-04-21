@@ -29,7 +29,7 @@ export default defineConfig({
           text: "At NERSC",
           items: [
             { text: "Quickstart",          link: "/nersc/index" },
-            { text: "Public Installation", link: "/nersc/public_installation" },
+            { text: "Developers' Installation", link: "/nersc/developers_installation" },
             { text: "User's Installation", link: "/nersc/users_installation" },
           ],
         },
