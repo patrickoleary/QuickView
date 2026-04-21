@@ -66,7 +66,7 @@ can be used to search for variables by their names or dimensions.
 
 ## Variable display modes
 
-![Eye icon variations](./screenshots/eye_icon_variations.png){ width="30%", align=right }
+![Eye icon variations](./screenshots/eye_icon_variations.png){ width="25%", align=right }
 
 The eye icon to the left of the text input box (filter box)
 is a button for cycling through three display modes.
@@ -81,13 +81,13 @@ the full set of variables in the simulation file.
 
 Also note that:
 
-![Filter box with close button](./screenshots/filter_box_close.png){ width="20%", align=right }
+![Filter box with close button](./screenshots/filter_box_close.png){ width="40%", align=right }
 
 - If the user wants to return to the full list, the filter can be cleared
   by first hovering the cursor over the filter box and then clicking the cross button
   at the right end.
 
-![Filter group](./screenshots/filter_group.png){ width="30%", align=right }
+![Filter group](./screenshots/filter_group.png){ width="60%", align=right }
 
 - Clicking a colored group tab sets the filter to that group.
   The three display modes then apply to the selection state within that group.
