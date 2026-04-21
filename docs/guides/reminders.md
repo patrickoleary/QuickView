@@ -23,10 +23,12 @@ simulation data file. Please double check when you run into a loading error.
 
 ::: warning The `Load ... Variables` Button
 Most buttons, sliders, and selection boxes in the UI apply their effects
-immediately upon user interaction. The only exception is variable
+immediately upon user interaction. An important exception is variable
 selection: After variables are chosen for the first time following file load
 or after the selection is changed, the user **must** click the `Load ... Variables`
-button at the top of the "Select Variables" control panel for the new selection to take effect.
+button at the top of the "Select Variables" control panel for the new selection to take effect
+i.e., for the selected variables to be loaded into memory and displayed as
+global or regional maps.
 :::
 
 ::: info Show/hide control panels

@@ -71,6 +71,4 @@ program.
 
 ##  
 
-![SciDAC](/logos/SciDAC-logo.png){ width="25%", align=left }
-![Kitware](/logos/Kitware_logo_with_text.png){ width="15%", align=left}
-![PNNL](/logos/PNNL_logo_with_text_abbr.png){ width="15%", align=left }
+![SciDAC, Kitware, and PNNL](/logos/SciDAC-Kitware-PNNL.png){ width="75%", align=center }

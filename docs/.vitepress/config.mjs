@@ -64,6 +64,7 @@ export default defineConfig({
             { text: "Keyboard Shortcuts",link: "/guides/quickview/shortcuts" },
             { text: "File Selection",    link: "/guides/quickview/file_selection" },
             { text: "Variable Selection",link: "/guides/quickview/variable_selection" },
+            { text: "Slice Selection",   link: "/guides/quickview/slice_selection" },
             { text: "Viewport Layout",   link: "/guides/quickview/viewport_layout" },
             { text: "Individual Views",  link: "/guides/quickview/individual_views" },
           ],
@@ -76,9 +77,9 @@ export default defineConfig({
           ],
         },
         {
-          text: "Tools Under Development",
+          text: "Tools In Development",
           items: [
-            { text: "Site View" },
+            { text: "SiteView" },
             { text: "CondiDiagViewer", },
           ],
         },
