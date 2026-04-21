@@ -241,11 +241,54 @@ def tick_contrast_color(r, g, b):
     return "#000" if luminance > 0.45 else "#fff"
 
 
+def _position_on_bar(val, vmin, vmax, scale):
+    """Map a data value to a 0-100 percentage position on a linear colorbar.
+
+    For 'linear' scale, position is simply the linear interpolation.
+    For 'log' and 'symlog', the colorbar image is always rendered from the
+    linear LUT, so tick positions must be placed in the *transformed* space
+    to show where data values actually map.
+    """
+    data_range = vmax - vmin
+    if data_range == 0:
+        return 50.0
+
+    if scale == "log":
+        safe_vmin = max(vmin, 1e-15)
+        safe_vmax = max(vmax, 1e-14)
+        safe_val = max(val, safe_vmin)
+        log_min = np.log10(safe_vmin)
+        log_max = np.log10(safe_vmax)
+        log_range = log_max - log_min
+        if log_range == 0:
+            return 50.0
+        return (np.log10(safe_val) - log_min) / log_range * 100
+
+    if scale == "symlog":
+        linthresh = max(abs(vmin), abs(vmax)) * 1e-2
+        if linthresh == 0:
+            linthresh = 1.0
+
+        def _symlog(x):
+            return np.sign(x) * np.log10(np.abs(x) / linthresh + 1)
+
+        s_min = _symlog(vmin)
+        s_max = _symlog(vmax)
+        s_range = s_max - s_min
+        if s_range == 0:
+            return 50.0
+        return float((_symlog(val) - s_min) / s_range * 100)
+
+    # linear
+    return (val - vmin) / data_range * 100
+
+
 def compute_color_ticks(vmin, vmax, scale="linear", n=5, min_gap=7, edge_margin=3):
     """Compute tick marks for a colorbar.
 
-    Tick positions are always linear in data space since the colorbar image
-    is sampled linearly (lut_to_img uses uniform steps from vmin to vmax).
+    The colorbar image is always rendered from the linear LUT.  For log and
+    symlog scales, tick *positions* are placed in the transformed space so
+    they line up visually with the correct colours.
 
     Args:
         vmin: Minimum color range value
@@ -263,14 +306,13 @@ def compute_color_ticks(vmin, vmax, scale="linear", n=5, min_gap=7, edge_margin=
 
     raw_n = n if scale == "linear" else n * 2
     ticks = get_nice_ticks(vmin, vmax, raw_n, scale)
-    data_range = vmax - vmin
 
-    # Build candidate list with position in linear data space
+    # Build candidate list with position in transformed space
     candidates = []
     has_zero = False
     for t in ticks:
         val = float(t)
-        pos = (val - vmin) / data_range * 100
+        pos = _position_on_bar(val, vmin, vmax, scale)
         if edge_margin <= pos <= (100 - edge_margin):
             is_zero = np.isclose(val, 0, atol=1e-12)
             if is_zero:
@@ -285,7 +327,7 @@ def compute_color_ticks(vmin, vmax, scale="linear", n=5, min_gap=7, edge_margin=
 
     # Always include 0 when it falls within the range (for any scale)
     if not has_zero and scale != "log":
-        zero_pos = (0.0 - vmin) / data_range * 100
+        zero_pos = _position_on_bar(0.0, vmin, vmax, scale)
         if 0 <= zero_pos <= 100:
             tick = {"position": round(zero_pos, 2), "label": "0", "priority": True}
             # Insert in sorted order
