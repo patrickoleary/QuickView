@@ -3,7 +3,7 @@
 ![Four views](../../images/viewport_four_views.png){ width="50%", align=right }
 
 Once the user has selected variables using the [control panel](control_panel.md)
-and clicked the `LOAD VARIABLES` button in the [toolbar](toolbar.md), the app
+and clicked the `LOAD VARIABLES` button in the toolbar, the app
 will show each variable in its own little frame (which we refer to as a "view")
 inside the viewport. On the right is an example showing four views.
 
@@ -31,7 +31,7 @@ The screenshot on the right shows an example with rearranged views.
 
 Furthermore, if a user saves a state file after these adjustments, they can
 later continue their analysis with the customized layout by using the app in the
-resume mode, as described in on the description of the [toolbar](toolbar.md).
+resume mode, as described in on the description of the toolbar.
 
 ---
 
@@ -76,7 +76,7 @@ width="48%"}
 
 !!! tip "Tip: Colormap Groups"
 
-    The [toolbar](toolbar.md) at the top of the GUI includes icons for two colormap
+    The toolbar at the top of the GUI includes icons for two colormap
     groups: colorblind-friendly and other. Only the colormaps belonging to the
     selected group (or groups) are shown in the `Color Map` drop-down menu
     brought up by the gear button.

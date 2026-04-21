@@ -1,9 +1,3 @@
-!!! tip inline end "Tip"
-
-    The control panel can be collapsed or made visible using the hamburger icon
-    (three horizontal lines stacked on top of each other ) on the left end of the
-    [toolbar](toolbar.md).
-
 # Control Panel
 
 The control panel allows users to select variables from the simulation data file
@@ -17,13 +11,13 @@ below.
 !!! warning inline end "The `LOAD VARIABLE` button"
 
     After a selection of variables is made or changed, the `LOAD VARIABLES`
-    button in the [toolbar](toolbar.md) must be clicked in order for the
+    button in the toolbar must be clicked in order for the
     (new) selection to take effect.
     In contrast, all other buttons, sliders, and text boxes
     apply their effects immediately upon user interaction.
 
 After a simulation data file and a connectivity have been loaded and the status
-icon in the [toolbar](toolbar.md) has turned into a green circle with a check
+icon in the toolbar has turned into a green circle with a check
 mark, the variable selection submenu of each variable category, if expanded,
 will show a list of variables that have been recognized by the app, as shown in
 the screenshot above. Checking the boxes to the left of the variable names _and
@@ -43,7 +37,7 @@ Clicking the `CLEAR` button in the submenu will unselect all variables in the
 category.
 
 _Here, we emphasize again that any changes in variable selection needs to be
-followed by a click on the `LOAD VARIABLES` button in the [toolbar](toolbar.md)
+followed by a click on the `LOAD VARIABLES` button in the toolbar
 in order for these changes to take effect._
 
 ---
