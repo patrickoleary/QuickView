@@ -14,7 +14,7 @@ The following sections on this page contain instructions for users who would lik
 
 Users who are interested in the **installation process** can find relevant information
 on separate pages:
-- How our public installation was done: see [this page](./public_installation).
+- How our installation was done: see [this page](./developers_installation).
 - How to install your own copy at NERSC: see [this example](./users_installation.md).
 - How to install the tools on a laptop or desktop computer: see [this page](/guides/install_and_launch.md).
 
