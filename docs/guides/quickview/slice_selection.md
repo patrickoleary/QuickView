@@ -1,9 +1,5 @@
 # Selecting Data Slices to Inspect
 
-For any multi-dimensional variable in the simulation file,
-QuickView is designed to show one slice of 
-
-
 QuickView is designed to visualize variables in the simulation data file
 that have horizontal dimensions representing the globe.
 The variables are shown as global or regional maps.
@@ -15,7 +11,7 @@ the slice selection button in the vertical tool bar can be used
 to bring up the Slice Selection control panel, as shown in
 the first screenshot below, which contains sliders for the other dimensions.
 
-![](./screenshots/slice_selection_panel.png){ width="80%" }
+![](./screenshots/slice_selection_panel.png){ width="100%" }
 
 Alternatively, the animation control panel shown in the screenshot below
 can be used. This panel contains
@@ -23,4 +19,4 @@ can be used. This panel contains
 - a slider and a set of forward and backward buttons to step through the selected dimension, and
 - a play/pause toggle button to automatically step through the selected dimension.
 
-![](./screenshots/animation_control_panel_and_menu.png){ width="80%" }
+![](./screenshots/animation_control_panel_and_menu.png){ width="100%" }

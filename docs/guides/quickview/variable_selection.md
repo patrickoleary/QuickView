@@ -64,9 +64,9 @@ can be used to search for variables by their names or dimensions.
   Exact search is **case-sensitive**.
 
 
-## Variable display modes
+## Variable list display modes
 
-![Eye icon variations](./screenshots/eye_icon_variations.png){ width="25%", align=right }
+![Eye icon variations](./screenshots/eye_icon_variations.png){ width="30%", align=right }
 
 The eye icon to the left of the text input box (filter box)
 is a button for cycling through three display modes.
@@ -81,7 +81,7 @@ the full set of variables in the simulation file.
 
 Also note that:
 
-![Filter box with close button](./screenshots/filter_box_close.png){ width="40%", align=right }
+![Filter box with close button](./screenshots/filter_box_close.png){ width="50%", align=right }
 
 - If the user wants to return to the full list, the filter can be cleared
   by first hovering the cursor over the filter box and then clicking the cross button
@@ -94,7 +94,7 @@ Also note that:
   A second click clears the filter.
 
 
-::: warning Reminder: Do not forget the `Load ... variables` button
+::: info Reminder: Do not forget the `Load ... variables` button
 After making your selection or adjusting it, the `Load ... variables`
 buttone at the top of the control panel needs to be clicked
 in order for the selected variables to be loaded into memory and
