@@ -1,4 +1,6 @@
-![NERSC logo](/logos/nersc.png){ width="40%", align=left }
+![NERSC logo](/logos/nersc.png){width="40%"}
+
+
 
 # The QuickView tool family at NERSC
 

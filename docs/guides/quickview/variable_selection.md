@@ -11,7 +11,7 @@ files containing many (e.g., hundreds of) variables.
 Here, we use a simulation file with more than one thousand variables as an example
 to explain the search and selection capabilities.
 
-## Checkboxes for selecting and unselecting variables
+## Checkboxes
 
 The first screenshot here shows how the Variable Selection panel
 looks like after a simulation file has been loaded.
@@ -26,7 +26,7 @@ looks like after a simulation file has been loaded.
 QuickView sorts variables into different groups according to their dimensions
 and, subsequently, allows the users to select, unselect, and inspect groups.
 
-In the same example as discussed above, when all variables are selected
+In the same example as discussed above, when *all* variables are selected
 using the first checkbox in the Variable Selection control panel,
 we get the second screenshot shown here.
 - The **wide blue button** at the top of the contol panel indicates there is
@@ -46,31 +46,27 @@ there is a text input box with a magnifying glass icon.
 This box, also referred to as the filter box,
 can be used to search for variables by their names or dimensions.
 
-### Fuzzy search
+- **Fuzzy search**:
+  As soon as the user enters text into the filter box, QuickView displays
+  a filtered list of variables whose **names or dimension names** contain
+  the entered string.
+  Fuzzy search is case-**in**sensitive.
 
-As soon as the user enters text into the filter box, QuickView displays
-a filtered list of variables whose **names or dimension names** contain
-the entered string.
+- **Pattern search**:
+  Patterns such as `text*` or `*text` can be used to match **variable names**
+  that start or end with `text`, respectively.
+  Pattern search is also case-**in**sensitive.
 
-Fuzzy search is case-**in**sensitive.
-
-### Pattern search
-
-Patterns such as `text*` or `*text` can be used to match **variable names**
-that start or end with `text`, respectively.
-
-Pattern search is also case-**in**sensitive.
-
-### Strict search
-
-A string enclosed in double quotation marks (e.g., `"text"`) can be used
-to request exact matches of **variable names**,
-with no preceding or succeeding characters.
-
-Exact search is **case-sensitive**.
+- **Strict search**
+  A string enclosed in double quotation marks (e.g., `"text"`) can be used
+  to request exact matches of **variable names**,
+  with no preceding or succeeding characters.
+  Exact search is **case-sensitive**.
 
 
 ## Variable display modes
+
+![Eye icon variations](./screenshots/eye_icon_variations.png){ width="30%", align=right }
 
 The eye icon to the left of the text input box (filter box)
 is a button for cycling through three display modes.
@@ -84,11 +80,18 @@ When a search or filter is active, these modes apply to the filtered list rather
 the full set of variables in the simulation file.
 
 Also note that:
+
+![Filter box with close button](./screenshots/filter_box_close.png){ width="20%", align=right }
+
 - If the user wants to return to the full list, the filter can be cleared
   by first hovering the cursor over the filter box and then clicking the cross button
   at the right end.
-- Double-clicking a colored group tab sets the filter to that group.
+
+![Filter group](./screenshots/filter_group.png){ width="30%", align=right }
+
+- Clicking a colored group tab sets the filter to that group.
   The three display modes then apply to the selection state within that group.
+  A second click clears the filter.
 
 
 ::: warning Reminder: Do not forget the `Load ... variables` button
