@@ -2,6 +2,38 @@
 
 <!-- version list -->
 
+## v2.3.0 (2026-04-22)
+
+### Bug Fixes
+
+- Render colorbar always linear and position tick marks in transformed space
+  ([`02aee8a`](https://github.com/Kitware/QuickView/commit/02aee8a6d68ffe0565b42b6dfe2b4c0accc07eb6))
+
+### Continuous Integration
+
+- **mac**: Fix pyinstaller failure on turbojpeg
+  ([`d803983`](https://github.com/Kitware/QuickView/commit/d8039839457707b85d6319d56166317e6f4bcf68))
+
+### Features
+
+- **chunker**: Add cli chunker helper
+  ([`cc4e4d4`](https://github.com/Kitware/QuickView/commit/cc4e4d48e18b74a4b8a8925b9f9ee745f080062f))
+
+### Performance Improvements
+
+- Cache EAMProject output across time-slice changes
+  ([`e736c59`](https://github.com/Kitware/QuickView/commit/e736c59c90ee0ca0eca42c1e1221db5c8a7fc8fd))
+
+- Make projection thread count configurable
+  ([`f8d6068`](https://github.com/Kitware/QuickView/commit/f8d606818de05b5d7cdf507453b81041e490693c))
+
+- Parallelize pyproj point projection in EAMProject
+  ([`2af4ad4`](https://github.com/Kitware/QuickView/commit/2af4ad448b067e79eaa752aad7c8c58ab4237a0e))
+
+- Replace fancy-index with cached slice plan in add_cell_arrays
+  ([`246d621`](https://github.com/Kitware/QuickView/commit/246d6212f9bff781fc10a1c5fb8e70aa4dc896bb))
+
+
 ## v2.2.0 (2026-04-20)
 
 ### Bug Fixes
