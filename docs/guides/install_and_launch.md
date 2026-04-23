@@ -48,6 +48,8 @@ As our tools depend on [ParaView](https://www.paraview.org/) and
 require specific features in [Python](https://www.python.org/),
 we use conda to facilitate the setup.
 
+### Initial installation
+
 For example, to create a conda environment named `quickview-env`
 then install QuickView and QuickCompare, we can use the following commands:
 
@@ -58,7 +60,7 @@ conda install conda-forge::e3sm-quickview
 conda install conda-forge::e3sm_compareview
 ```
 
-## Updating conda installation
+### Updating to new versions 
 
 To update the tools to newer versions, first find the most recent version
 numbers using the links in the summary table above,
@@ -70,7 +72,7 @@ conda install "e3sm-quickview>=2.1.1"
 conda install "e3sm_compareview>=1.3.4"
 ```
 
-## Launching a tool installed via conda
+### Launching a tool installed via conda
 
 To use the tools installed via conda, open a Terminal window and
 activate the conda environment using

@@ -1,13 +1,15 @@
 
 
-## QuickView's rendering of SCREAM output
+## QuickView showing SCREAM output
 
-Horizontal mesh: ne1024 (~3.5 km).
+Horizontal mesh is ne1024pg2 (~3.5 km).
+
 Simulation data was provided by the EAMxx group, thanks to Chris Terai at LLNL.
 
 ![SCREAM surface variables](/gallery/SCREAM_sfc_tropical.png)
 
-## QuickView's rendering of aerosols in EAM
+## QuickView showing aerosols in EAMv2
 
-Horizontal mesh: ne30pg2 (~165 km)
+Horizontal mesh: ne256pg2
 
+Simulation data was provided by Kai Zhang at PNNL.

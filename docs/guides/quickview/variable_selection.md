@@ -73,31 +73,31 @@ The icon changes to reflect the current mode:
 
 ![Eye icon variations](./screenshots/eye_icon_variations.png){ width="30%", align=right }
 
-- Eye icon – shows the **full list** of variables in the file.
+- Eye only – shows the **full list** of variables, both selected and unselected.
 - With check mark – shows only the variables currently **selected** via the checkboxes.
-- With a cross – shows the variables that are **not currently selected**.
+- With cross – shows the variables that are **not currently selected**.
 
 When a search or filter is active, these modes apply to the filtered list rather than
-the full set of variables in the simulation file.
-
+the full set of variables in the simulation data file.
 Also note that:
 
 ![Filter box with close button](./screenshots/filter_box_close.png){ width="55%", align=right }
 
-- If the user wants to return to the full list, the filter can be cleared
+- If the user wants to return to the full list of variables in the data file,
+  the filter can be cleared
   by first hovering the cursor over the filter box and then clicking the cross button
   at the right end.
 
 ![Filter group](./screenshots/filter_group.png){ width="55%", align=right }
 
-- Clicking a colored group tab sets the filter to that group.
+- Clicking a colored variable-group tab sets the filter to that group.
   The three display modes then apply to the selection state within that group.
-  A second click clears the filter.
+  A second click on the group tab clears the filter.
 
 
 ::: info Reminder: Do not forget the `Load ... variables` button
 After making your selection or adjusting it, the `Load ... variables`
-buttone at the top of the control panel needs to be clicked
+button at the top of the control panel needs to be clicked
 in order for the selected variables to be loaded into memory and
 shown in the viewport.
 :::

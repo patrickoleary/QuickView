@@ -39,7 +39,7 @@ The user can now start to search for and load variables to inspect.
 ![File loaded](./screenshots/file_loaded.png){ width="95%", align=center }
 
 ::: tip Tip: File system navigation
-![Nav buttons](./screenshots/file_loading_start_and_parent_dirs.png){ width="20%", align=right }
+![Nav buttons](./screenshots/file_loading_start_and_parent_dirs.png){ width="18%", align=right }
 For QuickView installed through conda,
 the start directory is the directory in which the app is launched.
 After launch, the File Loading dialogue window
@@ -52,9 +52,9 @@ users launch QuickView in a directory close to their data.
 :::
 
 
-## Resume mode: picking up where you left off
+## Resume mode: picking up where you left off {#state-files}
 
-![State explort and import](./screenshots/state_export_import.png){ width="35%", align=right }
+![State explort and import](./screenshots/state_export_import.png){ width="28%", align=right }
 
 The current state of the analysis session can be saved—and reloaded later to resume
 the analysis—using the `State Import/Export` button in the vertical toolbar
