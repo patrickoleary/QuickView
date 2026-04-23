@@ -2,6 +2,20 @@
 
 <!-- version list -->
 
+## v2.4.0 (2026-04-23)
+
+### Features
+
+- --perf CLI flag with slider-tick instrumentation across the pipeline
+  ([`0f9e31a`](https://github.com/Kitware/QuickView/commit/0f9e31a5861f02d7ad9e024091fbb2bf370c3c16))
+
+- **perf**: Time the actual VTK render via StartEvent/EndEvent observers
+  ([`79029e9`](https://github.com/Kitware/QuickView/commit/79029e9cc96c82fe1103a3e75b41e35dc711f22b))
+
+- **perf**: Time trame-rca JPEG encode and websocket push phases
+  ([`315b8f3`](https://github.com/Kitware/QuickView/commit/315b8f3c7cfbe8e3e524cadf2b3729fffe128d75))
+
+
 ## v2.3.0 (2026-04-22)
 
 ### Bug Fixes
