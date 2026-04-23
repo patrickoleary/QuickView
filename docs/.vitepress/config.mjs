@@ -47,9 +47,9 @@ export default defineConfig({
       ],
       "/guides/": [
         {
-          { text: "Introduction", link:"/guides/index" },
+          text: "Introduction",
           items: [
-            { text: "Key Reminders",      link: "/guides/reminders" },
+            { text: "Overview",           link: "/guides/reminders" },
             { text: "Connecitiviy Files", link: "/guides/connectivity" },
             { text: "Simulation Files",   link: "/guides/simulation_data" },
             { text: "Install and Launch", link: "/guides/install_and_launch" },
