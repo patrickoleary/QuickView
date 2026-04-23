@@ -47,7 +47,7 @@ export default defineConfig({
       ],
       "/guides/": [
         {
-          text: "Introduction",
+          { text: "Introduction", link:"/guides/index" },
           items: [
             { text: "Key Reminders",      link: "/guides/reminders" },
             { text: "Connecitiviy Files", link: "/guides/connectivity" },
