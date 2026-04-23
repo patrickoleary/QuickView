@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v2.5.0 (2026-04-23)
+
+### Bug Fixes
+
+- **animation**: Allow out of screen field to be exported
+  ([`cb7e7fd`](https://github.com/Kitware/QuickView/commit/cb7e7fd26dccd3804d0be954e253db98c6676610))
+
+### Features
+
+- **capture**: Add animation recording and unified PNG capture infrastructure
+  ([`1420480`](https://github.com/Kitware/QuickView/commit/14204802844a751143767a54e008583228ab9fff))
+
+
 ## v2.4.0 (2026-04-23)
 
 ### Features
