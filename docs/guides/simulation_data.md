@@ -15,7 +15,7 @@ variables on `ne*pg2` cubed-sphere meshes regardless of what name is used
 for the horizontal dimension (e.g., `ncol` in EAM files or
 `lndgrid` in ELM files).
 
-## Multi-dimensional variables
+## Multi-dimensional variables {#nd-vars}
 
 Starting from QuickView version 2 and QuickCompare version 1,
 the tool family has been generalized to visualize any variable

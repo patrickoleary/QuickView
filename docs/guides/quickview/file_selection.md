@@ -1,11 +1,11 @@
 # Selecting Files for Analysis
 
 QuickView can be used in two modes:
-- a **new-viz mode** for starting a new visualization or
-- a **resume mode** for continuing an earlier analysis saved in a state file.
+- a [**new-vis mode**](#new-analysis) for starting a new visualization or
+- a [**resume mode**](#state-files) for continuing an earlier analysis saved in a state file.
 These are explained below.
 
-## New-viz mode: starting a new analysis
+## New-vis mode: starting a new analysis {#new-analysis}
 
 ![File loading window](./screenshots/file-upload-outline.png){ width="5%", align=right }
 
@@ -39,7 +39,7 @@ The user can now start to search for and load variables to inspect.
 ![File loaded](./screenshots/file_loaded.png){ width="95%", align=center }
 
 ::: tip Tip: File system navigation
-![Nav buttons](./screenshots/file_loading_start_and_parent_dirs.png){ width="18%", align=right }
+![Nav buttons](./screenshots/file_loading_start_and_parent_dirs.png){ width="12%", align=right }
 For QuickView installed through conda,
 the start directory is the directory in which the app is launched.
 After launch, the File Loading dialogue window
