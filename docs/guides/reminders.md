@@ -29,7 +29,7 @@ In terms of the computational mesh over the globe,
 the tools currently supports only the E3SM Atmosphere Model's
 cubed-sphere `ne*pg2` grids, but extensions to other grids are possible.
 
-# Key Reminders
+## Key Reminders
 
 ::: warning Two modes of use
 QuickView can be used in two modes:
