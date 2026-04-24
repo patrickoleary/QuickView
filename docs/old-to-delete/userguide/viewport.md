@@ -1,7 +1,5 @@
 # Viewport
 
-![Four views](../../images/viewport_four_views.png){ width="50%", align=right }
-
 Once the user has selected variables using the [control panel](control_panel.md)
 and clicked the `LOAD VARIABLES` button in the toolbar, the app
 will show each variable in its own little frame (which we refer to as a "view")
@@ -17,8 +15,6 @@ displayed.
 
 ## Custimizing the viewport
 
-![Many views resized and rearranged](../../images/viewport_many_views_rearranged.png){
-width="50%", align=right}
 
 To help present multiple variables in an informative way, the app allows users
 to
@@ -47,9 +43,6 @@ scale and to invert/restore the color sequence, text boxes for changing the
 minimum and maximum values for color mapping, and a button to reset the color
 mapping to fit the value range of data slice.
 
-![gear menu with auto range](../../images/viewport_gear_menu_range_auto.png){
-width="48%"}
-![gear menu with manual range](../../images/viewport_gear_menu_range_manual.png){width="48%"}
 
 !!! tip "Tip: Automatic or Fixed Colormap Ranges"
 
@@ -68,8 +61,6 @@ width="48%"}
     the colormap will be fixed to the user-specified range.
 
 !!! tip "Tip: Field Value Lookup in Colorbar"
-
-    ![colorbar hover over](../../images/colorbar_hover_over.png){ width="55%", align=right }
 
     If the user hovers their cursor over a colorbar, the corresponding field
     value will be displayed, as shown by the example here.

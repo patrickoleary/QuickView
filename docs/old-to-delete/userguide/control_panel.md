@@ -44,8 +44,6 @@ in order for these changes to take effect._
 
 ## Data slice selection
 
-![variable selection sections](../../images/control_panel_slice_selection.png){
-width="240", align=right }
 
 To keep the QuickView app lightweight and easy to use, we decided to only
 support color-filled contour plots of the globe or a latitude-longitude box. The
@@ -64,8 +62,6 @@ dimension will be paused.
 
 ## Map Projection
 
-![variable selection sections](../../images/control_panel_map_projection.png){
-width="240", align=right }
 
 QuickView currently provides a very simple map setting submenu that contains a
 few commonly used map projections. More projections can be added upon request.
