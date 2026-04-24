@@ -28,7 +28,11 @@ from vtkmodules.vtkRenderingCore import (
 from e3sm_quickview.components import view as tview
 from e3sm_quickview.presets import COLOR_BLIND_SAFE
 from e3sm_quickview.utils.color import COLORBAR_CACHE, lut_to_img
-from e3sm_quickview.utils.math import compute_color_ticks, tick_contrast_color
+from e3sm_quickview.utils.math import (
+    calculate_linthresh,
+    compute_color_ticks,
+    tick_contrast_color,
+)
 
 
 def auto_size_to_col(size):
@@ -180,22 +184,33 @@ class VariableView(TrameComponent):
         self._apply_linear_to_lut(invert)
         self.lut.RescaleTransferFunction(*self.config.color_range)
 
-        if log_scale == "log":
-            self._apply_log_to_lut()
-        elif log_scale == "symlog":
-            self._apply_symlog_to_lut()
-
         if n_colors is not None:
             self.lut.NumberOfTableValues = n_colors
 
-        # Read the actual LUT range (may differ from color_range for log scale)
+        # Capture the linear colorbar image (always the same regardless of scale)
         ctf = self.lut.GetClientSideObject()
         self.config.effective_color_range = ctf.GetRange()
-
         self.config.lut_img = lut_to_img(self.lut)
-        self._compute_ticks()
+
+        # Rebuild LUT with non-linear control points after capturing the
+        # linear colorbar image.  Compute linthresh once from data for symlog.
+        linthresh = None
+        if log_scale == "log":
+            self._apply_log_to_lut()
+        elif log_scale == "symlog":
+            from vtkmodules.util.numpy_support import vtk_to_numpy
+
+            arr = self.data_array
+            if arr is not None:
+                linthresh = calculate_linthresh(vtk_to_numpy(arr))
+            else:
+                linthresh = 1.0
+            self._apply_symlog_to_lut(linthresh)
+
+        self._compute_ticks(linthresh=linthresh)
 
         # Force mapper to pick up LUT changes
+        ctf = self.lut.GetClientSideObject()
         self.mapper.SetLookupTable(ctf)
         self.mapper.Modified()
 
@@ -223,72 +238,76 @@ class VariableView(TrameComponent):
         self.lut.MapControlPointsToLogSpace()
         self.lut.UseLogScale = 1
 
-    def _apply_symlog_to_lut(
-        self, linthresh=None, linscale=1.0, base=10, n_samples=256
-    ):
-        """Transform the already-prepared LUT to symmetric log scale.
+    def _apply_symlog_to_lut(self, linthresh):
+        """Build a symlog LUT with decade control points.
 
-        Uses:
-        - Linear for |x| <= linthresh
-        - Logarithmic for |x| > linthresh
-        with continuity at the boundary.
-
-        Samples colors from the linear preset and redistributes them
-        across the data range using symlog spacing.
+        Control points are placed at powers of 10 (and ±linthresh, 0 for
+        mixed-sign data).  The RGB color for each control point is sampled
+        from the linear colorbar at the position where that value falls in
+        symlog space: t = (symlog(v) - symlog(min)) / (symlog(max) - symlog(min)).
         """
-        # Get the current data range from the LUT
         ctf = self.lut.GetClientSideObject()
         x_min, x_max = ctf.GetRange()
         data_range = x_max - x_min
         if data_range == 0:
             return
 
-        if linthresh is None:
-            linthresh = max(abs(x_min), abs(x_max)) * 1e-2
-            if linthresh == 0:
-                linthresh = 1.0
+        def symlog(v):
+            v = np.asarray(v, dtype=float)
+            return np.sign(v) * np.log10(1.0 + np.abs(v) / linthresh)
 
-        log_base = np.log(base)
-        linscale_adj = linscale / (1.0 - base**-1)
+        # Build decade breakpoints
+        breakpoints = set()
 
-        def symlog(x):
-            abs_x = np.abs(x)
-            # Clip to avoid log(0); values <= linthresh use linear branch anyway
-            safe_abs = np.maximum(abs_x, linthresh)
-            out = np.where(
-                abs_x <= linthresh,
-                x * linscale_adj,
-                np.sign(x)
-                * linthresh
-                * (linscale_adj + np.log(safe_abs / linthresh) / log_base),
-            )
-            return out
+        if x_min < 0:
+            lo = max(linthresh, 1e-30)
+            for e in range(
+                int(np.floor(np.log10(lo))), int(np.floor(np.log10(abs(x_min)))) + 1
+            ):
+                val = -(10.0**e)
+                if x_min <= val < 0:
+                    breakpoints.add(val)
 
-        # Sample colors from the linear LUT at uniform positions
-        rgb = [0.0, 0.0, 0.0]
-        s_min = symlog(x_min)
-        s_max = symlog(x_max)
+        if x_max > 0:
+            lo = max(linthresh, 1e-30)
+            for e in range(
+                int(np.floor(np.log10(lo))), int(np.floor(np.log10(x_max))) + 1
+            ):
+                val = 10.0**e
+                if 0 < val <= x_max:
+                    breakpoints.add(val)
+
+        if x_min < 0 and x_max > 0:
+            breakpoints.update((-linthresh, 0.0, linthresh))
+        elif x_min < 0 and x_max <= 0:
+            if -linthresh >= x_min:
+                breakpoints.add(-linthresh)
+        elif x_min >= 0 and x_max > 0:
+            if linthresh <= x_max:
+                breakpoints.add(linthresh)
+
+        breakpoints.add(x_min)
+        breakpoints.add(x_max)
+        breakpoints = sorted(breakpoints)
+
+        # Symlog range for normalization
+        s_min = float(symlog(x_min))
+        s_max = float(symlog(x_max))
         s_range = s_max - s_min
         if s_range == 0:
             return
 
+        # Sample RGB from the linear LUT at symlog-normalized positions
+        rgb = [0.0, 0.0, 0.0]
         new_rgb_points = []
-        for i in range(n_samples):
-            # Uniform position in data space
-            t = i / (n_samples - 1)
-            x_data = x_min + t * data_range
-
-            # Map x_data through symlog, normalize to [0,1], then look up
-            # the color at the corresponding linear position
-            s_val = symlog(x_data)
-            s_t = (s_val - s_min) / s_range
-            x_lookup = x_min + s_t * data_range
+        for v in breakpoints:
+            t = (float(symlog(v)) - s_min) / s_range
+            x_lookup = x_min + t * data_range
             ctf.GetColor(x_lookup, rgb)
             new_rgb_points.extend(
-                [float(x_data), float(rgb[0]), float(rgb[1]), float(rgb[2])]
+                [float(v), float(rgb[0]), float(rgb[1]), float(rgb[2])]
             )
 
-        # Write back through the proxy so state stays in sync
         self.lut.RGBPoints = new_rgb_points
 
     def color_range_str_to_float(self, color_value_min, color_value_max):
@@ -346,9 +365,11 @@ class VariableView(TrameComponent):
             self.config.n_colors,
         )
 
-    def _compute_ticks(self):
-        vmin, vmax = self.config.effective_color_range
-        ticks = compute_color_ticks(vmin, vmax, scale=self.config.use_log_scale, n=5)
+    def _compute_ticks(self, linthresh=None):
+        vmin, vmax = self.config.color_range
+        ticks = compute_color_ticks(
+            vmin, vmax, scale=self.config.use_log_scale, n=5, linthresh=linthresh
+        )
         # Sample colors exactly as lut_to_img does: use RGBPoints range
         rgb_points = self.lut.RGBPoints
         if len(rgb_points) < 4:
