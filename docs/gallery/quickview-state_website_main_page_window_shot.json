@@ -1,0 +1,139 @@
+{
+  "origin": {
+    "user": "huiwan",
+    "created": "2026-04-24 11:48:41.398652",
+    "comment": ""
+  },
+  "files": {
+    "simulation": "/global/cfs/cdirs/m4359/www/huiwan/vis/202508_EAM_QuickView_test_data/large/EAMv2_ne120pg2_spinup.eam.h0.nc",
+    "connectivity": "/global/cfs/cdirs/m4359/www/huiwan/vis/202508_EAM_QuickView_test_data/connectivity/connectivity_ne120pg2_TEMPEST.scrip.nc"
+  },
+  "variables-selection": [
+    "T",
+    "Q",
+    "CCN3",
+    "CLDLOW"
+  ],
+  "layout": {
+    "aspect-ratio": 2,
+    "grouped": false,
+    "active": "auto_layout",
+    "tools": [
+      "select-slice-time"
+    ],
+    "help": false
+  },
+  "data-selection": {
+    "time_idx": 0,
+    "midpoint_idx": 0,
+    "interface_idx": 0,
+    "crop_longitude": [
+      -180,
+      180
+    ],
+    "crop_latitude": [
+      -90,
+      90
+    ],
+    "projection": [
+      "Robinson"
+    ]
+  },
+  "views": [
+    {
+      "type": [
+        "time",
+        "lev",
+        "ncol"
+      ],
+      "name": "T",
+      "config": {
+        "preset": "Yellow - Gray - Blue",
+        "invert": true,
+        "use_log_scale": "linear",
+        "order": 7,
+        "size": 6,
+        "offset": 0,
+        "break_row": false,
+        "override_range": true,
+        "color_range": [
+          220.0,
+          285.0
+        ],
+        "color_value_min": "220",
+        "color_value_max": "285"
+      }
+    },
+    {
+      "type": [
+        "time",
+        "lev",
+        "ncol"
+      ],
+      "name": "Q",
+      "config": {
+        "preset": "batlow",
+        "invert": false,
+        "use_log_scale": "linear",
+        "order": 5,
+        "size": 6,
+        "offset": 0,
+        "break_row": false,
+        "override_range": true,
+        "color_range": [
+          0.0,
+          0.008
+        ],
+        "color_value_min": "0",
+        "color_value_max": "0.008"
+      }
+    },
+    {
+      "type": [
+        "time",
+        "lev",
+        "ncol"
+      ],
+      "name": "CCN3",
+      "config": {
+        "preset": "Rainbow Desaturated",
+        "invert": false,
+        "use_log_scale": "linear",
+        "order": 3,
+        "size": 6,
+        "offset": 0,
+        "break_row": false,
+        "override_range": true,
+        "color_range": [
+          0.0,
+          260.0
+        ],
+        "color_value_min": "0",
+        "color_value_max": "260"
+      }
+    },
+    {
+      "type": [
+        "time",
+        "ncol"
+      ],
+      "name": "CLDLOW",
+      "config": {
+        "preset": "Grayscale",
+        "invert": false,
+        "use_log_scale": "linear",
+        "order": 2,
+        "size": 6,
+        "offset": 0,
+        "break_row": false,
+        "override_range": true,
+        "color_range": [
+          0.0,
+          0.88
+        ],
+        "color_value_min": "0.0",
+        "color_value_max": "0.88"
+      }
+    }
+  ]
+}
