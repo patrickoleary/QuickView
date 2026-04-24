@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.5.1 (2026-04-24)
+
+### Bug Fixes
+
+- Symlog/log colormap with standalone CTF, consistent formula, and discrete toggle
+  ([`93bc038`](https://github.com/Kitware/QuickView/commit/93bc03863b35306c65155424cb336018150db922))
+
+
 ## v2.5.0 (2026-04-23)
 
 ### Bug Fixes
