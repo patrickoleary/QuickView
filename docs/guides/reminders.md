@@ -20,14 +20,14 @@ workflows and assessing new needs to add members to the family.
 The first two members in the family are
 - [QuickView](/guides/quickview/index)
   for simultaneously presenting 2D contour plots of
-  multiple physical quantities (variables) in the form of
+  multiple physical quantities (variables) on 
   global or regional maps, and
 - [QuickCompare](/guides/quickcompare/index)
   for contrasting two or more simulations, also using 2D contour plots.
 
 In terms of the computational mesh over the globe,
 the tools currently supports only the E3SM Atmosphere Model's
-cubed-sphere `ne*pg2` grids, but extensions to other grids are possible.
+cubed-sphere `ne*pg2` grids, but extensions to other grids are planned.
 
 ## Key Reminders
 
@@ -75,8 +75,7 @@ using toggles in the toolbar and keyboard shortcuts.
 ::: tip Viewport Layout
 All tools in the QuickView family are designed to simultaneously present multiple
 images and charts etc. to help the user identify relationships and distinctions.
-The sizes and the layout of the different images etc. can be easily adjusted. See, e.g.,  
-[this page](/guides/quickview/viewport_layout).
+The sizes and the layout of the different images etc. can be easily adjusted. See, e.g., [this page](/guides/quickview/viewport_layout).
 
 Furthermore, if a user saves a state file after these
 adjustments, they can later resume their analysis with the customized

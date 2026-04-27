@@ -64,11 +64,10 @@ can be used to search for variables by their names or dimensions.
   Exact search is **case-sensitive**.
 
 
-## Variable list display modes
-
+## Variable lists
 
 The eye icon to the left of the text input box (filter box)
-is a button for cycling through three display modes.
+is a button for cycling through three display modes of the variable list.
 The icon changes to reflect the current mode:
 
 ![Eye icon variations](./screenshots/eye_icon_variations.png){ width="30%", align=right }
@@ -86,7 +85,7 @@ Also note that:
 - If the user wants to return to the full list of variables in the data file,
   the filter can be cleared
   by first hovering the cursor over the filter box and then clicking the cross button
-  at the right end.
+  on the right end.
 
 ![Filter group](./screenshots/filter_group.png){ width="55%", align=right }
 

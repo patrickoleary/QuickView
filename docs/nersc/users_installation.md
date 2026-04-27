@@ -1,4 +1,4 @@
-# Installing User's Copy of the QuickView Family at NERSC 
+# Installing a User's Copy of the QuickView Family at NERSC 
 
 The steps described below follow the same logic as documented on
 [this page](./developers_installation.md),

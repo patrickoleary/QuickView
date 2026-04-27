@@ -61,7 +61,7 @@ the analysis—using the `State Import/Export` button in the vertical toolbar
 or using the shortcut `D` for download and `U` for upload.
 
 Note that regardless of whether QuickView is execulated on a local computer
-or on a remote system, the state files are saved to and uploaded from the local computer.
+or on a remote system (e.g., at NERSC), the state files are saved to and uploaded from the local computer.
 
 ::: info Info: What's in a State File?
 A state file is a JSON file that contains the paths and names of

@@ -12,16 +12,16 @@ QuickView's UI contains three main components.
   The sequence of the displayed variables and the size of the map plots
   can be adjusted using the [viewport layout](./viewport_layout.md) control panel.
   For each variable shown on a map, the colormap, value ranges etc. can be adjusted
-  separately using the [pop-up menu](./individual_views.md)
+  individually using the [pop-up menu](./individual_views.md)
   activated by a click on the colorbar.
+
+![Toolbar compact or expanded](./screenshots/toolbar_compact_or_expanded.png){ width="40%" align=right}
 
 - **Control panels**: Various contral panels allow the user to
   change properties of all map plots shown in the viewport.
   The control panels can be collapsed (hidden)
   or expanded (shown) by clicking on their corresponding icons in the
   toolbar or by using [keybord shortcuts](./shortcuts).
-
-![Toolbar compact or expanded](./screenshots/toolbar_compact_or_expanded.png){ width="40%" align=right}
 
 - **Main toolbar**: The vertical toolbar located on the left of the UI
   contains various buttons that either activate pop-up menus on a single click
@@ -32,4 +32,4 @@ QuickView's UI contains three main components.
   `H` key on the keyboard. 
 
 
-## Tooltips and visual cues
+<!-- ## Tooltips and visual cues -->

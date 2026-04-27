@@ -43,7 +43,3 @@ If a variable has an attribute named `missing_value` or `_FillValue`, the value
 is converted to NaN and ignored in the calculation of global averages and for
 the visualization.
 
-## File groups
-
-:::danger FIXME - add contents
-::: 

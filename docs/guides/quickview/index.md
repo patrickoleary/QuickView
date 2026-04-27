@@ -69,5 +69,7 @@ via the
 [Scientific Discovery through Advanced Computing (SciDAC](https://www.scidac.gov/))
 program.
 
+The development of QuickView used resources of the National Energy Research Scientific Computing Center
+([NERSC](https://www.nersc.gov/)), a U.S. Department of Energy User Facility.
 
 ![SciDAC, Kitware, and PNNL](/logos/SciDAC-Kitware-PNNL.png){ width="75%", align=center }
