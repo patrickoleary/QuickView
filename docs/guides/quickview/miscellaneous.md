@@ -58,7 +58,7 @@ images of individual frames to the local computer, and the user needs to use a t
 the images into an animation (or animations).
 Direct download of animation files will be provided soon.
 
-![animation in progress](./screenshots/animation_in_progress.png){ width="10%", align=right }
+![animation in progress](./screenshots/animation_scan_in_progress.png){ width="10%", align=right }
 
 If the user clicks the animation download button again while the dark-red circle is still
 spinning, then the downloaded `.zip` file will contain images from index 0 to the last index
