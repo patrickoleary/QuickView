@@ -19,7 +19,7 @@ Users who would like to **install** their own copy at NERSC
 can follow [this example](/nersc/users_installation.md).
 :::
 
-## Desktop bundles
+## Desktop bundles {#desktop-bundles}
 
 To deliver pre-compiled standalone desktop applications,
 we use [PyInstaller](https://pyinstaller.org/en/stable/) and [Tauri](https://tauri.app/)
@@ -42,7 +42,7 @@ Also note that the **first execution of the app will take a while** as macOS
 will check and validate the full application file tree.
 :::
 
-## Conda installation
+## Conda installation {#conda}
 
 As our tools depend on [ParaView](https://www.paraview.org/) and
 require specific features in [Python](https://www.python.org/),

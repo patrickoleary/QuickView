@@ -60,7 +60,7 @@ The current state of the analysis session can be saved—and reloaded later to r
 the analysis—using the `State Import/Export` button in the vertical toolbar
 or using the shortcut `D` for download and `U` for upload.
 
-Note that regardless of whether QuickView is execulated on a local computer
+Note that regardless of whether QuickView is executed on a local computer
 or on a remote system (e.g., at NERSC), the state files are saved to and uploaded from the local computer.
 
 ::: info Info: What's in a State File?

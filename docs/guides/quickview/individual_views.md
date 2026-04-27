@@ -1,6 +1,7 @@
-# Custimizing Individual Views
 
 ![pop-up panel](./screenshots/single_view_pop-up_panel.png){ width="60%", align=right }
+
+# Custimizing Individual Views
 
 Each view in the viewport (i.e., each contour plot shown on a global or regional map)
 can be customized individually by clicking the associated colorbar.
@@ -21,7 +22,7 @@ A click on the color palette icon in the top-left corner of the pop-up panel
 changes the button to a shield icon and reduces the displayed list to
 the [collection by Fabio Crameri](https://www.fabiocrameri.ch/colourmaps/).
 
-![colormap filter](./screenshots/colormap_filter.png){ width="20%", align=right }
+![colormap filter](./screenshots/colormap_filter.png){ width="20%", align=left }
 
 The top-right corner of the pop-up panel contains a text box for filtering colormaps
 using a fuzzy search on their names. The x icon clears the filter.

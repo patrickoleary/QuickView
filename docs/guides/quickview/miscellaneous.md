@@ -5,9 +5,9 @@ This page summarizes several addtional convenient features in QuickView.
 ## Choosing map projection and extent
 
 The map projection used for the contour plots can be changed using the mini menu
-activated by a click on the Earth icon in the vertical tool bar—or by using keyboard shortcuts:
+activated by a click on the Earth icon in the vertical tool bar—or by keyboard shortcuts:
 
-![map projections](./screenshots/map_projections.png){ width="22%", align=right }
+![map projections](./screenshots/map_projections.png){ width="22%", align=center }
 
 - `C` for cylindrical equidistant,
 - `R` for Robinson, and
@@ -36,16 +36,30 @@ or animations for presentations and manuscripts, etc.:
 - A click on the **camera icon** next to the variable name **inside a view panel**
   saves that single view as a `.png` file. The file name starts with the variable name;
   dimension names and indices are appended when relevant.
+  For example, `aero_tau_sw-lev-71-swband-00.png` is an image of variable `aero_tau_sw`
+  at `lev` index 71 and `swband` index 0.
 
 
 ![animation download](./screenshots/animation_download.png){ width="70%", align=right }
 
-- When the animation control panel is expanded, a click on the icon on the right end
-  (a downward arrow with two lines) brings up a drop-down menu.
-  The user can choose `Full grid` and/or individual variables,
-  then click `Export animation`.
+- Let us assume the user has been inspecting 4 variables along the `lev` dimension,
+  as depicted by the screenshot here. To export animations showing how these variables
+  change in that dimension, the use can click on the icon on the right end of the
+  animation control panel, i.e., the downward arrow with two lines,
+  to bring up a drop-down menu and then click to select
+  `Full grid` and/or individual variables. Subsequently, a click on `Export animation`
+  triggers QuickView to scan through the indices in the `lev` dimension,
+  with a dark-red circle spinning around the download button while the scanning is in progress.
+  After the scan is finished, a file `quickview-animation.zip` gets downloaded to the local computer.
+  This file is a zipped folder that may contain multiple files.
 
-Note: as of version 2.5.1, the animation export functionality downloads a folder
-of images to the local computer, and the user needs to use a tool to combine
-the images into an animation. Direct download of animation files will be provided
-soon. 
+Note: as of version 2.6.0, the animation export functionality downloads
+images of individual frames to the local computer, and the user needs to use a tool to combine
+the images into an animation (or animations).
+Direct download of animation files will be provided soon.
+
+![animation in progress](./screenshots/animation_in_progress.png){ width="10%", align=right }
+
+If the user clicks the animation download button again while the dark-red circle is still
+spinning, then the downloaded `.zip` file will contain images from index 0 to the last index
+that QuickView has scanned.
