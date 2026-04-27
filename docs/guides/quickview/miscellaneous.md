@@ -4,10 +4,10 @@ This page summarizes several addtional convenient features in QuickView.
 
 ## Choosing map projection and extent
 
+![map projections](./screenshots/map_projections.png){ width="25%", align=center }
+
 The map projection used for the contour plots can be changed using the mini menu
 activated by a click on the Earth icon in the vertical tool bar—or by keyboard shortcuts:
-
-![map projections](./screenshots/map_projections.png){ width="22%", align=center }
 
 - `C` for cylindrical equidistant,
 - `R` for Robinson, and
