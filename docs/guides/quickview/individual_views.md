@@ -1,6 +1,6 @@
 # Custimizing Individual Views
 
-![pop-up panel](./screenshots/single_view_pop-up_panel.png){ width="65%", align=right }
+6[pop-up panel](./screenshots/single_view_pop-up_panel.png){ width="60%", align=right }
 
 Each view in the viewport (i.e., each contour plot shown on a global or regional map)
 can be customized individually by clicking the associated colorbar.
@@ -11,7 +11,7 @@ the variable values and the contour colors.
 
 ## Colormap search and selection
 
-![colormap collection icons](./screenshots/colormap_collection_icons.png){ width="15%", align=right }
+![colormap collection icons](./screenshots/colormap_collection_icons.png){ width="12%", align=right }
 
 QuickView has included most of the colormap "presets" from [ParaView](https://www.paraview.org/)
 and all palettes from the color vision deficiency-friendly (CVD-friendly)
@@ -26,14 +26,14 @@ the [collection by Fabio Crameri](https://www.fabiocrameri.ch/colourmaps/).
 The top-right corner of the pop-up panel contains a text box for filtering colormaps
 using a fuzzy search on their names. The x icon clears the filter.
 
-![color invert on/off](./screenshots/invert_color_icons.png){ width="15%", align=right }
+![color invert on/off](./screenshots/invert_color_icons.png){ width="12%", align=right }
 
 The second icon in the top-left corner is a toggle
 for inverting and resetting the sequence of colors. 
 
 ## Linear and symmetric logarithmic scales
 
-![linear and log](./screenshots/linear_log_icons.png){ width="15%", align=right }
+![linear and log](./screenshots/linear_log_icons.png){ width="12%", align=right }
 
 ## Automatic and fixed data ranges
 
@@ -45,14 +45,14 @@ step through different data slices,
 the colormap is automatically re-adjusted to fit the data range in each slice.
 
 
-![auto or fixed range icons](./screenshots/fixed_and_auto_range_icons.png){ width="15%", align=right }
+![auto or fixed range icons](./screenshots/fixed_and_auto_range_icons.png){ width="12%", align=right }
 
 A click on the pencil icon in the pop-up panel brings up two boxes for the
 user to examine and specify the maximum and minimum values for colormapping.
 After these values are specified, the colormapping becomes fixed
 until the user clicks the expand icon to change back to automatic fit.
 
-![auto or fixed ranges](./screenshots/auto_or_fixed_ranges.png){ width="85%" }
+![auto or fixed ranges](./screenshots/auto_or_fixed_ranges.png){ width="100%" }
 
 
 
