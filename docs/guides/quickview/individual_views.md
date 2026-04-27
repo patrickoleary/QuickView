@@ -1,6 +1,6 @@
 # Custimizing Individual Views
 
-![pop-up panel](./screenshots/single_view_pop-up_panel.png){ width="50%", align=right }
+![pop-up panel](./screenshots/single_view_pop-up_panel.png){ width="75%", align=right }
 
 Each view in the viewport (i.e., a contour plot shown on a global or regional map)
 can be customized individually by clicking the associated colorbar.
@@ -11,7 +11,7 @@ the variable values and the contour colors.
 
 ## Colormap search and selection
 
-![colormap collection icons](./screenshots/colormap_collection_icons.png){ width="5%", align=right }
+![colormap collection icons](./screenshots/colormap_collection_icons.png){ width="10%", align=right }
 
 QuickView has included most of the colormap "presets" from [ParaView](https://www.paraview.org/)
 and all palettes from the color vision deficiency-friendly (CVD-friendly)
@@ -21,7 +21,7 @@ A click on the color pallete icon in the top-left corner of the pop-up panel
 changes the button to a shield icon and limits the presented list to
 the [collection by Fabio Crameri](https://www.fabiocrameri.ch/colourmaps/).
 
-![colormap filter](./screenshots/colormap_filter.png){ width="10%", align=right }
+![colormap filter](./screenshots/colormap_filter.png){ width="18%", align=right }
 
 The top-right corner of the pop-up panel contains a text box for filtering colormaps
 using a fuzzy search on their names. The x icon clears the filter.
