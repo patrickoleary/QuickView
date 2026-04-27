@@ -2,3 +2,8 @@
   display: inline-table !important;
   width: 100% !important;
 }
+
+.image-src {
+  max-width: 2000px !important;
+  max-height: 2000px !important;
+}

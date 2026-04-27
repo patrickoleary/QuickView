@@ -6,7 +6,7 @@ export default defineConfig({
   title: "QuickView Family",
   description:
     "How to use the QuickView family of tools to look at your simulation data",
-  head: [["link", { rel: "stylesheet", href: "/custom.css" }]],
+  head: [["link", { rel: "stylesheet", href: "custom.css" }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     search: {
@@ -27,8 +27,11 @@ export default defineConfig({
         {
           text: "At NERSC",
           items: [
-            { text: "Quickstart",          link: "/nersc/index" },
-            { text: "Developers' Installation", link: "/nersc/developers_installation" },
+            { text: "Quickstart", link: "/nersc/index" },
+            {
+              text: "Developers' Installation",
+              link: "/nersc/developers_installation",
+            },
             { text: "User's Installation", link: "/nersc/users_installation" },
           ],
         },
@@ -48,40 +51,55 @@ export default defineConfig({
         {
           text: "Introduction",
           items: [
-            { text: "Overview",           link: "/guides/reminders" },
+            { text: "Overview", link: "/guides/reminders" },
             { text: "Connecitiviy Files", link: "/guides/connectivity" },
-            { text: "Simulation Files",   link: "/guides/simulation_data" },
+            { text: "Simulation Files", link: "/guides/simulation_data" },
             { text: "Install and Launch", link: "/guides/install_and_launch" },
           ],
         },
         {
           text: "QuickView",
           items: [
-            { text: "What is QuickView?",link: "/guides/quickview/index" },
-            { text: "Quickstart",        link: "/guides/quickview/quickstart" },
-            { text: "UI Overview",       link: "/guides/quickview/ui_overview" },
-            { text: "Keyboard Shortcuts",link: "/guides/quickview/shortcuts" },
-            { text: "File Selection",    link: "/guides/quickview/file_selection" },
-            { text: "Variable Selection",link: "/guides/quickview/variable_selection" },
-            { text: "Slice Selection",   link: "/guides/quickview/slice_selection" },
-            { text: "Viewport Layout",   link: "/guides/quickview/viewport_layout" },
-            { text: "Individual Views",  link: "/guides/quickview/individual_views" },
-            { text: "Micellaneous",      link: "/guides/quickview/miscellaneous" },
+            { text: "What is QuickView?", link: "/guides/quickview/index" },
+            { text: "Quickstart", link: "/guides/quickview/quickstart" },
+            { text: "UI Overview", link: "/guides/quickview/ui_overview" },
+            { text: "Keyboard Shortcuts", link: "/guides/quickview/shortcuts" },
+            {
+              text: "File Selection",
+              link: "/guides/quickview/file_selection",
+            },
+            {
+              text: "Variable Selection",
+              link: "/guides/quickview/variable_selection",
+            },
+            {
+              text: "Slice Selection",
+              link: "/guides/quickview/slice_selection",
+            },
+            {
+              text: "Viewport Layout",
+              link: "/guides/quickview/viewport_layout",
+            },
+            {
+              text: "Individual Views",
+              link: "/guides/quickview/individual_views",
+            },
+            { text: "Micellaneous", link: "/guides/quickview/miscellaneous" },
           ],
         },
         {
           text: "QuickCompare",
           items: [
-            { text: "What is QuickCompare?",link: "/guides/quickcompare/index" },
-            { text: "Quickstart",           link: "/guides/quickcompare/quickstart" },
+            {
+              text: "What is QuickCompare?",
+              link: "/guides/quickcompare/index",
+            },
+            { text: "Quickstart", link: "/guides/quickcompare/quickstart" },
           ],
         },
         {
           text: "Tools In Development",
-          items: [
-            { text: "SiteView" },
-            { text: "CondiDiagViewer", },
-          ],
+          items: [{ text: "SiteView" }, { text: "CondiDiagViewer" }],
         },
         {
           text: "For App Developers",
@@ -100,13 +118,12 @@ export default defineConfig({
 
   markdown: {
     // Options for the Table of Contents plugin
-    toc: { 
-      level: [2, 3] // Only include <h2> and <h3> in the TOC
+    toc: {
+      level: [2, 3], // Only include <h2> and <h3> in the TOC
     },
     // Options for heading anchors (optional)
     anchor: {
-      permalink: true // Enables clickable anchor links on headings
-    }
+      permalink: true, // Enables clickable anchor links on headings
+    },
   },
-
 });
