@@ -19,8 +19,7 @@ export default defineConfig({
       { text: "Gallery", link: "/gallery/" },
       { text: "User's Guide", link: "/guides/reminders" },
       { text: "At NERSC", link: "/nersc/index" },
-      { text: "Repo", link: "https://github.com/Kitware/QuickView" },
-      { text: "Bugs and Requests", link: "https://github.com/Kitware/QuickView/issues" },
+      { text: "Resources", link: "/resources" },
     ],
 
     sidebar: {
