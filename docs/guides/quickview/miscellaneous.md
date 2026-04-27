@@ -5,9 +5,9 @@ This page summarizes several addtional convenient features in QuickView.
 ## Choosing map projection and extent
 
 The map projection used for the contour plots can be changed using the mini menu
-activated by the Earth icon in the vertical tool bar and by using keyboard shortcuts:
+activated by a click on the Earth icon in the vertical tool bar—or by using keyboard shortcuts:
 
-![map projections](./screenshots/map_projections.png){ width="45%", align=right }
+![map projections](./screenshots/map_projections.png){ width="22%", align=right }
 
 - `C` for cylindrical equidistant,
 - `R` for Robinson, and
@@ -17,8 +17,8 @@ activated by the Earth icon in the vertical tool bar and by using keyboard short
 ![lat/lon sliders](./screenshots/latlon_sliders.png){ width="70%", align=right }
 
 The map extent, i.e., the latitude-longitude bounds to be displayed in the contour plots,
-can be adjusted using the sliders in the lat/lon cropping panel activated by the
-Earth grid icon in the vertical toolbar.
+can be adjusted using the sliders in the lat/lon cropping panel activated by a click on
+the Earth grid icon in the vertical toolbar.
 
 
 ## Saving the visualization
@@ -26,14 +26,14 @@ Earth grid icon in the vertical toolbar.
 In addition to [saving the state](/guides/quickview/file_selection#state-files)
 of the current session so that the analysis can be resumed later,
 QuickView provides three ways for the user to save the visualization as images
-or animations for presentations, manuscripts, etc.:
+or animations for presentations and manuscripts, etc.:
 
 ![image download](./screenshots/image_download.png){ width="20%", align=right }
 
 - A click on the **camera icon** at the end of the vertical **toolbar** saves the entire
-  viewport, in its current layout, to the local computer as `FullPanel.png`.
+  viewport—in its current layout—to the local computer as `FullPanel.png`.
 
-- A click on the **camera icon** next to the variable name inside a view panel in port
+- A click on the **camera icon** next to the variable name **inside a view panel**
   saves that single view as a `.png` file. The file name starts with the variable name;
   dimension names and indices are appended when relevant.
 
