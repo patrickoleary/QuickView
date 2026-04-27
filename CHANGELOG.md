@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v2.6.0 (2026-04-27)
+
+### Documentation
+
+- **hero**: Make picture bigger
+  ([`662e555`](https://github.com/Kitware/QuickView/commit/662e5552b88c770b990e2a375dd00f24fca3a995))
+
+### Features
+
+- Discrete colormaps for linear, log, and symlog scales
+  ([`d8f41d8`](https://github.com/Kitware/QuickView/commit/d8f41d8fed9a568050def9181e1e185e16e5a23e))
+
+
 ## v2.5.1 (2026-04-24)
 
 ### Bug Fixes
