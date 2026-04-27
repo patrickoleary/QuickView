@@ -84,7 +84,7 @@ export default defineConfig({
               text: "Individual Views",
               link: "/guides/quickview/individual_views",
             },
-            { text: "Micellaneous", link: "/guides/quickview/miscellaneous" },
+            { text: "Miscellaneous", link: "/guides/quickview/miscellaneous" },
           ],
         },
         {
