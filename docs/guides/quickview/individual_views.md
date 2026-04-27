@@ -1,6 +1,6 @@
 # Custimizing Individual Views
 
-6[pop-up panel](./screenshots/single_view_pop-up_panel.png){ width="60%", align=right }
+![pop-up panel](./screenshots/single_view_pop-up_panel.png){ width="60%", align=right }
 
 Each view in the viewport (i.e., each contour plot shown on a global or regional map)
 can be customized individually by clicking the associated colorbar.
