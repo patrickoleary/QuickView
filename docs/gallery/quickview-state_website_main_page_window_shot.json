@@ -1,7 +1,7 @@
 {
   "origin": {
     "user": "huiwan",
-    "created": "2026-04-24 11:48:41.398652",
+    "created": "2026-04-27 12:35:35.665126",
     "comment": ""
   },
   "files": {
@@ -18,9 +18,7 @@
     "aspect-ratio": 2,
     "grouped": false,
     "active": "auto_layout",
-    "tools": [
-      "select-slice-time"
-    ],
+    "tools": [],
     "help": false
   },
   "data-selection": {

@@ -31,7 +31,7 @@ using a fuzzy search on their names. The x icon clears the filter.
 The second icon in the top-left corner is a toggle
 for inverting and resetting the sequence of colors. 
 
-## Linear and symmetric logarithmic scales
+## Linear and symmetric logarithmic scales {#linear-and-log-scales}
 
 ![linear and log](./screenshots/linear_log_icons.png){ width="12%", align=right }
 

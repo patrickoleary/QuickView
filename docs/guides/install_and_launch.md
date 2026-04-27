@@ -1,8 +1,8 @@
 # Install and launch
 
 All tools of the **QuickView** family are available as
-**conda** packages as well as **pre-compiled desktop bundles**
-for various OS's like Mac, Windows, and Linux.
+**Conda** and **PyPI** packages as well as **pre-compiled desktop bundles**
+for various OS's including Mac, Windows, and Linux.
 The table below summarizes where the different packages
 and bundles can be found.
 
@@ -14,9 +14,9 @@ and bundles can be found.
 :::tip Note: The contents below were written with desktop and laptop computers in mind.
 
 Users who would like to **use** our tools installed at NERSC can find information in
-[this quickstart guide](/nersc/index.md).
-Users who would like to **install** their copy at NERSC can find an example
-[here](/nersc/users_installation.md).
+[a quickstart guide](/nersc/index.md).
+Users who would like to **install** their own copy at NERSC
+can follow [this example](/nersc/users_installation.md).
 :::
 
 ## Desktop bundles

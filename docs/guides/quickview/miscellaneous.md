@@ -21,7 +21,7 @@ can be adjusted using the sliders in the lat/lon cropping panel activated by a c
 the Earth grid icon in the vertical toolbar.
 
 
-## Saving the visualization
+## Saving the visualization {#save-vis}
 
 In addition to [saving the state](/guides/quickview/file_selection#state-files)
 of the current session so that the analysis can be resumed later,

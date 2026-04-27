@@ -7,7 +7,7 @@ Simulation data was provided by the EAMxx group, thanks to Chris Terai at LLNL.
 
 <figure>
   <figcaption>
-   Shown here is an uneditted real-time screen recording of QuickView running on an exclusive GPU node at NERSC, depicting the time evolution of the top-of-model upward longwave flux.
+   Shown here is an unedited real-time screen recording of QuickView running on an exclusive GPU node at NERSC, depicting the time evolution of the top-of-model upward longwave flux.
   </figcaption>
   <video controls autoplay loop muted playsinline width="100%">
     <source src="/gallery/QuickView2.5.0_SCREAM_TOMLWup.mp4" type="video/mp4">

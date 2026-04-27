@@ -4,20 +4,19 @@ The QuickView family is a collection of tools for interactive
 visualization and analysis of Earth system simulation data.
 Compared to standardized and formalized diagnostic packages
 that produce hundreds of static figures for comprehensive and
-in-depth analysis of model evaluation, the focus of the QuickView
+in-depth analysis for model evaluation, the focus of the QuickView
 family is on interactive explorations that often happen
-during the initial stage of an investigation aimed at
-reletionship search or code debugging using
-simulation output on the model's native grid.
+during the initial stage of an investigation or code debugging,
+using simulation output on the model's native grid.
 
-Each tool in the family focuses only on a small set of actions
+Each tool in the family focuses on a small set of actions
 that we believe are frequently taken by Earth system model
-developers and users, allowing the graphical user interface
+developers and users. The focused attention allows the graphical user interface
 to stay simple and intuitive.
 On the other hand, we are continually summarizing typical analysis
 workflows and assessing new needs to add members to the family.
 
-The first two members in the family are
+The first two members of the family are
 - [QuickView](/guides/quickview/index)
   for simultaneously presenting 2D contour plots of
   multiple physical quantities (variables) on 
@@ -25,8 +24,8 @@ The first two members in the family are
 - [QuickCompare](/guides/quickcompare/index)
   for contrasting two or more simulations, also using 2D contour plots.
 
-In terms of the computational mesh over the globe,
-the tools currently supports only the E3SM Atmosphere Model's
+As for the computational mesh over the globe,
+the tools currently support only the E3SM Atmosphere Model's
 cubed-sphere `ne*pg2` grids, but extensions to other grids are planned.
 
 ## Key Reminders
@@ -49,10 +48,14 @@ Further information about connectivity files can be found on
 ::: tip Consistency between connecitivity and simulation files
 One of the often encountered causes of error when loading files in the QuickView family is
 that the grid described by the connecitivity file does not match the grid in the
-simulation data file. Please double check when you run into a loading error.
+simulation data file. In such a case, after the user specified the two files
+and clicked `Load files` (see more detailed description [here](/guides/quickview/file_selection#new-analysis)),
+the file loading dialogue window will
+remain open and appear nonresponsive. 
+When this happens, please double check the paths and names of the two files.
 :::
 
-::: warning The `Load ... Variables` Button
+::: warning The `Load ... Variables` button
 Most buttons, sliders, and selection boxes in the graphical User Interfaces (UIs)
 apply their effects
 immediately upon user interaction. An important exception is variable
@@ -68,11 +71,12 @@ as images in the viewport.
 Each tool in the QuickView family contains multiple control panels
 for setting proverties of the visualization.
 These control panels can be shown/expanded for easy access or
-be hidden/folded to maximize the screenspace for visualization,
-using toggles in the toolbar and keyboard shortcuts.
+be hidden/folded to maximize the screenspace for visualization
+The UIs provide both keyboard shortcuts and toggles in the toolbar
+to show or hide these control panels.
 :::
 
-::: tip Viewport Layout
+::: tip Viewport layout
 All tools in the QuickView family are designed to simultaneously present multiple
 images and charts etc. to help the user identify relationships and distinctions.
 The sizes and the layout of the different images etc. can be easily adjusted. See, e.g., [this page](/guides/quickview/viewport_layout).
@@ -80,5 +84,5 @@ The sizes and the layout of the different images etc. can be easily adjusted. Se
 Furthermore, if a user saves a state file after these
 adjustments, they can later resume their analysis with the customized
 arrangement. For example, the use of state files in QuickView
-can be found on [in this section](/guides/quickview/file_selection#state-files).
+can be found in [this section](/guides/quickview/file_selection#state-files).
 :::

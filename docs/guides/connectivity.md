@@ -23,7 +23,7 @@ grids" or "GLL grids").
 
 A collection of connectivity files can
 be found on [Zenodo](https://doi.org/10.5281/zenodo.16908566). The archive is
-continually updated as more users inform us about the grids use.
+continually updated as more users inform us about the grids they use.
 
 
 ## Generating connectivity files
@@ -49,4 +49,4 @@ will generate several different files for the `ne30pg2` grid, including, e.g.,
 - `TEMEPST_NE30pg2.g` (Exodus format),
 - `TEMPEST_ne30pg2.scrip.nc` (SCRIP format).
 
-QuickView uses the **SCRIP** format.
+The QuickView family uses the **SCRIP** format.

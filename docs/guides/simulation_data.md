@@ -21,6 +21,7 @@ Starting from QuickView version 2 and QuickCompare version 1,
 the tool family has been generalized to visualize any variable
 in a NetCDF file that has a horizontal dimension matching the connecitivity file,
 regardless of how many additional dimensions the variables have.
+
 Here are some examples of variable dimensions (array shapes) from EAM output files:
 
 - `(ncol)`
@@ -29,9 +30,17 @@ Here are some examples of variable dimensions (array shapes) from EAM output fil
 - `(time,ncol,swband,lev)`
 - `(time,ncol,num_phys_constituents)`
 
+And here are some examples of variable dimensions (array shapes) from ELM output files:
+
+- `(levgrnd,lndgrid)`
+- `(levlak,lndgrid)`
+- `(time,lndgrid)`
+- `(time,levgrnd,lndgrid)`
+- `(time,natpft,lndgrid)`
+
 ## Global averages
 
-If an `area` variable with the correct horizontal dimension is present
+When an `area` variable with the correct horizontal dimension is present
 in the simulation file, this variable
 is used for calculating the area-weighted horizontal averages displayed in the
 viewport. If the `area` variable is not present, then an arithmetic average is
@@ -39,7 +48,7 @@ calculated and displayed.
 
 ## Missing values
 
-If a variable has an attribute named `missing_value` or `_FillValue`, the value
+When a variable has an attribute named `missing_value` or `_FillValue`, the value
 is converted to NaN and ignored in the calculation of global averages and for
 the visualization.
 
