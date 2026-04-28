@@ -12,7 +12,7 @@ from typing import List, Tuple, Optional
 def calculate_linthresh(data):
     """Calculate the linear threshold for symlog scaling.
 
-    Excludes machine-error zeros (values within ±sqrt(eps) of the data dtype),
+    Excludes true zeros (values within ±tiny of the data dtype),
     then returns min(abs(valid)).
 
     Operates on the original array without copies.
@@ -21,10 +21,9 @@ def calculate_linthresh(data):
         data: numpy array of data values
 
     Returns:
-        linthresh value (float), clamped to at least 1.0
+        linthresh value (float), floored at dtype tiny to avoid zero
     """
-    eps = np.finfo(data.dtype).eps
-    threshold = np.sqrt(eps)
+    threshold = np.finfo(data.dtype).tiny
 
     # Find min |x| > threshold without allocating a copy.
     # Using where= runs as a tight vectorized C loop, roughly 2-3 orders
@@ -37,7 +36,7 @@ def calculate_linthresh(data):
     if min_abs == np.inf:
         linthresh = 1.0
     else:
-        linthresh = max(float(min_abs), 1.0)
+        linthresh = max(float(min_abs), float(np.finfo(data.dtype).tiny))
 
     return linthresh
 
