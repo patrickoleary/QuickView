@@ -227,12 +227,12 @@ def create_bottom_bar(config, update_color_preset):
                             variant="outlined",
                             flat=True,
                             label=(
-                                "config.use_log_scale === 'linear' ? 'Colors per tick interval' : 'Colors per decade'",
+                                "config.use_log_scale === 'linear' ? 'Colors per tick interval' : 'Colors per order of magnitude'",
                             ),
                             classes="mt-2",
                             step=[1],
                             min=[1],
-                            max=[5],
+                            max=[20],
                         )
                     with v3.VCardItem(
                         v_show="config.override_range", classes="py-0 mb-2"

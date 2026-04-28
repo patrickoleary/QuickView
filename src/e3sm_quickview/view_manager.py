@@ -226,7 +226,7 @@ class VariableView(TrameComponent):
             else:
                 linthresh = 1.0
 
-        n_sub = max(1, min(5, int(n_discrete_colors)))
+        n_sub = max(1, min(20, int(n_discrete_colors)))
         if log_scale == "linear" and discrete_log:
             display_rgb_points = self._apply_discrete_linear_to_lut(
                 linear_rgb_points, n_sub
@@ -560,18 +560,24 @@ class VariableView(TrameComponent):
         # Sample RGB from the linear CTF at symlog-normalized positions
         rgb = [0.0, 0.0, 0.0]
         new_rgb_points = []
+        display_rgb_points = []
         for v in breakpoints:
             t = (float(symlog(v)) - s_min) / s_range
             x_lookup = x_min + t * data_range
             linear_ctf.GetColor(x_lookup, rgb)
-            new_rgb_points.extend(
-                [float(v), float(rgb[0]), float(rgb[1]), float(rgb[2])]
-            )
+            r, g, b = float(rgb[0]), float(rgb[1]), float(rgb[2])
+            new_rgb_points.extend([float(v), r, g, b])
+            # Display points: uniform linear positions with symlog colors
+            display_rgb_points.extend([x_lookup, r, g, b])
 
-        # Store on proxy for bookkeeping — the actual CTF used by the
+        # Regenerate colorbar image from display points so it matches the 3D
+        self.lut.UseLogScale = 0
+        self.lut.RGBPoints = display_rgb_points
+        self.config.lut_img = lut_to_img(self.lut)
+
+        # Store rendering points on proxy — the actual CTF used by the
         # mapper is a standalone vtkColorTransferFunction built in
         # update_color_preset to avoid proxy client-side object issues.
-        self.lut.UseLogScale = 0
         self.lut.RGBPoints = new_rgb_points
 
     def _apply_discrete_symlog_to_lut(self, linthresh, linear_rgb_points, n_sub=1):
@@ -666,7 +672,8 @@ class VariableView(TrameComponent):
         else:
             self._discrete_tick_data = all_tick_data
 
-        # Build a temporary linear CTF from the saved linear RGB points
+        # Build a continuous symlog CTF (same as _apply_symlog_to_lut) so
+        # discrete bands sample colours that match the continuous rendering.
         from vtkmodules.vtkRenderingCore import vtkColorTransferFunction
 
         linear_ctf = vtkColorTransferFunction()
@@ -678,12 +685,24 @@ class VariableView(TrameComponent):
                 linear_rgb_points[i + 3],
             )
 
+        n_samples = 256
+        s_vals = np.linspace(s_min, s_max, n_samples)
+        symlog_ctf = vtkColorTransferFunction()
+        rgb_tmp = [0.0, 0.0, 0.0]
+        for s in s_vals:
+            v = float(np.sign(s) * linthresh * (10.0 ** abs(s) - 1.0))
+            v = max(x_min, min(x_max, v))
+            t = (s - s_min) / s_range
+            x_lookup = x_min + t * data_range
+            linear_ctf.GetColor(x_lookup, rgb_tmp)
+            symlog_ctf.AddRGBPoint(v, rgb_tmp[0], rgb_tmp[1], rgb_tmp[2])
+
         # For each decade interval, split into n_sub equal sub-bands in
         # symlog space.  Each sub-band gets a flat color sampled from the
-        # continuous LUT at the sub-band midpoint.
+        # continuous symlog LUT at the sub-band midpoint.
         rgb = [0.0, 0.0, 0.0]
         eps_data = (x_max - x_min) * 1e-9
-        eps_lin = 1e-9
+        eps_lin = data_range * 1e-9
         display_rgb_points = []
         render_rgb_points = []
         band_idx = 0
@@ -696,9 +715,11 @@ class VariableView(TrameComponent):
                 s_lo = s_lo_decade + (s_hi_decade - s_lo_decade) * j / n_sub
                 s_hi = s_lo_decade + (s_hi_decade - s_lo_decade) * (j + 1) / n_sub
                 s_mid = (s_lo + s_hi) / 2.0
-                t_mid = (s_mid - s_min) / s_range
-                x_lookup = x_min + t_mid * data_range
-                linear_ctf.GetColor(x_lookup, rgb)
+
+                # Invert symlog to get data-space values
+                v_mid = float(np.sign(s_mid) * linthresh * (10.0 ** abs(s_mid) - 1.0))
+                v_mid = max(x_min, min(x_max, v_mid))
+                symlog_ctf.GetColor(v_mid, rgb)
                 r, g, b = float(rgb[0]), float(rgb[1]), float(rgb[2])
 
                 # Invert symlog to get data-space boundaries for rendering

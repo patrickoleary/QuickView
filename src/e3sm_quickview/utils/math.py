@@ -233,8 +233,6 @@ def get_nice_ticks(vmin, vmax, n, scale="linear", linthresh=None):
                     ticks_set.add(val)
         if vmin <= 0 <= vmax:
             ticks_set.add(0.0)
-        ticks_set.add(vmin)
-        ticks_set.add(vmax)
         raw_ticks = np.array(sorted(ticks_set))
         # Skip snap — powers of 10 are already nice
         return raw_ticks
@@ -258,7 +256,7 @@ def format_tick(val):
     shown as '10^N', very large/small values use scientific notation, and
     intermediate values use fixed-point.
     """
-    if np.isclose(val, 0, atol=1e-12):
+    if val == 0:
         return "0"
 
     val_abs = abs(val)
@@ -354,7 +352,7 @@ def compute_color_ticks(
         else:
             pos = (val - vmin) / data_range * 100
         if edge_margin <= pos <= (100 - edge_margin):
-            is_zero = np.isclose(val, 0, atol=1e-12)
+            is_zero = val == 0
             if is_zero:
                 has_zero = True
             candidates.append(
