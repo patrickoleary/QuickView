@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v2.6.1 (2026-04-28)
+
+### Bug Fixes
+
+- **linthresh**: Use dtype tiny instead of sqrt(eps) as zero threshold
+  ([#63](https://github.com/Kitware/QuickView/pull/63),
+  [`6b8e3b2`](https://github.com/Kitware/QuickView/commit/6b8e3b29e957e8cfd7c568cf39571415d91bc130))
+
+
 ## v2.6.0 (2026-04-27)
 
 ### Documentation
