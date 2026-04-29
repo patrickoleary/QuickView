@@ -956,7 +956,7 @@ class VariableView(TrameComponent):
                     style=(
                         """
                         {
-                            aspectRatio: active_layout === 'auto_layout' ? aspect_ratio : null,
+                            aspectRatio: active_layout === 'auto_layout' ? (1.0 / aspect_ratio) : null,
                             height: active_layout !== 'auto_layout' ? 'calc(100% - 2.4rem)' : null,
                             pointerEvents: lock_views ? 'none': null,
                         }
