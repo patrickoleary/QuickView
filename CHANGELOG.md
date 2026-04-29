@@ -2,6 +2,25 @@
 
 <!-- version list -->
 
+## v2.6.2 (2026-04-29)
+
+### Bug Fixes
+
+- **aspect-ratio**: Update aspect ratio slider by inverting direction and wider range(#69)
+  ([`6200bb9`](https://github.com/Kitware/QuickView/commit/6200bb9cc065a85a7e763f3a4ed5f58e7683de72))
+
+- **lut**: Symlog colorbar matching and discrete sampling
+  ([#67](https://github.com/Kitware/QuickView/pull/67),
+  [`82fd4ac`](https://github.com/Kitware/QuickView/commit/82fd4ac06b6f265734ea8e7b364dd3484f1de3e9))
+
+- **play**: Add reverse play button and forward/reverse looping
+  ([#68](https://github.com/Kitware/QuickView/pull/68),
+  [`efe84e2`](https://github.com/Kitware/QuickView/commit/efe84e22ada016560303ae0e7063a947696d583c))
+
+- **state**: Dynamic dimension indices, discrete/colorblind settings, color_range tuple
+  ([`e199d57`](https://github.com/Kitware/QuickView/commit/e199d57db04b89b90168a85a77034308d60a7cc3))
+
+
 ## v2.6.1 (2026-04-28)
 
 ### Bug Fixes
