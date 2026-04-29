@@ -56,6 +56,7 @@ class EAMApp(TrameApp):
                 "trame__favicon": ASSETS.icon,
                 "is_tauri": False,
                 "animation_play": False,
+                "animation_direction": "forward",
                 # All available variables
                 "variables_listing": [],
                 # Selected variables to load

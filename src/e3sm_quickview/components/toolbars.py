@@ -482,10 +482,25 @@ class Animation(v3.VToolbar):
                 )
                 v3.VDivider(vertical=True, classes="mx-2")
                 v3.VIconBtn(
-                    icon=("animation_play ? 'mdi-stop' : 'mdi-play'",),
+                    icon=(
+                        "animation_play && animation_direction === 'reverse' ? 'mdi-stop' : 'mdi-play'",
+                    ),
                     flat=True,
-                    click="animation_play = !animation_play",
-                    disabled=("capture_recording",),
+                    click="if (animation_play && animation_direction === 'reverse') { animation_play = false } else { animation_direction = 'reverse'; animation_play = true }",
+                    disabled=(
+                        "capture_recording || (animation_play && animation_direction === 'forward')",
+                    ),
+                    style="transform: scaleX(-1);",
+                )
+                v3.VIconBtn(
+                    icon=(
+                        "animation_play && animation_direction === 'forward' ? 'mdi-stop' : 'mdi-play'",
+                    ),
+                    flat=True,
+                    click="if (animation_play && animation_direction === 'forward') { animation_play = false } else { animation_direction = 'forward'; animation_play = true }",
+                    disabled=(
+                        "capture_recording || (animation_play && animation_direction === 'reverse')",
+                    ),
                 )
                 v3.VDivider(vertical=True, classes="mx-2")
 
@@ -572,7 +587,13 @@ class Animation(v3.VToolbar):
         with self.state as s:
             while s.animation_play:
                 await asyncio.sleep(0.1)
-                if s.animation_step < s.animation_step_max:
-                    await self._step_to(s.animation_step + 1)
+                if s.animation_direction == "reverse":
+                    if s.animation_step > 0:
+                        await self._step_to(s.animation_step - 1)
+                    else:
+                        await self._step_to(s.animation_step_max)
                 else:
-                    s.animation_play = False
+                    if s.animation_step < s.animation_step_max:
+                        await self._step_to(s.animation_step + 1)
+                    else:
+                        await self._step_to(0)
