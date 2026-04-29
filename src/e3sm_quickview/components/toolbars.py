@@ -47,11 +47,11 @@ class Layout(v3.VToolbar):
             v3.VSpacer()
 
             v3.VSlider(
-                v_model=("aspect_ratio", 2),
-                prepend_icon="mdi-arrow-expand-horizontal",
-                min=1,
+                v_model=("aspect_ratio", 0.5),
+                prepend_icon="mdi-arrow-expand-vertical",
+                min=0.25,
                 max=2,
-                step=0.1,
+                step=0.05,
                 density="compact",
                 hide_details=True,
                 style="max-width: 400px;",
