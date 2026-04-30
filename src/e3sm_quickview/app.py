@@ -167,7 +167,6 @@ class EAMApp(TrameApp):
                 ProjectionEquidistant="projection = ['Cyl. Equidistant']",
                 ProjectionRobinson="projection = ['Robinson']",
                 ProjectionMollweide="projection = ['Mollweide']",
-                ToggleViewLock="lock_views = !lock_views",
                 FileOpen=(self.toggle_toolbar, "['load-data']"),
                 SaveState="trigger('download_state_dialog')",
                 UploadState="utils.get('document').querySelector('#fileUpload').click()",
@@ -199,8 +198,6 @@ class EAMApp(TrameApp):
 
                 mt.bind("v", "ToggleVariableSelection")
 
-                mt.bind("space", "ToggleViewLock", stop_propagation=True)
-
                 mt.bind("esc", "RemoveAllToolbars")
 
             # Native Dialogs
@@ -225,7 +222,11 @@ class EAMApp(TrameApp):
 
                             # Fixed overlay for toolbars
                             with html.Div(style=css.TOOLBARS_FIXED_OVERLAY):
-                                toolbars.Layout(apply_size=self.view_manager.apply_size)
+                                toolbars.Layout(
+                                    apply_size=self.view_manager.apply_size,
+                                    zoom_in=self.view_manager.zoom_in,
+                                    zoom_out=self.view_manager.zoom_out,
+                                )
                                 toolbars.Cropping()
                                 toolbars.DataSelection()
                                 toolbars.Animation()
@@ -306,6 +307,7 @@ class EAMApp(TrameApp):
             "active": self.state.active_layout,
             "tools": self.state.active_tools,
             "help": not self.state.compact_drawer,
+            "zoom": self.view_manager.get_zoom(),
         }
         data_selection = {
             k: self.state[k]
@@ -413,6 +415,8 @@ class EAMApp(TrameApp):
         self.state.active_layout = state_content["layout"]["active"]
         self.state.active_tools = state_content["layout"]["tools"]
         self.state.compact_drawer = not state_content["layout"]["help"]
+        if "zoom" in state_content["layout"]:
+            self.view_manager.set_zoom(state_content["layout"]["zoom"])
 
         # Update filebrowser state
         with self.state:

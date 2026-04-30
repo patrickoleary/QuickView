@@ -38,13 +38,26 @@ def to_kwargs(value):
 
 
 class Layout(v3.VToolbar):
-    def __init__(self, apply_size=None):
+    def __init__(self, apply_size=None, zoom_in=None, zoom_out=None):
         super().__init__(**to_kwargs("adjust-layout"))
 
         with self:
             v3.VIcon("mdi-view-module", classes="px-6 opacity-50")
             v3.VLabel("Viewport layout", classes="text-subtitle-2")
             v3.VSpacer()
+
+            v3.VIconBtn(
+                v_tooltip_bottom="'Zoom in'",
+                icon="mdi-magnify-plus-outline",
+                flat=True,
+                click=zoom_in,
+            )
+            v3.VIconBtn(
+                v_tooltip_bottom="'Zoom out'",
+                icon="mdi-magnify-minus-outline",
+                flat=True,
+                click=zoom_out,
+            )
 
             v3.VSlider(
                 v_model=("aspect_ratio", 0.5),
@@ -457,24 +470,28 @@ class Animation(v3.VToolbar):
                 )
                 v3.VDivider(vertical=True, classes="mx-2")
                 v3.VIconBtn(
+                    v_tooltip_bottom="'First step'",
                     icon="mdi-page-first",
                     flat=True,
                     disabled=("animation_step === 0",),
                     click="animation_step = 0",
                 )
                 v3.VIconBtn(
+                    v_tooltip_bottom="'Previous step'",
                     icon="mdi-chevron-left",
                     flat=True,
                     disabled=("animation_step === 0",),
                     click="animation_step = Math.max(0, animation_step - 1)",
                 )
                 v3.VIconBtn(
+                    v_tooltip_bottom="'Next step'",
                     icon="mdi-chevron-right",
                     flat=True,
                     disabled=("animation_step === animation_step_max",),
                     click="animation_step = Math.min(animation_step_max, animation_step + 1)",
                 )
                 v3.VIconBtn(
+                    v_tooltip_bottom="'Last step'",
                     icon="mdi-page-last",
                     disabled=("animation_step === animation_step_max",),
                     flat=True,
@@ -482,6 +499,7 @@ class Animation(v3.VToolbar):
                 )
                 v3.VDivider(vertical=True, classes="mx-2")
                 v3.VIconBtn(
+                    v_tooltip_bottom="'Play reverse'",
                     icon=(
                         "animation_play && animation_direction === 'reverse' ? 'mdi-stop' : 'mdi-play'",
                     ),
@@ -493,6 +511,7 @@ class Animation(v3.VToolbar):
                     style="transform: scaleX(-1);",
                 )
                 v3.VIconBtn(
+                    v_tooltip_bottom="'Play forward'",
                     icon=(
                         "animation_play && animation_direction === 'forward' ? 'mdi-stop' : 'mdi-play'",
                     ),

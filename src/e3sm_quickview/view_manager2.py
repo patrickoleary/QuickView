@@ -918,12 +918,6 @@ class VariableView(TrameComponent):
                         click=f"utils.quickview.capturePanel('{self.variable_name}')",
                         style="transform: scale(0.75);",
                     )
-                    v3.VIcon(
-                        "mdi-lock-outline",
-                        size="x-small",
-                        v_show=("lock_views", True),
-                        style="transform: scale(0.75);",
-                    )
 
                     v3.VSpacer()
                     html.Div(
@@ -957,13 +951,13 @@ class VariableView(TrameComponent):
                         {
                             aspectRatio: active_layout === 'auto_layout' ? (1.0 / aspect_ratio) : null,
                             height: active_layout !== 'auto_layout' ? 'calc(100% - 2.4rem)' : null,
-                            pointerEvents: lock_views ? 'none': null,
+                            pointerEvents: 'none',
                         }
                         """,
                     ),
                 ):
                     rca.ImageRegion(
-                        enable_interaction=True,
+                        enable_interaction=False,
                         bounds=(self._bounds_key, (0, 0, 1, 1)),
                         size=(self.update_size, "[$event]"),
                     )
@@ -1082,6 +1076,25 @@ class ViewManager(TrameComponent):
 
         if render and view_to_reset:
             self.render()
+
+    def zoom_in(self):
+        scale = self._camera.GetParallelScale()
+        self._camera.SetParallelScale(scale / 1.2)
+        self.render()
+
+    def zoom_out(self):
+        scale = self._camera.GetParallelScale()
+        self._camera.SetParallelScale(scale * 1.2)
+        self.render()
+
+    def get_zoom(self):
+        return self._camera.GetParallelScale()
+
+    def set_zoom(self, scale):
+        if scale is None:
+            return
+        self._camera.SetParallelScale(scale)
+        self.render()
 
     @controller.set("size_update")
     def on_size_update(self):
