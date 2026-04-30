@@ -427,7 +427,8 @@ class VariableView(TrameComponent):
             pct = (np.log10(bv) - log_min) / log_range_val * 100 if log_range_val else 0
             self._discrete_tick_data.append({"val": bv, "pos": float(pct)})
 
-        # Build a temporary linear CTF from the saved linear RGB points
+        # Build a continuous log CTF so discrete bands sample colours that
+        # match the continuous log rendering.
         from vtkmodules.vtkRenderingCore import vtkColorTransferFunction
 
         linear_ctf = vtkColorTransferFunction()
@@ -439,9 +440,21 @@ class VariableView(TrameComponent):
                 linear_rgb_points[i + 3],
             )
 
+        n_samples = 256
+        log_vals = np.linspace(log_min, log_max, n_samples)
+        log_ctf = vtkColorTransferFunction()
+        rgb_tmp = [0.0, 0.0, 0.0]
+        for lg in log_vals:
+            v = 10.0**lg
+            v = max(x_min, min(x_max, v))
+            t = (lg - log_min) / log_range
+            x_lookup = x_min + t * data_range
+            linear_ctf.GetColor(x_lookup, rgb_tmp)
+            log_ctf.AddRGBPoint(v, rgb_tmp[0], rgb_tmp[1], rgb_tmp[2])
+
         rgb = [0.0, 0.0, 0.0]
         eps_data = data_range * 1e-9
-        eps_lin = 1e-9
+        eps_lin = data_range * 1e-9
         display_rgb_points = []
         render_rgb_points = []
         band_idx = 0
@@ -456,10 +469,10 @@ class VariableView(TrameComponent):
                     log_lo_decade + (log_hi_decade - log_lo_decade) * (j + 1) / n_sub
                 )
                 log_mid = (log_lo + log_hi) / 2.0
-                # Sample color from linear LUT at normalized position
-                t_mid = (log_mid - log_min) / log_range
-                x_lookup = x_min + t_mid * data_range
-                linear_ctf.GetColor(x_lookup, rgb)
+                # Sample color from continuous log CTF at sub-band midpoint
+                v_mid = 10.0**log_mid
+                v_mid = max(x_min, min(x_max, v_mid))
+                log_ctf.GetColor(v_mid, rgb)
                 r, g, b = float(rgb[0]), float(rgb[1]), float(rgb[2])
 
                 # Data-space boundaries for rendering
