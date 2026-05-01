@@ -375,7 +375,7 @@ class ParaViewFileBrowser(TrameComponent):
                     v_model=(self.name("data_simulation"), ""),
                     density="compact",
                     variant="outlined",
-                    disabled=True,
+                    placeholder="Paste or browse for simulation file path",
                     messages="EAM's history output on the physics grids (pg2 grids) written by EAMv2, v3, and an intermediate version towards v4 (EAMxx).",
                 )
                 html.Label(
@@ -386,7 +386,7 @@ class ParaViewFileBrowser(TrameComponent):
                     v_model=(self.name("data_connectivity"), ""),
                     density="compact",
                     variant="outlined",
-                    disabled=True,
+                    placeholder="Paste or browse for connectivity file path",
                     messages="The horizontal grids used by EAM are cubed spheres. Since these are unstructed grids, QuickView needs to know how to map data to the globe. Therefore, for each simulation data file, a 'connectivity file' needs to be provided.",
                 )
 
