@@ -93,6 +93,9 @@ class FieldSelection(v3.VNavigationDrawer):
             with html.Div(
                 style="position:fixed;top:0;width: 500px;height:100vh;",
                 classes="d-flex flex-column",
+                raw_attrs=[
+                    "@keyup.enter=\"variables_selected.length > 0 && !variables_loaded && !loading ? trigger('data_load_variables') : null\""
+                ],
             ):
                 with v3.VCardActions(classes="pb-0", style="min-height: 0;"):
                     v3.VBtn(

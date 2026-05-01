@@ -525,6 +525,20 @@ class EAMApp(TrameApp):
             tool for tool in self.state.active_tools if tool != "load-data"
         ]
 
+    @trigger("enter_load_files")
+    def _enter_load_files(self):
+        """Route Enter key to load files or import state in the file dialog."""
+        s = self.state
+        if s[self.file_browser.name("is_state_file")]:
+            self.file_browser.import_state_file()
+        elif (
+            s[self.file_browser.name("data_simulation")]
+            and s[self.file_browser.name("data_connectivity")]
+            and not s[self.file_browser.name("error")]
+        ):
+            self.file_browser.load_data_files()
+
+    @trigger("data_load_variables")
     def data_load_variables(self):
         self.state.loading = True
         asynchronous.create_task(self._data_load_variables())
