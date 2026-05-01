@@ -925,13 +925,6 @@ class VariableView(TrameComponent):
                                         ),
                                     )
 
-                    v3.VIcon(
-                        "mdi-lock-outline",
-                        size="x-small",
-                        v_show=("lock_views", True),
-                        style="transform: scale(0.75);",
-                    )
-
                     v3.VSpacer()
                     html.Div(
                         "t = {{ time_idx }}",
@@ -971,7 +964,7 @@ class VariableView(TrameComponent):
                         {
                             aspectRatio: active_layout === 'auto_layout' ? (1.0 / aspect_ratio) : null,
                             height: active_layout !== 'auto_layout' ? 'calc(100% - 2.4rem)' : null,
-                            pointerEvents: lock_views ? 'none': null,
+                            pointerEvents: 'none',
                         }
                         """,
                     ),
@@ -1025,6 +1018,30 @@ class ViewManager(TrameComponent):
 
         for view in views:
             view.disable_render = False
+
+    def zoom_in(self):
+        for view in list(self._var2view.values()):
+            cam = view.camera
+            cam.SetParallelScale(cam.GetParallelScale() / 1.2)
+            view.render()
+
+    def zoom_out(self):
+        for view in list(self._var2view.values()):
+            cam = view.camera
+            cam.SetParallelScale(cam.GetParallelScale() * 1.2)
+            view.render()
+
+    def get_zoom(self):
+        for view in list(self._var2view.values()):
+            return view.camera.GetParallelScale()
+        return None
+
+    def set_zoom(self, scale):
+        if scale is None:
+            return
+        for view in list(self._var2view.values()):
+            view.camera.SetParallelScale(scale)
+            view.render()
 
     def render(self):
         for view in list(self._var2view.values()):
