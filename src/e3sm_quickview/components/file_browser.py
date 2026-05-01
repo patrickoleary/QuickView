@@ -1,9 +1,11 @@
 import json
 import re
 from pathlib import Path
+
 from paraview import simple
-from trame.widgets import vuetify3 as v3, html
 from trame.app import TrameComponent
+from trame.widgets import html
+from trame.widgets import vuetify3 as v3
 
 DIRECTORY = dict(icon="mdi-folder", type="directory")
 GROUP = dict(icon="mdi-file-document-multiple-outline", type="group")
@@ -108,6 +110,8 @@ class ParaViewFileBrowser(TrameComponent):
         ]
         for file_name in file_listing:
             f = self._current_path / file_name
+            if not f.exists():
+                continue
             stats = f.stat()
 
             # Group or file?
